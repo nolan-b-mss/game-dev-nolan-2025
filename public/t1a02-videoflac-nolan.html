@@ -1,19 +1,14 @@
-<!DOCTYPE html>
 <html>
 <head>
     <title>t1a02-video-flac-nolan.html</title>
     <script>
-        // a Class is a blueprint for creating objects
         class MyMath {
             constructor(number) {
                 this.number = number;
             }
 
-            // a Function is a block of code designed to perform a particular task
             mySquareFunction() {
-                // a Variable is a container for storing data
                 let myAnswer;
-                // a Loop is used to execute a block of code repeatedly
                 for (let i = 0; i < 1; i++) {
                     myAnswer = this.number * this.number;
                 }
@@ -22,21 +17,16 @@
         }
 
         function mainFunction() {
-            // Input/Output is the communication between a computer and a user
             let myIn01 = parseFloat(document.getElementById('myNum01').value);
 
-            // a Decision is a control flow statement that determines which code to execute
             if (myIn01 < 0) {
                 document.getElementById('mySpan01').innerHTML = 'Please enter a positive number.';
                 return;
             }
 
-            // an Object is an instance of a class
             const myMathObject = new MyMath(myIn01);
 
             let myAnswer = myMathObject.mySquareFunction();
-
-            // an Array is a special variable, which can hold more than one value
             let myArray = [myIn01, 'squared is', myAnswer];
 
             document.getElementById('mySpan01').innerHTML = myArray[0] + ' ' + myArray[1] + ' ' + myArray[2];
@@ -51,7 +41,7 @@
     Input: <input id="myNum01" type="number" value="4">
     <br><br>
 
-    <input type="button" value="myEvent squares" onclick="mainFunction()">
+    Event:<input type="button" value="myEvent squares" onclick="mainFunction()">
     <br><br>
 
     Output:<span id="mySpan01">...</span>
