@@ -27,12 +27,12 @@ Output:<span id="mySpan01">...</span>
   function myNumGen() {
   let myRandomNum = Math.floor(Math.random()*10) + 1;
   let evenNumbers = [2, 4, 6, 8, 10]; //Here is an Array
-    <div id="evenSquare" style="height:100px;width:100px;visibility:hidden;background-color:blue">This number is even.</div>
    document.getElementById('myRandomNumArea').innerHTML = myRandomNum;
     if (evenNumbers.includes(myRandomNum)) {document.getElementById('evenSquare').style.visibility = "visible"
   } else {document.getElementById('evenSquare').style.visibility = "hidden" }
 </script>
 <br>
 Generated Number: <span id="myRandomNumArea">...</span>
+<div id="evenSquare" style="height:100px;width:100px;visibility:hidden;background-color:blue">This number is even.</div>
 
 
