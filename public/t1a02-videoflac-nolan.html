@@ -24,10 +24,10 @@ Output:<span id="mySpan01">...</span>
 
 <input type="button" value="Generate a number between 1-10." style="height:100px;width:270px;font-family:Comic Sans MS" onclick="myNumGen()">
 <script>
-  function myNumGen() 
-  let myRandomNum = Math.floor(Math.random()*10) + 1 
-   document.getelementById('myRandomNum').innerHTML = "myRandomNumArea"
-   
+  function myNumGen() {
+  let myRandomNum = Math.floor(Math.random()*10) + 1;
+   document.getElementById('myRandomNumArea').innerHTML = myRandomNum;
+  }
 </script>
 
 Generated Number: <p id="myRandomNumArea">...</p>
