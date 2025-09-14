@@ -27,14 +27,23 @@ Output:<span id="mySpan01">...</span>
   function myNumGen() {
   let myRandomNum = Math.floor(Math.random()*10) + 1;
   let evenNumbers = [2, 4, 6, 8, 10]; //Here is an Array
-  let currentPosition = 0
+  let currentPosition = 0;
   let myString01 = currentPosition + "px";
+  let direction = 1;
+    
    document.getElementById('myRandomNumArea').innerHTML = myRandomNum;
     if (evenNumbers.includes(myRandomNum)) {document.getElementById('evenSquare').style.visibility = "visible"
     //The codes above and below me are a Decision
   } else {document.getElementById('evenSquare').style.visibility = "hidden" }
     while (evenNumbers.includes(myRandomNum)) {function moveSquare(){currentPosition += 1;
-                                                                     setInterval
+                                                                     setInterval(moveSquare, 10)
+                                                                      document.getElementById('evenSquare').style.left = currentPosition + "px"
+                                                                     if currentPostion > 200) {
+                                                                       direction =-1;
+                                                                     }
+                                                                     if currentPosition < 0) {
+                                                                       direction =-1;
+                                                                     }
   }
 </script>
 <br>
