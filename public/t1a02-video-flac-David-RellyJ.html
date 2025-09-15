@@ -1,0 +1,28 @@
+<h1 align=center> t1a02-video-flac-David-RellyJ.html </h1>
+
+<input id="myNum01" type="number" value="11" placeholder="Enter a number">
+<button onclick="mySquareFunction()">Go</button>
+<br><br>
+<span id=my"mySpan01:></span>
+
+<script>
+  function mysqaureFunction() {
+    let userNum =parseFloat(document.getElementById('myNum01').value);
+
+    let myvideoflac = {
+      numbers: [3, 8, userNum]
+    };
+
+    let output = "";
+
+    for (let i = 0; i < myvideoflac.numbers.length; i++) {
+      let num = myvideoflac.numbers[i];
+      let square = num * num
+
+      if (sqaure % 2 === 0) {
+        output += num + " squared = " + square + " (even)<br>";
+      } else {
+        output += num + " squared = " + square + " (odd)<br>";
+      }
+    }
+</script>
