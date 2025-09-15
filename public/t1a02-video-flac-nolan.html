@@ -28,7 +28,8 @@ Output:<span id="mySpan01">...</span>
   let myString01 = currentPosition + "px";
   let direction = 1;
  
-  function myNumGen() {
+  function myNumGen() //Here is a function 
+{
   let myRandomNum = Math.floor(Math.random()*10) + 1;
   let evenNumbers = [2, 4, 6, 8, 10]; //Here is an Array    
    document.getElementById('myRandomNumArea').innerHTML = myRandomNum;
@@ -36,7 +37,7 @@ Output:<span id="mySpan01">...</span>
     //The codes above and below me are a Decision
   } else {document.getElementById('evenSquare').style.visibility = "hidden" }
   }
-  setInterval(moveSquare, 10)
+  setInterval(moveSquare, 10) //Here is a loop, every 10 miliseconds moveSquare gets functioned
   function moveSquare(){currentPosition += direction;
                         document.getElementById('evenSquare').style.left = currentPosition + "px"
                         if (currentPosition > 200) {
