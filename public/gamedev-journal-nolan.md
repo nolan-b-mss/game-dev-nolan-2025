@@ -1,4 +1,4 @@
-Nolan's Game Development 11 Journal
+Nolan's Game Development 11 Journal <br>
 9/8/2025
 I started my journal today. (this file)
 We talked about the names of each other and getting to remember everyone's names.
