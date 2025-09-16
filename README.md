@@ -14,10 +14,11 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 
 <details open><summary>Monday Sept 8th, 2025</summary>
 
-### The first 
-1.
-1.
-1.
+### The first day
+1. We were learning each others names.
+1. We activated our github pages.
+1. We discussed if-statements.
+1. We began learning about VIDEO-FLAC.
 
 </details>
 
@@ -70,8 +71,8 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 
 <details open><summary>Tuesday Sept 16th, 2025</summary>
 
-### Title
-1.
+### There is a VIDEO-FLAC test today.
+1. I have already got the basics of videoflac, so this test shouldn't be too difficult.
 1.
 1.
 
