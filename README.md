@@ -12,7 +12,16 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 
 ---      
 
-<details ><summary>Monday Sept 8th, 2025</summary>
+<details open><summary>Monday Sept 8th, 2025</summary>
+
+### The first 
+1.
+1.
+1.
+
+</details>
+
+<details open><summary>Tuesday Sept 9th, 2025</summary>
 
 ### Title
 1.
@@ -21,7 +30,7 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 
 </details>
 
-<details ><summary>Tuesday Sept 9th, 2025</summary>
+<details open><summary>Wed Sept 10th, 2025</summary>
 
 ### Title
 1.
@@ -30,7 +39,7 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 
 </details>
 
-<details><summary>Wed Sept 10th, 2025</summary>
+<details open><summary>Thursday Sept 11th, 2025</summary>
 
 ### Title
 1.
@@ -39,16 +48,7 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 
 </details>
 
-<details><summary>Thursday Sept 11th, 2025</summary>
-
-### Title
-1.
-1.
-1.
-
-</details>
-
-<details><summary>Friday Sept 12th, 2025</summary>
+<details open><summary>Friday Sept 12th, 2025</summary>
 
 ### Title
 1.
@@ -59,7 +59,7 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 
 ---     
 
-<details ><summary>Monday Sept 15th, 2025</summary>
+<details open><summary>Monday Sept 15th, 2025</summary>
 
 ### Title
 1.
@@ -68,7 +68,7 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 
 </details>
 
-<details><summary>Tuesday Sept 16th, 2025</summary>
+<details open><summary>Tuesday Sept 16th, 2025</summary>
 
 ### Title
 1.
@@ -77,7 +77,7 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 
 </details>
 
-<details><summary>Wed Sept 17th, 2025</summary>
+<details open><summary>Wed Sept 17th, 2025</summary>
 
 ### Title
 1.
@@ -86,7 +86,7 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 
 </details>
 
-<details><summary>Thursday Sept 18th, 2025</summary>
+<details open><summary>Thursday Sept 18th, 2025</summary>
 
 ### Title
 1.
@@ -95,13 +95,13 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 
 </details>
 
-<details><summary>Friday Sept 19th, 2025 School Goals ProD  No Classes</summary>
+<details ><summary>Friday Sept 19th, 2025 School Goals ProD  No Classes</summary>
 
 </details>
 
 ---   
 
-<details ><summary>Monday Sept 22nd, 2025</summary>
+<details open><summary>Monday Sept 22nd, 2025</summary>
 
 ### Title
 1.
@@ -110,7 +110,7 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 
 </details>
 
-<details><summary>Tuesday Sept 23rd, 2025</summary>
+<details open><summary>Tuesday Sept 23rd, 2025</summary>
 
 ### Title
 1.
@@ -119,7 +119,7 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 
 </details>
 
-<details><summary>Wed Sept 24th, 2025</summary>
+<details open><summary>Wed Sept 24th, 2025</summary>
 
 ### Title
 1.
@@ -128,7 +128,7 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 
 </details>
 
-<details><summary>Thursday Sept 25th, 2025</summary>
+<details open><summary>Thursday Sept 25th, 2025</summary>
 
 ### Title
 1.
@@ -137,7 +137,7 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 
 </details>
 
-<details><summary>Friday Sept 26th, 2025</summary>
+<details open><summary>Friday Sept 26th, 2025</summary>
 
 ### Title
 1.
@@ -148,7 +148,7 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 
 ---      
 
-<details ><summary>Monday Sept 29th, 2025</summary>
+<details open><summary>Monday Sept 29th, 2025</summary>
 
 ### Title
 1.
@@ -159,7 +159,7 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 
 
 
-<details><summary>Tuesday Sept 30th, 2025. Truth and Reconciliation no classes</summary>
+<details ><summary>Tuesday Sept 30th, 2025. Truth and Reconciliation no classes</summary>
 
 
 </details>
