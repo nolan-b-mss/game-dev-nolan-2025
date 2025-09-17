@@ -1,0 +1,43 @@
+<html>
+<body>
+<canvas id="c" width="800" height="500"></canvas>
+<script>
+let c = document.getElementById("c"), 
+    ctx = c.getContext("2d"),
+    pw = 10, ph = 100, // paddle
+    px = 10, py = c.height/2 - ph/2,
+    bx = c.width/2, by = c.height/2,
+    br = 8, dx = 4, dy = 4;
+
+document.body.style.margin = 0;
+c.style.display = "block";
+c.style.margin = "auto";
+c.style.background = "#000";
+
+document.onmousemove = e => {
+  let r = c.getBoundingClientRect();
+  py = e.clientY - r.top - ph/2;
+};
+
+function loop() {
+  bx += dx; by += dy;
+  if (by < br || by > c.height - br) dy *= -1;
+  if (bx < px + pw && by > py && by < py + ph) dx *= -1;
+  if (bx < 0 || bx > c.width) {
+    bx = c.width/2; by = c.height/2;
+  }
+
+  ctx.fillStyle = "#000";
+  ctx.fillRect(0, 0, c.width, c.height);
+  ctx.fillStyle = "#fff";
+  ctx.fillRect(px, py, pw, ph);
+  ctx.beginPath();
+  ctx.arc(bx, by, br, 0, 2 * Math.PI);
+  ctx.fill();
+
+  requestAnimationFrame(loop);
+}
+loop();
+</script>
+</body>
+</html>
