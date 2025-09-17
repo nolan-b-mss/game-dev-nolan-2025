@@ -1,9 +1,97 @@
 <h1 align=center>t1a04-vibe-code-cleaning-nolan.html</h1>
 
-<h1 align=top>Cleaned Code</h1>
-You need to put the cleaned code here. No CSS, no confusing divs and paragraphs. Just as simple as possible webpage  html. <br><br>
+<h1 align=top>Cleaned Code</h1><br>
+<html>
+<body>
+<canvas id="gameCanvas" width="800" height="500"></canvas>
+<script>
+const canvas = document.getElementById("gameCanvas");
+const context = canvas.getContext("2d");
 
-If doing javascript script are the variables sensibly named camelCase "myVar" etc do't use promises (.then) instead use async/await, no addEventListeners unless necessary, get chatGPT to make the changes. More changes... Only simple javascript nothing fancy.
+// Style the page and canvas with JavaScript
+document.body.style.margin = "0";
+canvas.style.display = "block";
+canvas.style.margin = "auto";
+canvas.style.background = "#000";
+
+// Paddle settings
+const paddleWidth = 10;
+const paddleHeight = 100;
+const paddleX = 10;
+let paddleY = canvas.height / 2 - paddleHeight / 2;
+
+// Ball settings
+let ballX = canvas.width / 2;
+let ballY = canvas.height / 2;
+const ballRadius = 8;
+let ballSpeedX = 4;
+let ballSpeedY = 4;
+
+// Handle mouse movement to move paddle
+document.addEventListener("mousemove", function (event) {
+  const rect = canvas.getBoundingClientRect();
+  paddleY = event.clientY - rect.top - paddleHeight / 2;
+});
+
+function updateGame() {
+  // Move ball
+  ballX += ballSpeedX;
+  ballY += ballSpeedY;
+
+  // Bounce off top and bottom walls
+  if (ballY < ballRadius || ballY > canvas.height - ballRadius) {
+    ballSpeedY = -ballSpeedY;
+  }
+
+  // Bounce off paddle
+  const paddleRightX = paddleX + paddleWidth;
+  const paddleTopY = paddleY;
+  const paddleBottomY = paddleY + paddleHeight;
+
+  if (
+    ballX - ballRadius < paddleRightX &&
+    ballY > paddleTopY &&
+    ballY < paddleBottomY
+  ) {
+    ballSpeedX = -ballSpeedX;
+    ballX = paddleRightX + ballRadius; // Prevent ball from getting stuck
+  }
+
+  // Reset if ball goes out of bounds
+  if (ballX < 0 || ballX > canvas.width) {
+    ballX = canvas.width / 2;
+    ballY = canvas.height / 2;
+    ballSpeedX = -ballSpeedX;
+    ballSpeedY = (Math.random() - 0.5) * 8; // Add some variation
+  }
+}
+
+function drawGame() {
+  // Clear canvas
+  context.fillStyle = "#000";
+  context.fillRect(0, 0, canvas.width, canvas.height);
+
+  // Draw paddle
+  context.fillStyle = "#FFF";
+  context.fillRect(paddleX, paddleY, paddleWidth, paddleHeight);
+
+  // Draw ball
+  context.beginPath();
+  context.arc(ballX, ballY, ballRadius, 0, Math.PI * 2);
+  context.fill();
+}
+
+function gameLoop() {
+  updateGame();
+  drawGame();
+  requestAnimationFrame(gameLoop);
+}
+
+gameLoop();
+</script>
+</body>
+</html>
+
 
 <br><br>
 
