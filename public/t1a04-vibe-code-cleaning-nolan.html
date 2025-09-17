@@ -27,11 +27,11 @@ const ballRadius = 8;
 let ballSpeedX = 4;
 let ballSpeedY = 4;
 
-// Handle mouse movement to move paddle
-document.addEventListener("mousemove", function (event) {
+// Use onmousemove property instead of addEventListener
+document.onmousemove = function(event) {
   const rect = canvas.getBoundingClientRect();
   paddleY = event.clientY - rect.top - paddleHeight / 2;
-});
+};
 
 function updateGame() {
   // Move ball
@@ -95,7 +95,7 @@ gameLoop();
 
 <br><br>
 
-Here is the original vibecode<br>
+<h1 align=top>Original Vibecode</h1><br>
 <iframe width="100%" height=500 src="game-test.html"></iframe>
 
 <br><br>
