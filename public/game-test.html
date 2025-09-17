@@ -1,43 +1,90 @@
 <html>
 <body>
-<canvas id="c" width="800" height="500"></canvas>
+<canvas id="gameCanvas" width="800" height="500"></canvas>
 <script>
-let c = document.getElementById("c"), 
-    ctx = c.getContext("2d"),
-    pw = 10, ph = 100, // paddle
-    px = 10, py = c.height/2 - ph/2,
-    bx = c.width/2, by = c.height/2,
-    br = 8, dx = 4, dy = 4;
+const canvas = document.getElementById("gameCanvas");
+const context = canvas.getContext("2d");
 
-document.body.style.margin = 0;
-c.style.display = "block";
-c.style.margin = "auto";
-c.style.background = "#000";
+// Style the page and canvas with JavaScript
+document.body.style.margin = "0";
+canvas.style.display = "block";
+canvas.style.margin = "auto";
+canvas.style.background = "#000";
 
-document.onmousemove = e => {
-  let r = c.getBoundingClientRect();
-  py = e.clientY - r.top - ph/2;
-};
+// Paddle settings
+const paddleWidth = 10;
+const paddleHeight = 100;
+const paddleX = 10;
+let paddleY = canvas.height / 2 - paddleHeight / 2;
 
-function loop() {
-  bx += dx; by += dy;
-  if (by < br || by > c.height - br) dy *= -1;
-  if (bx < px + pw && by > py && by < py + ph) dx *= -1;
-  if (bx < 0 || bx > c.width) {
-    bx = c.width/2; by = c.height/2;
+// Ball settings
+let ballX = canvas.width / 2;
+let ballY = canvas.height / 2;
+const ballRadius = 8;
+let ballSpeedX = 4;
+let ballSpeedY = 4;
+
+// Handle mouse movement to move paddle
+document.addEventListener("mousemove", function (event) {
+  const rect = canvas.getBoundingClientRect();
+  paddleY = event.clientY - rect.top - paddleHeight / 2;
+});
+
+function updateGame() {
+  // Move ball
+  ballX += ballSpeedX;
+  ballY += ballSpeedY;
+
+  // Bounce off top and bottom walls
+  if (ballY < ballRadius || ballY > canvas.height - ballRadius) {
+    ballSpeedY = -ballSpeedY;
   }
 
-  ctx.fillStyle = "#000";
-  ctx.fillRect(0, 0, c.width, c.height);
-  ctx.fillStyle = "#fff";
-  ctx.fillRect(px, py, pw, ph);
-  ctx.beginPath();
-  ctx.arc(bx, by, br, 0, 2 * Math.PI);
-  ctx.fill();
+  // Bounce off paddle
+  const paddleRightX = paddleX + paddleWidth;
+  const paddleTopY = paddleY;
+  const paddleBottomY = paddleY + paddleHeight;
 
-  requestAnimationFrame(loop);
+  if (
+    ballX - ballRadius < paddleRightX &&
+    ballY > paddleTopY &&
+    ballY < paddleBottomY
+  ) {
+    ballSpeedX = -ballSpeedX;
+    ballX = paddleRightX + ballRadius; // Prevent ball from getting stuck
+  }
+
+  // Reset if ball goes out of bounds
+  if (ballX < 0 || ballX > canvas.width) {
+    ballX = canvas.width / 2;
+    ballY = canvas.height / 2;
+    ballSpeedX = -ballSpeedX;
+    ballSpeedY = (Math.random() - 0.5) * 8; // Add some variation
+  }
 }
-loop();
+
+function drawGame() {
+  // Clear canvas
+  context.fillStyle = "#000";
+  context.fillRect(0, 0, canvas.width, canvas.height);
+
+  // Draw paddle
+  context.fillStyle = "#FFF";
+  context.fillRect(paddleX, paddleY, paddleWidth, paddleHeight);
+
+  // Draw ball
+  context.beginPath();
+  context.arc(ballX, ballY, ballRadius, 0, Math.PI * 2);
+  context.fill();
+}
+
+function gameLoop() {
+  updateGame();
+  drawGame();
+  requestAnimationFrame(gameLoop);
+}
+
+gameLoop();
 </script>
 </body>
 </html>
