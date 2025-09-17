@@ -1,54 +1,149 @@
-<html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Simple Pong Game</title>
+  <style>
+    body {
+      margin: 0;
+      background: #000;
+      overflow: hidden;
+    }
+    canvas {
+      display: block;
+      margin: auto;
+      background: #111;
+    }
+  </style>
+</head>
 <body>
-<canvas id="c" width="800" height="500"></canvas>
-<script>
-let c = document.getElementById("c"), 
-    ctx = c.getContext("2d"),
-    pw = 10, ph = 100,
-    px = 10, py = c.height/2 - ph/2,
-    bx = c.width/2, by = c.height/2,
-    br = 8, dx = 4, dy = 4;
+  <canvas id="gameCanvas" width="800" height="500"></canvas>
 
-document.body.style.margin = 0;
-c.style.display = "block";
-c.style.margin = "auto";
-c.style.background = "#000";
+  <script>
+    const canvas = document.getElementById('gameCanvas');
+    const ctx = canvas.getContext('2d');
 
-document.onmousemove = e => {
-  let r = c.getBoundingClientRect();
-  py = e.clientY - r.top - ph/2;
-};
+    const paddleWidth = 10, paddleHeight = 100;
+    const player = { x: 10, y: canvas.height / 2 - paddleHeight / 2, score: 0 };
+    const ai = { x: canvas.width - 20, y: canvas.height / 2 - paddleHeight / 2, score: 0 };
+    const ball = {
+      x: canvas.width / 2,
+      y: canvas.height / 2,
+      radius: 8,
+      speed: 5,
+      dx: 5,
+      dy: 5
+    };
 
-function loop() {
-  bx += dx;
-  by += dy;
+    function drawRect(x, y, w, h, color) {
+      ctx.fillStyle = color;
+      ctx.fillRect(x, y, w, h);
+    }
 
-  if (by < br || by > c.height - br) dy *= -1;
+    function drawCircle(x, y, r, color) {
+      ctx.fillStyle = color;
+      ctx.beginPath();
+      ctx.arc(x, y, r, 0, Math.PI * 2);
+      ctx.closePath();
+      ctx.fill();
+    }
 
-  if (bx < px + pw && by > py && by < py + ph) {
-    dx *= -1;
-    bx = px + pw + br; // Prevent sticking
-  }
+    function drawText(text, x, y, color) {
+      ctx.fillStyle = color;
+      ctx.font = "32px Arial";
+      ctx.fillText(text, x, y);
+    }
 
-  if (bx < 0 || bx > c.width) {
-    // Reset ball and reverse direction
-    bx = c.width/2;
-    by = c.height/2;
-    dx = -dx;
-    dy = (Math.random() - 0.5) * 8; // Random Y direction
-  }
+    function resetBall() {
+      ball.x = canvas.width / 2;
+      ball.y = canvas.height / 2;
+      ball.dx = -ball.dx;
+      ball.speed = 5;
+    }
 
-  ctx.fillStyle = "#000";
-  ctx.fillRect(0, 0, c.width, c.height);
-  ctx.fillStyle = "#fff";
-  ctx.fillRect(px, py, pw, ph);
-  ctx.beginPath();
-  ctx.arc(bx, by, br, 0, 2 * Math.PI);
-  ctx.fill();
+    function drawNet() {
+      for (let i = 0; i < canvas.height; i += 15) {
+        drawRect(canvas.width / 2 - 1, i, 2, 10, "#FFF");
+      }
+    }
 
-  requestAnimationFrame(loop);
-}
-loop();
-</script>
+    function update() {
+      // Move ball
+      ball.x += ball.dx;
+      ball.y += ball.dy;
+
+      // Wall collision (top/bottom)
+      if (ball.y + ball.radius > canvas.height || ball.y - ball.radius < 0) {
+        ball.dy = -ball.dy;
+      }
+
+      // Paddle collision
+      let playerPaddle = { x: player.x, y: player.y, w: paddleWidth, h: paddleHeight };
+      let aiPaddle = { x: ai.x, y: ai.y, w: paddleWidth, h: paddleHeight };
+
+      function collision(b, p) {
+        return (
+          b.x < p.x + p.w &&
+          b.x + ball.radius > p.x &&
+          b.y < p.y + p.h &&
+          b.y + ball.radius > p.y
+        );
+      }
+
+      if (collision(ball, playerPaddle)) {
+        ball.dx = -ball.dx;
+        ball.x = player.x + paddleWidth;
+      }
+
+      if (collision(ball, aiPaddle)) {
+        ball.dx = -ball.dx;
+        ball.x = ai.x - ball.radius;
+      }
+
+      // Score update
+      if (ball.x - ball.radius < 0) {
+        ai.score++;
+        resetBall();
+      } else if (ball.x + ball.radius > canvas.width) {
+        player.score++;
+        resetBall();
+      }
+
+      // AI movement
+      let aiCenter = ai.y + paddleHeight / 2;
+      if (ball.y < aiCenter) ai.y -= 4;
+      else if (ball.y > aiCenter) ai.y += 4;
+    }
+
+    function render() {
+      // Clear canvas
+      drawRect(0, 0, canvas.width, canvas.height, "#111");
+
+      // Draw net
+      drawNet();
+
+      // Draw scores
+      drawText(player.score, canvas.width / 4, 50, "#FFF");
+      drawText(ai.score, 3 * canvas.width / 4, 50, "#FFF");
+
+      // Draw paddles and ball
+      drawRect(player.x, player.y, paddleWidth, paddleHeight, "#FFF");
+      drawRect(ai.x, ai.y, paddleWidth, paddleHeight, "#FFF");
+      drawCircle(ball.x, ball.y, ball.radius, "#FFF");
+    }
+
+    function game() {
+      update();
+      render();
+    }
+
+    // Player control
+    document.addEventListener("mousemove", evt => {
+      let rect = canvas.getBoundingClientRect();
+      player.y = evt.clientY - rect.top - paddleHeight / 2;
+    });
+
+    // Game loop
+    setInterval(game, 1000 / 60); // 60 FPS
+  </script>
 </body>
 </html>
