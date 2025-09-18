@@ -80,17 +80,17 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 
 <details open><summary>Wed Sept 17th, 2025</summary>
 
-### Title
-1.
-1.
+### Tables and Lists
+1. We started assignment 3 on tables and lists.
+1. We also started assignment 4 on vibecoding and cleaning.
 1.
 
 </details>
 
 <details open><summary>Thursday Sept 18th, 2025</summary>
 
-### Title
-1.
+### Forms
+1. We started Assignment 5 on Forms.
 1.
 1.
 
