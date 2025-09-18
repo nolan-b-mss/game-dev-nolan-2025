@@ -12,7 +12,7 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 
 ---      
 
-<details open><summary>Monday Sept 8th, 2025</summary>
+<details ><summary>Monday Sept 8th, 2025</summary>
 
 ### The first day
 1. We were learning each others names.
@@ -22,7 +22,13 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 
 </details>
 
-<details open><summary>Tuesday Sept 9th, 2025</summary>
+<details ><summary>Tuesday Sept 9th, 2025</summary>
+
+### Honestly, I cant remember what happened here.
+
+</details>
+
+<details ><summary>Wed Sept 10th, 2025</summary>
 
 ### Title
 1.
@@ -31,7 +37,7 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 
 </details>
 
-<details open><summary>Wed Sept 10th, 2025</summary>
+<details ><summary>Thursday Sept 11th, 2025</summary>
 
 ### Title
 1.
@@ -40,16 +46,7 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 
 </details>
 
-<details open><summary>Thursday Sept 11th, 2025</summary>
-
-### Title
-1.
-1.
-1.
-
-</details>
-
-<details open><summary>Friday Sept 12th, 2025</summary>
+<details ><summary>Friday Sept 12th, 2025</summary>
 
 ### Title
 1.
@@ -62,9 +59,9 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 
 <details open><summary>Monday Sept 15th, 2025</summary>
 
-### Title
-1.
-1.
+### Work day
+1. We just worked on our assignments.
+1. VIDEO-FLAC test tomorrow.
 1.
 
 </details>
@@ -91,8 +88,8 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 
 ### Forms
 1. We started Assignment 5 on Forms.
-1.
-1.
+1. We had a "test" on everybody's names.
+1. It wasn't really a test at all, it was just a second name assignment.
 
 </details>
 
