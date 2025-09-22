@@ -57,7 +57,7 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 
 ---     
 
-<details open><summary>Monday Sept 15th, 2025</summary>
+<details ><summary>Monday Sept 15th, 2025</summary>
 
 ### Work day
 1. We just worked on our assignments.
@@ -66,7 +66,7 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 
 </details>
 
-<details open><summary>Tuesday Sept 16th, 2025</summary>
+<details ><summary>Tuesday Sept 16th, 2025</summary>
 
 ### There is a VIDEO-FLAC test today.
 1. I have already got the basics of videoflac, so this test shouldn't be too difficult.
@@ -75,7 +75,7 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 
 </details>
 
-<details open><summary>Wed Sept 17th, 2025</summary>
+<details ><summary>Wed Sept 17th, 2025</summary>
 
 ### Tables and Lists
 1. We started assignment 3 on tables and lists.
@@ -84,7 +84,7 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 
 </details>
 
-<details open><summary>Thursday Sept 18th, 2025</summary>
+<details ><summary>Thursday Sept 18th, 2025</summary>
 
 ### Forms
 1. We started Assignment 5 on Forms.
