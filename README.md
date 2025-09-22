@@ -102,8 +102,8 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 <details open><summary>Monday Sept 22nd, 2025</summary>
 
 ### Finishing Assignment 3
-1.I learned how to add images to tables with links, thus finishing assignment 3 on lists and tables.
-1.I put assignment 4 on VibeCodeCleaing up for mark, as well as assignment 3.
+1. I learned how to add images to tables with links, thus finishing assignment 3 on lists and tables.
+1. I put assignment 4 on VibeCodeCleaing up for mark, as well as assignment 3.
 1.
 
 </details>
