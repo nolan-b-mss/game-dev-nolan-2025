@@ -110,9 +110,9 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 
 <details open><summary>Tuesday Sept 23rd, 2025</summary>
 
-### Title
-1.
-1.
+### CSS Assignment
+1. We started assignment 6 on CSS styling.
+1. I learned about styling CSS borders and text.
 1.
 
 </details>
