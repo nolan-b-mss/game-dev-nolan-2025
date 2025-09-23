@@ -23,8 +23,10 @@ This is a
 <b style="background-color:purple;">w</b> <br> <br> <br>
 
 This is <b>guy</b> <br>
-<input type="button" src="guy.png" height="125" width="125" style="border-style:outset;border-top-color:red;border-bottom-color:blue;border-right-color:yellow;border-left-color:green;position:relative;right:0;" onclick="myMoveFunction()">
+<input type="button" id="guy"  img="guy.png" height="125" width="125" style="border-style:outset;border-top-color:red;border-bottom-color:blue;border-right-color:yellow;border-left-color:green;position:relative;right:0;" onclick="myMoveFunction()">
 
 <script>
-  function myMoveFunction() {document.getElementById(right).innerhtml + 1}
+  let myPosition1 = 0;
+  let myPosition = myPosition1 + "px"
+  function myMoveFunction() {document.getElementById('guy').style.right = myPosition + 1}
 </script>
