@@ -2,9 +2,10 @@
 <head>
     <script>
   setInterval(animateBox,10)
-  let myBox = document.getElementById('box').style.left = boxPos + 'px'
+  document.getElementById('box').style.left = boxMove
   let boxPos = 0 
   let boxDir = 1
+  let boxMove = boxPos + 'px'
   function animateBox() {parseInt(boxPos)
                          boxPos += 1}
                          
