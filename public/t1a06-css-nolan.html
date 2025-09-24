@@ -3,9 +3,11 @@
   <script>
   setInterval(animateBox,10)
   let myBox = document.getElementById('box').style.left = boxPos + 'px'
-  let boxPos = parseInt('box'.style.left)
+  let boxPos = 0 
   let boxDir = 1
-  function animateBox() {boxPos += 1}
+  function animateBox() {parseInt(boxPos)
+                         boxPos += 1}
+                         
                          
 </script>
 </body>
