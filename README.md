@@ -128,9 +128,9 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 
 <details open><summary>Thursday Sept 25th, 2025</summary>
 
-### Title
-1.
-1.
+### easyEDA
+1. We made our first project on easyEDA.com.
+1. I have absolutely no idea what is happening.
 1.
 
 </details>
