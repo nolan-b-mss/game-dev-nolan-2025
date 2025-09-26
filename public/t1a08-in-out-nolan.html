@@ -2,11 +2,22 @@
 
 <input type="text" id="myText01" value="Fred"><br>
 <span id="mySpan01">...</span><br>
-<input type="button" onclick="moveMyText()"></input><br>
+<input type="button" onclick="moveMyText()" value="Move My Text!"></input><br>
   <script>
     function moveMyText(){document.getElementById('mySpan01').innerHTML = myText01.value}
   </script>
-
+<br><br><br>
+<input type="date" id="myDate01"><br>
+<input type="button" onclick="howLongAgo()" value="How long ago was this?"> <br>
+<span id="mySpan02">...</span><br>
+  <script>
+    function howLongAgo() {let dateInput = document.getElementById('myDate01').value;
+                           let myDate02 = new Date(dateInput);
+                           let myCurrentDate = new Date();
+                           let dateDifference = myCurrentDate - myDate02
+                           let dateResult = dateDifference / 86400000 + 'Days ago'
+                           document.getElementById('mySpan02').innerHTML = dateResult
+  </script>
 
 
 
