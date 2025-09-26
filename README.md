@@ -137,10 +137,10 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 
 <details open><summary>Friday Sept 26th, 2025</summary>
 
-### Title
-1.
-1.
-1.
+### InputOutput assignment
+1. We started (and I finished) assignment 8 on input/output.
+1. This assignment meant much to me because we didnt have starting code to work off of.
+1. We wrote our code from the ground up this time.
 
 </details>
 
