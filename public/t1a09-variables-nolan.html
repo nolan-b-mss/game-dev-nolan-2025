@@ -9,12 +9,15 @@ Show correct use of const, var, let and integer, character, boolean, float and s
 <input id = "myNum02" type=text value="Mary"> <br>
 <span id ="mySpan01">...</span><br>
 
-<input type=button value="add (concatenate) strings" onclick="{
+<input type=button value="add (concatenate) strings" onclick="myFunc01()"><br>
+<script>
+  function myFunc01(){
   let myFred = document.getElementById('myNum01').value
   var myMary = document.getElementById('myNum02').value
   const myOut = document.getElementById('mySpan01')
   myOut.innerHTML = myFred + ' ' + myMary
-}"><br>
+}
+</script>
 
 You do similar versions of this for integer character, boolean and float. <br><br>
 
