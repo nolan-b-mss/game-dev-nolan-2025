@@ -5,7 +5,7 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 
 ---
 
-<details open><summary>September 2025 Journal Entries</summary>
+<details ><summary>September 2025 Journal Entries</summary>
 
 ---
 
@@ -99,7 +99,7 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 
 ---   
 
-<details open><summary>Monday Sept 22nd, 2025</summary>
+<details ><summary>Monday Sept 22nd, 2025</summary>
 
 ### Work day
 1. I learned how to add images to tables with links, thus finishing assignment 3 on lists and tables.
@@ -108,7 +108,7 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 
 </details>
 
-<details open><summary>Tuesday Sept 23rd, 2025</summary>
+<details ><summary>Tuesday Sept 23rd, 2025</summary>
 
 ### CSS Assignment
 1. We started assignment 6 on CSS styling.
@@ -117,7 +117,7 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 
 </details>
 
-<details open><summary>Wed Sept 24th, 2025</summary>
+<details ><summary>Wed Sept 24th, 2025</summary>
 
 ### Work day
 1. Simply just worked on assignment 6.
@@ -126,7 +126,7 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 
 </details>
 
-<details open><summary>Thursday Sept 25th, 2025</summary>
+<details ><summary>Thursday Sept 25th, 2025</summary>
 
 ### easyEDA
 1. We made our first project on easyEDA.com.
@@ -135,7 +135,7 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 
 </details>
 
-<details open><summary>Friday Sept 26th, 2025</summary>
+<details ><summary>Friday Sept 26th, 2025</summary>
 
 ### InputOutput assignment
 1. We started assignment 8 on input/output.
@@ -148,8 +148,8 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 
 <details open><summary>Monday Sept 29th, 2025</summary>
 
-### Title
-1.
+### Variables Assignment
+1. We started assignment 9 on variables.
 1.
 1.
 
@@ -166,11 +166,11 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 
 ---
 
-<details><summary>October 2025 Journal Entries</summary>
+<details open><summary>October 2025 Journal Entries</summary>
 
 ---
 
-<details><summary>Wednesday Oct 1st, 2025</summary>
+<details open><summary>Wednesday Oct 1st, 2025</summary>
 
 ### Title
 1.
@@ -179,7 +179,7 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 
 </details>
 
-<details><summary>Thursday Oct 2nd, 2025</summary>
+<details open><summary>Thursday Oct 2nd, 2025</summary>
 
 ### Title
 1.
@@ -188,7 +188,7 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 
 </details>
 
-<details><summary>Friday Oct 3rd, 2025</summary>
+<details open><summary>Friday Oct 3rd, 2025</summary>
 
 ### Title
 1.
