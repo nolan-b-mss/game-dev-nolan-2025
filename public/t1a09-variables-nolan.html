@@ -1,0 +1,53 @@
+<h2 align=center>t1a09-variables-nolan.html</h2>
+
+Show correct use of const, var, let and integer, character, boolean, float and string.<br>
+
+<h2> Concatenating (adding) strings</h2>
+
+<input id="myNum01:" type=text value="Fred">
++
+<input id = "myNum02" type=text value="Mary"> <br>
+<span id ="mySpan01">...</span><br>
+
+<input type=button value="add (concatenate) strings" onclick="{
+  let myFred = document.getElementById('myNum01').value
+  var myMary = document.getElementById('myNum02').value
+  const myOut = document.getElementById('mySpan01')
+  myOut.innerHTML = myFred + ' ' + myMary
+}"><br>
+
+You do similar versions of this for integer character, boolean and float. <br><br>
+
+<h2> Adding floating point numbers</h2>
+
+<input id="myNum03" type=text value="3.4">
++
+<input id="myNum04" type=text value="2.1">
+<span id="mySpan02">...</span><br>
+
+<input type=button value="add floating point numbers" onclick="{
+  let myFred = document.getElementById('myNum03').value
+  var myMary = document.getElementById('myNum04').value
+  let myAnswer = parseFloat(myFred) + parseFloat(myMary)
+  const myOut = document.getElementById('mySpan02')
+  myOut.inerHTML = myFred + ' + ' + myMary + ' = ' + myAnswer
+  }"><br>
+
+<h2> test for boolean</h2>
+
+<input id="myBool" type=text value="3.4" >
+
+<span id="mySpan033">...</span><br>
+
+<input type=button value="is boolean?" onclick="{
+  let myBool = document.getElementById('myBool').value
+  const myOut = document.getELementById('mySpan03')
+
+  if (myBool.toLowerCase() === 'true' || myBool.toLowerCase() === 'false') {
+    myAnswer = 'yes'
+  } else {
+    myAnswer = 'No'
+  }
+
+  myOut.innerHTML = 'Is ' + myBool +' a Boolean ? ' + myAnswer
+}"><br>
