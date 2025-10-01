@@ -40,16 +40,16 @@ You do similar versions of this for integer character, boolean and float. <br><b
 
 <input id="myBool" type=text value="3.4" >
 
-<span id="mySpan033">...</span><br>
+<span id="mySpan03">...</span><br>
 
 <input type=button value="is boolean?" onclick="{
   let myBool = document.getElementById('myBool').value
   const myOut = document.getELementById('mySpan03')
 
   if (myBool.toLowerCase() === 'true' || myBool.toLowerCase() === 'false') {
-    myAnswer = 'yes'
+    let myAnswer = 'yes'
   } else {
-    myAnswer = 'No'
+    let myAnswer = 'No'
   }
 
   myOut.innerHTML = 'Is ' + myBool +' a Boolean ? ' + myAnswer
