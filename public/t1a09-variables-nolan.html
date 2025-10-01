@@ -47,10 +47,10 @@ You do similar versions of this for integer character, boolean and float. <br><b
   const myOut = document.getElementById('mySpan03')
 
   if (myBool.toLowerCase() === 'true' || myBool.toLowerCase() === 'false'){
-    myAnswer = yes
-  } else {
-    myAnswer = No
-  }
+    myAnswer = 'yes'
+  } else 
+  {myAnswer = 'no'}
+  
 
   myOut.innerHTML = 'Is ' + myBool +' a Boolean ? ' + myAnswer
 }"><br>
