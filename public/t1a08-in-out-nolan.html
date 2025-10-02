@@ -27,11 +27,11 @@
 
 <script>
     function myFunc02() {
-        let myInt1Str = document.getElementById('myInt01').value
-        var myInt2Str = document.getElementById('myInt02').value
-        let myAnswer = parseInt(myInt1Str) + parseInt(myInt2Str)
+        let myInt1 = document.getElementById('myInt01').value
+        var myInt2 = document.getElementById('myInt02').value
+        let myAnswer = parseFloat(myInt1Str) + parseFloat(myInt2Str)
         const myOut = document.getElementById('mySpan04')
-        myOut.innerHTML = myInt1Str + ' + ' + myInt2Str + ' = ' + myAnswer
+        myOut.innerHTML = myInt1 + ' + ' + myInt2 + ' = ' + myAnswer
     }
 </script>
 <br><br><br>
