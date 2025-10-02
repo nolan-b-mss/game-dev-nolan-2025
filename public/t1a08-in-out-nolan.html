@@ -18,6 +18,22 @@
                            let dateResult = dateDifference / 86400000
                            document.getElementById('mySpan02').innerHTML = Math.floor(dateResult) + ' Days ago'}
   </script>
+<input id="myInt01" type=text value="10">
++
+<input id="myInt02" type=text value="5">
+<span id="mySpan04">...</span><br>
+
+<input type=button value="add integers" onclick="myFunc02()"><br>
+
+<script>
+    function myFunc02() {
+        let myInt1Str = document.getElementById('myInt01').value
+        var myInt2Str = document.getElementById('myInt02').value
+        let myAnswer = parseInt(myInt1Str) + parseInt(myInt2Str)
+        const myOut = document.getElementById('mySpan04')
+        myOut.innerHTML = myInt1Str + ' + ' + myInt2Str + ' = ' + myAnswer
+    }
+</script>
 <br><br><br>
 
 
