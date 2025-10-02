@@ -172,7 +172,7 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 
 <details open><summary>Wednesday Oct 1st, 2025</summary>
 
-### Title
+### Work day
 1.
 1.
 1.
@@ -181,8 +181,8 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 
 <details open><summary>Thursday Oct 2nd, 2025</summary>
 
-### Title
-1.
+### VideoFlac test
+1. We did our Hard VideoFlac full test.
 1.
 1.
 
