@@ -183,7 +183,7 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 
 ### VideoFlac test
 1. We did our Hard VideoFlac full test.
-1.
+1. We started assignment 10 on for loops.
 1.
 
 </details>
