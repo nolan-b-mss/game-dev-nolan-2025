@@ -49,6 +49,15 @@
       document.getElementById('mySpan05').innerHTML = myDropDown01.value
     }
   </script>
+<br><br><br>
+<input type="range" id="myRange01" min="0" max="100" value="50" oninput="showRangeValue()">
+<span id="mySpan06">50</span>
+<script>
+  function showRangeValue(){
+    let myRange02 = document.getElementById('myRange01').value
+    document.getElementById('mySpan06').innerHTML = myRange02
+  }
+</script>
 
 
 
