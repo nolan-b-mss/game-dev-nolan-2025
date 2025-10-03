@@ -173,9 +173,6 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 <details open><summary>Wednesday Oct 1st, 2025</summary>
 
 ### Work day
-1.
-1.
-1.
 
 </details>
 
@@ -190,10 +187,7 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 
 <details open><summary>Friday Oct 3rd, 2025</summary>
 
-### Title
-1.
-1.
-1.
+### Work day
 
 </details>
 
