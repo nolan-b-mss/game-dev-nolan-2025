@@ -41,12 +41,12 @@
   <option value="Green">Green</option>
   <option value="Yellow">Yellow</option>
 </select>
-<span id="mySpan05">
+<span id="mySpan05"><br>
 <input type="button" value="What was my selection?" onclick="showMySel()">
   <script>
     function showMySel(){
       let mySelection = document.getElementById('myDropDown01').value
-      document.getElementById('mySpan05').innerHTML = myDropDown01
+      document.getElementById('mySpan05').innerHTML = myDropDown01.value
     }
   </script>
 
