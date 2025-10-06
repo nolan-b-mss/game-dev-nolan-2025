@@ -3,6 +3,7 @@
 <script>
   let myArray = new Array()
   let myArray2 = [10,20,30,40,50]
+  let myArray3 = ['Red','Orange','Yellow','Green','Blue','Indigo','Violet']
 
   myArray[0] = 'Fred'
   myArray[1] = 'Mary'
@@ -40,4 +41,20 @@ Max Array Entry 2: <input type=text id="myText02" value="5"><br>
   document.getElementById('myDiv02').innerHTML = mySum2
 }"><br>
 
-<div id="myDiv02">...</div>
+<div id="myDiv02">...</div><br><br>
+
+Max Array Entry 3: <input type=text id="myText03" value="7"><br>
+
+<input type="button" value="Show Array 3" onClick="{
+  let myMax3 = document.getElementById('myText03').value
+  let mySum3 = ''
+  document.getElementById('myDiv03').innerHTML = ''
+
+  for (let myLoop=0; myLoop < myMax3; myLoop++){
+    mySum3 += 'Loop #:' + myLoop + ' array entry: ' + myArray3[myLoop] +'<br>'
+  }
+  document.getElementById('myDiv03').innerHTML = mySum3
+}"><br>
+
+<div id="myDiv03">...</div>
+
