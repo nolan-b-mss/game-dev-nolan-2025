@@ -2,6 +2,7 @@
 
 <script>
   let myArray = new Array()
+  let myArray2 = [10,20,30]
 
   myArray[0] = 'Fred'
   myArray[1] = 'Mary'
@@ -24,4 +25,19 @@ Max Array Entry: <input type=text id="myText01" value="3"><br>
 
 <br>
 
-You do atleast 7 other arrays: <br>  
+You do atleast 7 other arrays: <br>  <br>
+
+Max Array Entry 2: <input type=text id="myText02" value="30"><br>
+
+<input type="button" value="Show Array 2" onClick="{
+  let myMax2 = document.getElementById('myText02').value
+  let mySum2 = ''
+  document.getElementById('myDiv02').innerHTML = ''
+
+  for (let myLoop=0; myLoop < myMax2; myLoop++){
+    mySum2 += 'Loop #:' + myLoop + ' array entry: ' + myArray2[myLoop] +'<br>'
+  }
+  document.getElementById('myDiv02').innerHTML = mySum2
+}"><br>
+
+<div id="myDiv02">...</div>
