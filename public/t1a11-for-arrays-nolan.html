@@ -4,6 +4,7 @@
   let myArray = new Array()
   let myArray2 = [10,20,30,40,50]
   let myArray3 = ['Red','Orange','Yellow','Green','Blue','Indigo','Violet']
+  let myArray4 = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']
 
   myArray[0] = 'Fred'
   myArray[1] = 'Mary'
@@ -56,5 +57,20 @@ Max Array Entry 3: <input type=text id="myText03" value="7"><br>
   document.getElementById('myDiv03').innerHTML = mySum3
 }"><br>
 
-<div id="myDiv03">...</div>
+<div id="myDiv03">...</div><br><br>
 
+<text style="background-color:yellow;">I recommend refreshing the page after using this Array 4.</text>
+Max Array Entry 4: <input type=text id="myText04" value="27"><br>
+
+<input type="button" value="Show Array 4" onClick="{
+  let myMax4 = document.getElementById('myText04').value
+  let mySum4 = ''
+  document.getElementById('myDiv04').innerHTML = ''
+
+  for (let myLoop=0; myLoop < myMax4; myLoop++){
+    mySum4 += 'Loop #:' + myLoop + ' array entry: ' + myArray4[myLoop] +'<br>'
+  }
+  document.getElementById('myDiv04').innerHTML = mySum4
+}"><br>
+
+<div id="myDiv04">...</div><br><br>
