@@ -1,3 +1,18 @@
 <h1 align=center>x-x-rock-paper-scissors-nolan.html</h1>
+<input type=text placeholder="Rock, Paper, or Scissors?" id="myInput01" list="myDataL01"><br>
+
 <input type=button value="Play" onclick="myFunc01()"><br>
-<input type=button placeholder="Rock, Paper, or Scissors?" id="myInput01">
+
+<datalist id="myDataL01">
+  <option value="Rock!"></option>
+  <option value="Paper!"></option>
+  <option value="Scissors!"></option>
+</datalist>
+<br><br>
+<script>
+  let min = 1
+  let max = 3
+    function myFunc01(){let myResult = Math.floor(Math.random() * (max - min + 1)) + min
+                        let myResultDisplay = document.getElementById('myResult').value
+</script>
+<div id="myResultDisplay">...</div>
