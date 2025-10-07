@@ -89,3 +89,18 @@ Max Array Entry 5: <input type=text id="myText05" value="3"><br>
 }"><br>
 
 <div id="myDiv05">...</div><br><br>
+
+Max Array Entry 6: <input type=text id="myText06" value="3"><br>
+
+<input type="button" value="Show Array 6" onClick="{
+  let myMax6 = document.getElementById('myText06').value
+  let mySum6 = ''
+  document.getElementById('myDiv06').innerHTML = ''
+
+  for (let myLoop=0; myLoop < myMax6; myLoop++){
+    mySum6 += 'Loop #:' + myLoop + ' array entry: ' + myArray6[myLoop] +'<br>'
+  }
+  document.getElementById('myDiv06').innerHTML = mySum6
+}"><br>
+
+<div id="myDiv06">...</div><br><br>
