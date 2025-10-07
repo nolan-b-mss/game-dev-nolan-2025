@@ -8,6 +8,7 @@
   let myArray5 = ['Canada','USA','Mexico']
   let myArray6 = ['Sweet','Sour','Spicy','Salty']
   let myArray7 = ['HTML','JavaScript','CSS','C++','C#','Python','Lua']
+  let myArray8 = ['Variables','Input-Output','Decisions','Events','Objects','Functions','Loops','Arrays','Classes']
 
   myArray[0] = 'Fred'
   myArray[1] = 'Mary'
@@ -107,7 +108,7 @@ Max Array Entry 6: <input type=text id="myText06" value="4"><br>
 
 <div id="myDiv06">...</div><br><br>
 
-Max Array Entry 7: <input type=text id="myText07" value="3"><br>
+Max Array Entry 7: <input type=text id="myText07" value="7"><br>
 
 <input type="button" value="Show Array 7" onClick="{
   let myMax7 = document.getElementById('myText07').value
@@ -121,3 +122,18 @@ Max Array Entry 7: <input type=text id="myText07" value="3"><br>
 }"><br>
 
 <div id="myDiv07">...</div><br><br>
+
+Max Array Entry 8: <input type=text id="myText08" value="9"><br>
+
+<input type="button" value="Show Array 8" onClick="{
+  let myMax8 = document.getElementById('myText08').value
+  let mySum8 = ''
+  document.getElementById('myDiv08').innerHTML = ''
+
+  for (let myLoop=0; myLoop < myMax8; myLoop++){
+    mySum8 += 'Loop #:' + myLoop + ' array entry: ' + myArray8[myLoop] +'<br>'
+  }
+  document.getElementById('myDiv08').innerHTML = mySum8
+}"><br>
+
+<div id="myDiv08">...</div><br><br>
