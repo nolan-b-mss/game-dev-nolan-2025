@@ -170,13 +170,13 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 
 ---
 
-<details open><summary>Wednesday Oct 1st, 2025</summary>
+<details ><summary>Wednesday Oct 1st, 2025</summary>
 
 ### Work day
 
 </details>
 
-<details open><summary>Thursday Oct 2nd, 2025</summary>
+<details ><summary>Thursday Oct 2nd, 2025</summary>
 
 ### VideoFlac test
 1. We did our Hard VideoFlac full test.
@@ -185,7 +185,7 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 
 </details>
 
-<details open><summary>Friday Oct 3rd, 2025</summary>
+<details ><summary>Friday Oct 3rd, 2025</summary>
 
 ### Work day
 
@@ -193,7 +193,34 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 
 ---    
 
-<details ><summary>Monday Oct 6th, 2025</summary>
+<details open><summary>Monday Oct 6th, 2025</summary>
+
+### Assignment 11
+1. We started assignment 11 on arrays with for loops.
+1.
+1.
+
+</details>
+
+<details open><summary>Tuesday Oct 7th, 2025</summary>
+
+### Work day
+1. I finished assignment 11
+1. I began working on my first X assignment, which is a simple Rock Paper Scissors game!
+1.
+
+</details>
+
+<details open><summary>Wednesday Oct 8th, 2025</summary>
+
+### Work day
+1. I finished my first X assignment, you can find it [here](https://nolan-b-mss.github.io/game-dev-nolan-2025/public/x-x-rock-paper-scissors-nolan.html).
+1.
+1.
+
+</details>
+
+<details open><summary>Thursday Oct 9th, 2025</summary>
 
 ### Title
 1.
@@ -202,34 +229,7 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 
 </details>
 
-<details><summary>Tuesday Oct 7th, 2025</summary>
-
-### Title
-1.
-1.
-1.
-
-</details>
-
-<details><summary>Wednesday Oct 8th, 2025</summary>
-
-### Title
-1.
-1.
-1.
-
-</details>
-
-<details><summary>Thursday Oct 9th, 2025</summary>
-
-### Title
-1.
-1.
-1.
-
-</details>
-
-<details><summary>Friday Oct 10th, 2025</summary>
+<details open><summary>Friday Oct 10th, 2025</summary>
 
 ### Title
 1.
