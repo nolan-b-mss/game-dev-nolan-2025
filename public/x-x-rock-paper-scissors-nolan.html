@@ -1,16 +1,16 @@
 <h1 align=center>x-x-rock-paper-scissors-nolan.html</h1>
 <input type=button value="Choose Rock" onclick="chooseRock()">
 <input type=button value="Choose Paper" onclick="choosePaper()">
-<input type=button value="Choose Scissors" onclick="chooseScissors()">
+<input type=button value="Choose Scissors" onclick="chooseScissors()"><br>
 
 <input type=button value="Play" onclick="myFunc01()"><br>
 <br><br>
 <script>
   let min = 1
   let max = 3
-    function chooseRock(){alert('you chose rock')let myInput01 = 1}
-    function choosePaper(){alert('you chose paper')let myInput01 = 2}
-    function chooseScissors(){alert('you chose scissors')let myInput01 = 3}
+    function chooseRock(){alert('you chose rock')myInput01 = 1}
+    function choosePaper(){alert('you chose paper')myInput01 = 2}
+    function chooseScissors(){alert('you chose scissors')myInput01 = 3}
     function myFunc01(){let myResult = Math.floor(Math.random() * (max - min + 1)) + min
                         let myInput02 = parseInt(document.getElementById('myInput01').value)
                         if (myResult == 1){document.getElementById('myResultDisplay').innerHTML = 'Rock'}
