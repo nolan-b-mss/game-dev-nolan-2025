@@ -16,7 +16,7 @@ You Chose:<span id="myChoice" placeholder="(you haven't chosen yet)"></span><br>
     function chooseRock(){document.getElementById('myChoice').innerHTML = ' Rock';myInput01 = 1}
     function choosePaper(){document.getElementById('myChoice').innerHTML = ' Paper';myInput01 = 2}
     function chooseScissors(){document.getElementById('myChoice').innerHTML = ' Scissors';myInput01 = 3}
-    function myFunc01(){if (myInput01 == 0){document.getElementById('finalResults').innerHTML = "You didn't even choose, silly!"}
+    function myFunc01(){if (myInput01 == 0){document.getElementById('finalResults').innerHTML = "You didn't even choose, silly!";return}
                         let myResult = Math.floor(Math.random() * (max - min + 1)) + min
                         if (myResult == 1){document.getElementById('myResultDisplay').innerHTML = 'Rock'}
                         if (myResult == 2){document.getElementById('myResultDisplay').innerHTML = 'Paper'}
