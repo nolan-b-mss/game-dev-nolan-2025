@@ -223,8 +223,8 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 <details open><summary>Thursday Oct 9th, 2025</summary>
 
 ### Assignment 12
-1. I started another X assignment on a whack a mole game.
 1. We started assignment 12 on events.
+1.
 1.
 
 </details>
