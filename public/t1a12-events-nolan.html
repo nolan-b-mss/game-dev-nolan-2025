@@ -21,6 +21,8 @@ You make at least 8 HTML events.
   <h2 align=left>#4 and #5. onKeyDown and onKeyUp</h2>
 <textarea onkeydown="{document.getElementById('myOut04').innerHTML = 'You pressed a key down';}" onkeyup="{document.getElementById('myOut04').innerHTML = 'You released a key up';}" placeholder="Press keys here"></textarea>
 <div id="myOut04">...</div>
-  <h2 align=left>#6
+  <h2 align=left>#6 onCopy</h2>
+<p oncopy="{document.getElementById('myOut05').innerHTML = 'You copied the text'}">Copy this text</p>
+<div id="myOut05">...</div>
 </body>
 </html>
