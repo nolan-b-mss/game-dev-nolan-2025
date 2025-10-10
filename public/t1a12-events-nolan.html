@@ -6,11 +6,8 @@
 <body>
   <h2 align=left>Examples</h2>
 <button onclick="{console.log('hi')}">ctrl-shift-i for console</button><br>
-
-  <hr>
-
 <button style="background-color:lightgray;" onmouseover="{this.style.backgroundColor = 'green';}" onmouseout="{this.style.backgroundColor = 'lightgray'}">onMouseOver</button> <br>
-
+<hr>
 You make at least 8 HTML events.
   <h2 align=left>#1. onDBLClick</h2>
 <button ondblclick="{document.getElementById('myOut01').innerHTML = 'You double clicked'}">Double Click This</button>
@@ -21,5 +18,8 @@ You make at least 8 HTML events.
   <h2 align=left>#3. onContextMenu</h2>
 <button oncontextmenu="{document.getElementById('myOut03').innerHTML = 'You opened the context menu'}">Right click this</button>
 <div id='myOut03'>...</div>
+  <h2 align=left>#4 and #5. onKeyDown and onKeyUp
+<button onkeydown="{document.getElementById('myOut04').innerHTML = 'You pressed a key down';}" onkeyup="{document.getElementById('myOut04').innerHTML = 'You released a key up';}">Press a key</button>
+<div id="myOut04">...</div>
 </body>
 </html>
