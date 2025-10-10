@@ -7,12 +7,16 @@
   <h2 align=left>Examples</h2>
 <button onclick="{console.log('hi')}">ctrl-shift-i for console</button><br>
 
+  <hr>
 
 <button style="background-color:lightgray;" onmouseover="{this.style.backgroundColor = 'green';}" onmouseout="{this.style.backgroundColor = 'lightgray'}">onMouseOver</button> <br>
 
 You make at least 8 HTML events.
   <h2 align=left>#1. onDBLClick</h2>
-<button ondblclick="{document.getElementById('myOut01').innerHTML = 'You double clicked!'}">Double Click This</button>
+<button ondblclick="{document.getElementById('myOut01').innerHTML = 'You double clicked'}">Double Click This</button>
 <div id="myOut01">...</div>
+  <h2 align=left>#2. onMouseMove
+<button onmousemove="{document.getelementById('myOut02').innerHTML = 'You moved the mouse'}">Move your mouse over this</button>
+<div id="myOut02">...</div>
 </body>
 </html>
