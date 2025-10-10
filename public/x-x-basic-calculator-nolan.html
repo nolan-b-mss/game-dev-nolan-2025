@@ -10,6 +10,14 @@
 <input type=number value=4 id="myInput02">
 <input type=button value=Run onclick="runEquation()">
 <script>
-  function runEquation(){let myNum01 = parseFloat(document.getElementById('myInput01').value)
+  function runEquation(){let myOperator = document.getElementById('event').value
+                         let myNum01 = parseFloat(document.getElementById('myInput01').value)
                          let myNum02 = parseFloat(document.getElementById('myInput02').value)
+                         let myAnswer = ...
+                         if (myOperator == "+"){myAnswer = myNum01 + myNum02}
+                         else if (myOperator == "-"){myAnswer = myNum01 - myNum02}
+                         else if (myOperator == "*"){myAnswer = myNum01 * myNum02}
+                         else if (myOperator == "/"){myAnswer = myNum01 / myNum02}
+                         document.getElementById('myOutput01').innerHTML = myNum01 + myOperator + myNum02 + '=' + myAnswer
 </script>
+<div id=myOutput01>...</div>
