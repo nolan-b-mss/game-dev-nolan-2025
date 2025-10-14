@@ -11,6 +11,13 @@
     }
   } // end class myAnimal
 
+  class myCat extends myAnimal {
+    myShow(){
+      document.getElementById('myDiv01').innerHTML = this.myName + ' is a great cat<br>'
+  }
+  } // end extended class myCat
+
+
   class myReptile extends myAnimal {
     constructor(passName, passAge) {
       super (passName, passAge)
@@ -32,16 +39,8 @@
 Nothing: <input type=text id="myText01" value="Useless at the moment"><br>
 
 <input type=button value="Example Extend Class Animal" onClick="{
-
-  class myCat extends myAnimal {
-    myShow(){
-      document.getElementById('myDiv01').innerHTML = this.myName + ' is a great cat<br>'
-  }
-  } // end extended class myCat
-
   myPet = new myCat ('Fluffy', 14)
   myPet.myShow()
-
 }">
 
 <div id="myDiv01">...</div>
@@ -50,7 +49,7 @@ Nothing: <input type=text id="myText01" value="Useless at the moment"><br>
 <input type=button value="Extend Class Reptile" onClick="{
   myTurtle = new myReptile('Gerson', 89)
   myTurtle.myShow()
-  }">
+}">
 
 
 
