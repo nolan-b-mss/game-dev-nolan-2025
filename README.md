@@ -146,7 +146,7 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 
 ---      
 
-<details open><summary>Monday Sept 29th, 2025</summary>
+<details ><summary>Monday Sept 29th, 2025</summary>
 
 ### Variables Assignment
 1. We started assignment 9 on variables.
@@ -193,7 +193,7 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 
 ---    
 
-<details open><summary>Monday Oct 6th, 2025</summary>
+<details ><summary>Monday Oct 6th, 2025</summary>
 
 ### Assignment 11
 1. We started assignment 11 on arrays with for loops.
@@ -202,7 +202,7 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 
 </details>
 
-<details open><summary>Tuesday Oct 7th, 2025</summary>
+<details ><summary>Tuesday Oct 7th, 2025</summary>
 
 ### Work day
 1. I finished assignment 11
@@ -211,7 +211,7 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 
 </details>
 
-<details open><summary>Wednesday Oct 8th, 2025</summary>
+<details ><summary>Wednesday Oct 8th, 2025</summary>
 
 ### Work day
 1. I finished my first X assignment, you can find it [here](https://nolan-b-mss.github.io/game-dev-nolan-2025/public/x-x-rock-paper-scissors-nolan.html).
@@ -220,7 +220,7 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 
 </details>
 
-<details open><summary>Thursday Oct 9th, 2025</summary>
+<details ><summary>Thursday Oct 9th, 2025</summary>
 
 ### Assignment 12
 1. We started assignment 12 on events.
@@ -229,7 +229,7 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 
 </details>
 
-<details open><summary>Friday Oct 10th, 2025</summary>
+<details ><summary>Friday Oct 10th, 2025</summary>
 
 ### Work day
 1. I finished assignment 12.
@@ -245,7 +245,7 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 
 </details>
 
-<details><summary>Tuesday Oct 14th, 2025</summary>
+<details open><summary>Tuesday Oct 14th, 2025</summary>
 
 ### Title
 1.
@@ -254,7 +254,7 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 
 </details>
 
-<details><summary>Wednesday Oct 15th, 2025</summary>
+<details open><summary>Wednesday Oct 15th, 2025</summary>
 
 ### Title
 1.
@@ -263,7 +263,7 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 
 </details>
 
-<details><summary>Thursday Oct 16th, 2025</summary>
+<details open><summary>Thursday Oct 16th, 2025</summary>
 
 ### Title
 1.
@@ -272,7 +272,7 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 
 </details>
 
-<details><summary>Friday Oct 17th, 2025</summary>
+<details open><summary>Friday Oct 17th, 2025</summary>
 
 ### Title
 1.
