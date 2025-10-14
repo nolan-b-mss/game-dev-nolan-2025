@@ -247,8 +247,8 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 
 <details open><summary>Tuesday Oct 14th, 2025</summary>
 
-### Title
-1.
+### Assignment 13
+1. We did assigment 13 on extending classes.
 1.
 1.
 
