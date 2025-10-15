@@ -256,8 +256,8 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 
 <details open><summary>Wednesday Oct 15th, 2025</summary>
 
-### Title
-1.
+### Edge Impulse
+1. We started assignment 14 on Edge Impulse
 1.
 1.
 
