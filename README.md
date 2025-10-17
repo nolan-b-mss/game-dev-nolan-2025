@@ -274,8 +274,8 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 
 <details open><summary>Friday Oct 17th, 2025</summary>
 
-### Title
-1.
+### Work day
+1. We continued assigment 14 on Edge Impulse
 1.
 1.
 
