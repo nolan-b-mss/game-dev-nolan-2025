@@ -22,4 +22,8 @@ Have 8 different types of objects move in different ways<br>
 ">Move Right</button><br>
 <hr><br>
 <h1 align=left>#1. With Range Bar </h1>
-<input type=range>
+<input type=range oninput="myMove01()" id="myRange01">
+<script>
+  function myMove01(){parseInt(myRange01)
+                              document.getElementById('myDiv02').style.left = myRange01 + 'px'}
+</script>
