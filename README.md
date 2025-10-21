@@ -294,9 +294,9 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 
 <details open><summary>Tuesday Oct 21st, 2025</summary>
 
-### Title
-1.
-1.
+### Assignemnt 15/16 (?)
+1. We started assignment 16 on moving objects
+1. I dont know about assignment 15.
 1.
 
 </details>
