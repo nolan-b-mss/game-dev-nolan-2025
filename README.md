@@ -303,8 +303,8 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 
 <details open><summary>Wednesday Oct 22nd, 2025</summary>
 
-### Title
-1.
+### Work day
+1. I continued assignment 16.
 1.
 1.
 
