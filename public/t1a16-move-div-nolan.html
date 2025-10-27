@@ -45,6 +45,8 @@ Have 8 different types of objects move in different ways<br>
   function myMove03(){let myNum02 = document.getElementById('myNum01').value
                       parseInt(myNum02)
                       document.getElementById('myDiv06').style.left = myNum02 + 'px'}
+  function myFocus(){document.getElementById('myDiv07').style.left = 30 + 'px'}
+  function myBlur(){document.getElementById('myDiv07').style.left = 0 + 'px'}
 </script>
 <div id="myDiv02" style="position:relative;left:0px;"> ...</div> 
 
@@ -61,4 +63,8 @@ Have 8 different types of objects move in different ways<br>
 
 <h1 align=left>#7. Through Number Input </h1>
 <div id="myDiv06" style="position:relative;left:0px;"> ...</div>
-<input type=number id="myNum01" placeholder=0 oninput="myMove03()">
+<input type=number id="myNum01" placeholder=0 oninput="myMove03()"><br>
+
+<h1 align=left>#8. On input blur and focus </h1>
+<div id="myDiv07" style="position:relative;left:0px;"> ...</div>
+<input type=text onfocus="myFocus()" onblur="myBlur()">
