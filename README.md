@@ -312,8 +312,8 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 
 <details open><summary>Thursday Oct 23rd, 2025</summary>
 
-### Title
-1.
+### Work day
+1. I continued assignment 16.
 1.
 1.
 
@@ -332,9 +332,9 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 
 <details ><summary>Monday Oct 27th, 2025</summary>
 
-### Title
-1.
-1.
+### Work day
+1. I continued assignment 16.
+1. We discussed about making interactive objects for a game, (like picking up an item).
 1.
 
 </details>
