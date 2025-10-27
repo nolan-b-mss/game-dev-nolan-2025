@@ -283,7 +283,7 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 
 ---     
 
-<details open><summary>Monday Oct 20th, 2025</summary>
+<details ><summary>Monday Oct 20th, 2025</summary>
 
 ### Work day
 1. We continued assignment 14 on Edge Impulse
@@ -292,7 +292,7 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 
 </details>
 
-<details open><summary>Tuesday Oct 21st, 2025</summary>
+<details ><summary>Tuesday Oct 21st, 2025</summary>
 
 ### Assignemnt 15/16 (?)
 1. We started assignment 16 on moving objects
@@ -301,7 +301,7 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 
 </details>
 
-<details open><summary>Wednesday Oct 22nd, 2025</summary>
+<details ><summary>Wednesday Oct 22nd, 2025</summary>
 
 ### Work day
 1. I continued assignment 16.
@@ -310,7 +310,7 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 
 </details>
 
-<details open><summary>Thursday Oct 23rd, 2025</summary>
+<details ><summary>Thursday Oct 23rd, 2025</summary>
 
 ### Work day
 1. I continued assignment 16.
@@ -319,7 +319,7 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 
 </details>
 
-<details open><summary>Friday Oct 24th, 2025 ProD no classes</summary>
+<details ><summary>Friday Oct 24th, 2025 ProD no classes</summary>
 
 ### Title
 1.
@@ -330,7 +330,7 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 
 ---     
 
-<details ><summary>Monday Oct 27th, 2025</summary>
+<details open><summary>Monday Oct 27th, 2025</summary>
 
 ### Work day
 1. I continued assignment 16.
@@ -339,7 +339,7 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 
 </details>
 
-<details><summary>Tuesday Oct 28th, 2025</summary>
+<details open><summary>Tuesday Oct 28th, 2025</summary>
 
 ### Title
 1.
@@ -348,7 +348,7 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 
 </details>
 
-<details><summary>Wednesday Oct 29th, 2025</summary>
+<details open><summary>Wednesday Oct 29th, 2025</summary>
 
 ### Title
 1.
@@ -357,7 +357,7 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 
 </details>
 
-<details><summary>Thursday Oct 30th, 2025</summary>
+<details open><summary>Thursday Oct 30th, 2025</summary>
 
 ### Title
 1.
@@ -366,7 +366,7 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 
 </details>
 
-<details><summary>Friday Oct 31st, 2025</summary>
+<details open><summary>Friday Oct 31st, 2025</summary>
 
 ### Title
 1.
