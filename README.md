@@ -342,7 +342,7 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 <details open><summary>Tuesday Oct 28th, 2025</summary>
 
 ### Title
-1.
+1. I worked on a passion repository.
 1.
 1.
 
