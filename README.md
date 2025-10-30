@@ -341,7 +341,7 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 
 <details open><summary>Tuesday Oct 28th, 2025</summary>
 
-### Title
+### Work day
 1. I worked on a passion repository.
 1.
 1.
@@ -350,8 +350,8 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 
 <details open><summary>Wednesday Oct 29th, 2025</summary>
 
-### Title
-1.
+### Work day
+1. I worked on assignment 15.
 1.
 1.
 
@@ -359,8 +359,8 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 
 <details open><summary>Thursday Oct 30th, 2025</summary>
 
-### Title
-1.
+### Work day
+1. I worked on assignment 15.
 1.
 1.
 
