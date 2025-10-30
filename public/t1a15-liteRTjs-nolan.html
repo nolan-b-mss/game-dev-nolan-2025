@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>T1A15 Edge Impulse Model Demo (FINAL VERIFIED FIX)</title>
+        <title>T1A15 Edge Impulse Model Demo (Final Fix)</title>
         <script src="./edge-impulse-standalone.js"></script>
         <script src="./run-impulse.js"></script>
         
@@ -65,19 +65,22 @@
 
         const inferenceInterval = setInterval(() => {
             
-            // --- CRITICAL FINAL FIX ---
-            // Bypass webcam. Create a dummy grayscale array (1 channel, normalized 0-1)
-            // This array simulates a bright image (value 0.5 = medium gray) for 96x96 pixels.
+            // --- CRITICAL FINAL FIX (Simple Array) ---
+            // Bypass webcam. Create a simple JavaScript Array (not Float32Array) 
+            // of 1-channel, non-normalized (0-255) Grayscale values.
             const totalPixels = IMAGE_WIDTH * IMAGE_HEIGHT;
-            const dummyData = new Float32Array(totalPixels);
+            const rawData = [];
             
-            // Fill the array with a non-zero, normalized value (e.g., 0.5)
+            // Simulates a medium-gray image (value 127) for 96x96 pixels.
+            const dummyValue = 127; 
+            
+            // Fill the array with the simple 0-255 value
             for (let i = 0; i < totalPixels; i++) {
-                dummyData[i] = 0.5;
+                rawData.push(dummyValue);
             }
 
-            // 3. Pass the correctly formatted Float32Array
-            ei_classifier.classify(dummyData)
+            // 3. Pass the simple JS Array. The WASM module must handle the final memory conversion.
+            ei_classifier.classify(rawData)
                 .then(res => {
                     const output = {
                         success: res.success,
