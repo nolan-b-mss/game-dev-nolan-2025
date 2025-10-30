@@ -75,9 +75,23 @@
 
                     ctx.drawImage(video, 0, 0, IMAGE_WIDTH, IMAGE_HEIGHT);
                     
+
                     const imageData = ctx.getImageData(0, 0, IMAGE_WIDTH, IMAGE_HEIGHT);
-                    
-                    runImpulse(imageData)
+
+
+                    const rawData = [];
+                    for (let i = 0; i < imageData.data.length; i += 4) {
+                        const r = imageData.data[i];     
+                        const g = imageData.data[i + 1]; 
+                        const b = imageData.data[i + 2]; 
+
+                        const grayscale = (r * 0.299) + (g * 0.587) + (b * 0.114);
+                        
+
+                        rawData.push(grayscale);
+                    }
+
+                    runImpulse(rawData)
                         .then(res => {
                             const output = {
                                 success: res.success,
