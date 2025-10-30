@@ -85,7 +85,8 @@
             ctx.drawImage(video, 0, 0, IMAGE_WIDTH, IMAGE_HEIGHT);
             const imageData = ctx.getImageData(0, 0, IMAGE_WIDTH, IMAGE_HEIGHT);
 
-
+            results.textContent = 'Processing frame...';
+            
             const rawData = [];
             for (let i = 0; i < imageData.data.length; i += 4) {
                 const r = imageData.data[i];     
