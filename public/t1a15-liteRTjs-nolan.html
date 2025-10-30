@@ -28,7 +28,6 @@
         <div class="container">
             <h1>Edge Impulse Model Demo (heavily assisted by AI)</h1>
             
-            
             <button id="start-webcam">Start Webcam & Run Model</button>
             <video id="video" width="320" height="240" autoplay muted></video>
             <canvas id="canvas" width="96" height="96" style="display:none;"></canvas>
@@ -38,7 +37,7 @@
         </div>
 
 <script>
-
+    // Instantiate the classifier globally
     const ei_classifier = new EdgeImpulseClassifier();
 
     const IMAGE_WIDTH = 96;
@@ -51,7 +50,7 @@
         const ctx = canvas.getContext('2d');
         const results = document.getElementById('results');
 
-
+        // 1. Request camera access
         if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
             results.textContent = 'Error: Webcam access not supported by your browser.';
             return;
@@ -69,7 +68,7 @@
         
         await new Promise(resolve => video.onloadedmetadata = resolve);
 
-
+        // 2. CRITICAL FIX: Initialize the WASM model and WAIT for it to load.
         results.textContent = 'Initializing model... please wait.';
         try {
             await ei_classifier.init();
@@ -78,32 +77,23 @@
             return;
         }
 
-
+        // 3. Start Classification Loop (The loop is correctly defined once)
         results.textContent = 'Webcam started. Model running...';
 
-        setInterval(() => {
+        const inferenceInterval = setInterval(() => {
+            // Draw current video frame to a 96x96 canvas for processing
             ctx.drawImage(video, 0, 0, IMAGE_WIDTH, IMAGE_HEIGHT);
+            
+            // Get the raw RGBA image data (4 channels)
             const imageData = ctx.getImageData(0, 0, IMAGE_WIDTH, IMAGE_HEIGHT);
 
-            results.textContent = 'Processing frame...';
-            
-            const rawData = [];
-            for (let i = 0; i < imageData.data.length; i += 4) {
-                const r = imageData.data[i];     
-                const g = imageData.data[i + 1];  
-                const b = imageData.data[i + 2];  
-
-                const grayscale = (r * 0.299) + (g * 0.587) + (b * 0.114);
-                
-
-                rawData.push(grayscale / 255.0); 
-            }
-
-
-            ei_classifier.classify(new Float32Array(rawData))
+            // 4. CRITICAL FIX: Pass the raw ImageData object. 
+            // The WASM module handles the Grayscale/Normalization internally.
+            ei_classifier.classify(imageData)
                 .then(res => {
                     const output = {
                         success: res.success,
+                        // This displays the results for 'unknown' and 'pen'
                         classification: res.results.map(r => ({
                             label: r.label,
                             score: r.value.toFixed(4)
@@ -112,8 +102,9 @@
                     results.textContent = JSON.stringify(output, null, 2);
                 })
                 .catch(err => {
-                    results.textContent = 'Fatal Error during WASM inference: ' + err;
-                    clearInterval(this);
+                    // Stop the loop if a fatal error occurs inside the model
+                    results.textContent = 'FATAL ERROR inside WASM: ' + err;
+                    clearInterval(inferenceInterval); 
                 });
 
         }, INFERENCE_INTERVAL_MS);
