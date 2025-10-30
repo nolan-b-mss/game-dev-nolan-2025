@@ -37,79 +37,86 @@
             <pre id="results">Click 'Start Webcam' to begin classification...</pre>
         </div>
 
-        <script>
+<script>
+    // Global instance of the classifier must be declared here
+    const ei_classifier = new EdgeImpulseClassifier();
 
-            const IMAGE_WIDTH = 96;
-            const IMAGE_HEIGHT = 96;
-            const INFERENCE_INTERVAL_MS = 1000; 
+    const IMAGE_WIDTH = 96;
+    const IMAGE_HEIGHT = 96;
+    const INFERENCE_INTERVAL_MS = 1000;  
 
+    document.getElementById('start-webcam').addEventListener('click', async () => {
+        const video = document.getElementById('video');
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        const results = document.getElementById('results');
 
-            document.getElementById('start-webcam').addEventListener('click', async () => {
-                const video = document.getElementById('video');
-                const canvas = document.getElementById('canvas');
-                const ctx = canvas.getContext('2d');
-                const results = document.getElementById('results');
-
-
-                if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
-                    results.textContent = 'Error: Webcam access not supported by your browser.';
-                    return;
-                }
-                
-                try {
-                    const stream = await navigator.mediaDevices.getUserMedia({ 
-                        video: { width: 320, height: 240 } 
-                    });
-                    video.srcObject = stream;
-                } catch (err) {
-                    results.textContent = 'Error accessing webcam: ' + err.name + '. Please ensure your browser has permission.';
-                    return;
-                }
-                
-                await new Promise(resolve => video.onloadedmetadata = resolve);
-
-
-                results.textContent = 'Webcam started. Model running...';
-
-                setInterval(() => {
-
-                    ctx.drawImage(video, 0, 0, IMAGE_WIDTH, IMAGE_HEIGHT);
-                    
-
-                    const imageData = ctx.getImageData(0, 0, IMAGE_WIDTH, IMAGE_HEIGHT);
-
-
-                    const rawData = [];
-                    for (let i = 0; i < imageData.data.length; i += 4) {
-                        const r = imageData.data[i];     
-                        const g = imageData.data[i + 1]; 
-                        const b = imageData.data[i + 2]; 
-
-
-                        const grayscale = (r * 0.299) + (g * 0.587) + (b * 0.114);
-                        
-
-                        rawData.push(grayscale / 255.0);
-                    }
-
-                    runImpulse(rawData)
-                        .then(res => {
-                            const output = {
-                                success: res.success,
-                                classification: res.results.map(r => ({
-                                    label: r.label,
-                                    score: r.value.toFixed(4)
-                                }))
-                            };
-                            results.textContent = JSON.stringify(output, null, 2);
-                        })
-                        .catch(err => {
-                            results.textContent = 'Fatal Error during WASM inference: ' + err;
-                            clearInterval(this);
-                        });
-
-                }, INFERENCE_INTERVAL_MS);
+        // 1. Request camera access
+        if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+            results.textContent = 'Error: Webcam access not supported by your browser.';
+            return;
+        }
+        
+        try {
+            const stream = await navigator.mediaDevices.getUserMedia({ 
+                video: { width: 320, height: 240 } 
             });
-        </script>
+            video.srcObject = stream;
+        } catch (err) {
+            results.textContent = 'Error accessing webcam: ' + err.name + '. Please ensure your browser has permission.';
+            return;
+        }
+        
+        await new Promise(resolve => video.onloadedmetadata = resolve);
+
+        // 2. *** CRITICAL FIX: INITIALIZE THE WASM MODEL and WAIT ***
+        results.textContent = 'Initializing model... please wait.';
+        try {
+            await ei_classifier.init();
+        } catch (err) {
+            results.textContent = 'ERROR: Failed to initialize Edge Impulse model. ' + err;
+            return;
+        }
+
+        // 3. Start Classification Loop
+        results.textContent = 'Webcam started. Model running...';
+
+        setInterval(() => {
+            ctx.drawImage(video, 0, 0, IMAGE_WIDTH, IMAGE_HEIGHT);
+            const imageData = ctx.getImageData(0, 0, IMAGE_WIDTH, IMAGE_HEIGHT);
+
+            // Grayscale Conversion and Normalization Fix
+            const rawData = [];
+            for (let i = 0; i < imageData.data.length; i += 4) {
+                const r = imageData.data[i];     
+                const g = imageData.data[i + 1];  
+                const b = imageData.data[i + 2];  
+
+                const grayscale = (r * 0.299) + (g * 0.587) + (b * 0.114);
+                
+                // Normalization Fix (0-255 -> 0-1)
+                rawData.push(grayscale / 255.0); 
+            }
+
+            // 4. *** CRITICAL FIX: CALL CLASSIFY METHOD ON THE INITIALIZED OBJECT ***
+            ei_classifier.classify(rawData)
+                .then(res => {
+                    const output = {
+                        success: res.success,
+                        classification: res.results.map(r => ({
+                            label: r.label,
+                            score: r.value.toFixed(4)
+                        }))
+                    };
+                    results.textContent = JSON.stringify(output, null, 2);
+                })
+                .catch(err => {
+                    results.textContent = 'Fatal Error during WASM inference: ' + err;
+                    clearInterval(this);
+                });
+
+        }, INFERENCE_INTERVAL_MS);
+    });
+</script>
     </body>
 </html>
