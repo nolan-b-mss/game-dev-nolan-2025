@@ -85,10 +85,11 @@
                         const g = imageData.data[i + 1]; 
                         const b = imageData.data[i + 2]; 
 
+
                         const grayscale = (r * 0.299) + (g * 0.587) + (b * 0.114);
                         
 
-                        rawData.push(grayscale);
+                        rawData.push(grayscale / 255.0);
                     }
 
                     runImpulse(rawData)
