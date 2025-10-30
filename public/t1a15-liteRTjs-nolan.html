@@ -89,20 +89,23 @@
             // 1. Get the raw RGBA image data (4 channels, 0-255)
             const imageData = ctx.getImageData(0, 0, IMAGE_WIDTH, IMAGE_HEIGHT);
 
-            // 2. CRITICAL FIX: Convert and Normalize for WASM memory structure
-            // The WASM model expects a Float32Array (0-1) of the RGBA data.
-            const rawFloatData = new Float32Array(imageData.data.length);
-            for (let i = 0; i < imageData.data.length; i++) {
-                // Normalize 0-255 value to 0-1 value
-                rawFloatData[i] = imageData.data[i] / 255.0;
+            // 2. CRITICAL FIX: Create a simple JavaScript array of 1-channel Grayscale (0-255)
+            const rawData = [];
+            for (let i = 0; i < imageData.data.length; i += 4) {
+                const r = imageData.data[i];
+                const g = imageData.data[i + 1];
+                const b = imageData.data[i + 2];
+                
+                // Calculate simple grayscale value (average of R, G, B)
+                const grayscale = (r + g + b) / 3; 
+                rawData.push(grayscale);
             }
 
-            // 3. Pass the correctly formatted Float32Array
-            ei_classifier.classify(rawFloatData)
+            // 3. Pass the simple JS Array. The WASM module handles the final conversion.
+            ei_classifier.classify(rawData)
                 .then(res => {
                     const output = {
                         success: res.success,
-                        // This displays the results for 'unknown' and 'pen'
                         classification: res.results.map(r => ({
                             label: r.label,
                             score: r.value.toFixed(4)
