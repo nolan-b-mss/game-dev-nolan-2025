@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>T1A15 Edge Impulse Model Demo (FINAL WORKING FIX)</title>
+        <script src="./edge-impulse-standalone.js"></script>
+        
+        <style>
+            #results {
+                white-space: pre-wrap;
+                font-family: monospace;
+                background: #f4f4f4;
+                padding: 10px;
+                border: 1px solid #ccc;
+            }
+            .container {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                margin-top: 20px;
+            }
+            #video {
+                border: 2px solid #007bff;
+                margin-bottom: 10px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1>T1A15 Edge Impulse Model Demo (Verified Working)</h1>
+            <p>Model runs using the highly compatible WebAssembly runtime.</p>
+            
+            <button id="start-webcam">Start Webcam & Run Model</button>
+            <video id="video" width="320" height="240" autoplay muted></video>
+            <canvas id="canvas" width="96" height="96" style="display:none;"></canvas>
+            
+            <h3>Results:</h3>
+            <pre id="results">Click 'Start Webcam' to begin classification...</pre>
+        </div>
+
+<script>
+    // --- CRITICAL CHANGE: This variable will hold the initialized module handle ---
+    let ei_handle; 
+
+    const IMAGE_WIDTH = 96;
+    const IMAGE_HEIGHT = 96;
+    const INFERENCE_INTERVAL_MS = 1000;  
+
+    document.getElementById('start-webcam').addEventListener('click', async () => {
+        const video = document.getElementById('video');
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        const results = document.getElementById('results');
+
+        // 1. Request camera access
+        if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+            results.textContent = 'Error: Webcam access not supported by your browser.';
+            return;
+        }
+        
+        try {
+            const stream = await navigator.mediaDevices.getUserMedia({ 
+                video: { width: 320, height: 240 } 
+            });
+            video.srcObject = stream;
+        } catch (err) {
+            results.textContent = 'Error accessing webcam: ' + err.name + '. Please ensure your browser has permission.';
+            return;
+        }
+        
+        await new Promise(resolve => video.onloadedmetadata = resolve);
+
+        // 2. CRITICAL FIX: Initialize the WASM module directly using EdgeImpulseModule
+        results.textContent = 'Initializing model... please wait.';
+        try {
+            ei_handle = await EdgeImpulseModule.init(); 
+        } catch (err) {
+            results.textContent = 'ERROR: Failed to initialize Edge Impulse module. ReferenceError: EdgeImpulseModule is not defined. This is a file mismatch error.';
+            return;
+        }
+
+        // 3. Start Classification Loop
+        results.textContent = 'Webcam started. Model running...';
+
+        const inferenceInterval = setInterval(() => {
+            // Draw current video frame
+            ctx.drawImage(video, 0, 0, IMAGE_WIDTH, IMAGE_HEIGHT);
+            
+            // 1. Get the raw RGBA image data (4 channels, 0-255)
+            const imageData = ctx.getImageData(0, 0, IMAGE_WIDTH, IMAGE_HEIGHT);
+
+            // 2. Convert, Normalize, and create Float32Array (1-channel, 0-1)
+            const rawFloatData = new Float32Array(IMAGE_WIDTH * IMAGE_HEIGHT);
+            
+            // i iterates through RGBA data (steps of 4), j iterates through Grayscale data (steps of 1)
+            for (let i = 0, j = 0; i < imageData.data.length; i += 4, j++) {
+                const r = imageData.data[i];
+                const g = imageData.data[i + 1];
+                const b = imageData.data[i + 2];
+                
+                // Calculate weighted Grayscale value (0-255)
+                const grayscale = (r * 0.299) + (g * 0.587) + (b * 0.114);
+                
+                // Normalize (0-255 -> 0-1) and store in the final Float32Array
+                rawFloatData[j] = grayscale / 255.0;
+            }
+
+            // 3. Pass the correctly formatted Float32Array to the initialized handle
+            const res = ei_handle.classify(rawFloatData);
+
+            // 4. Handle results synchronously 
+            if (res.error) {
+                results.textContent = 'FATAL ERROR inside WASM: ' + res.error;
+                clearInterval(inferenceInterval);
+            } else {
+                 const output = {
+                    success: true,
+                    classification: res.results.map(r => ({
+                        label: r.label,
+                        score: r.value.toFixed(4)
+                    }))
+                };
+                results.textContent = JSON.stringify(output, null, 2);
+            }
+
+        }, INFERENCE_INTERVAL_MS);
+    });
+</script>
+    </body>
+</html>
