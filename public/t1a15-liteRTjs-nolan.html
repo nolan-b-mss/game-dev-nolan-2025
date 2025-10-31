@@ -3,6 +3,7 @@
     <head>
         <title>T1A15 Edge Impulse Model Demo (Final Working Fix)</title>
         <script src="./edge-impulse-standalone.js"></script>
+        <script src="./run-impulse.js"></script>
         
         <style>
             #results {
@@ -38,8 +39,9 @@
         </div>
 
 <script>
-    // --- CRITICAL CHANGE: This variable will hold the initialized module handle ---
-    let ei_handle; 
+    // --- CRITICAL CHANGE: Using the original, intended asynchronous API ---
+    // This requires both JS files to load correctly.
+    const ei_classifier = new EdgeImpulseClassifier();
 
     const IMAGE_WIDTH = 96;
     const IMAGE_HEIGHT = 96;
@@ -69,13 +71,13 @@
         
         await new Promise(resolve => video.onloadedmetadata = resolve);
 
-        // 2. CRITICAL FIX: Initialize the WASM module using the correct global name (EdgeImpulse).
+        // 2. Initialize the WASM module asynchronously.
         results.textContent = 'Initializing model... please wait.';
         try {
-            // This fixes the final ReferenceError!
-            ei_handle = await EdgeImpulse.init(); 
+            // This is the correct asynchronous call for the EdgeImpulseClassifier API
+            await ei_classifier.init(); 
         } catch (err) {
-            results.textContent = 'ERROR: Failed to initialize Edge Impulse module. ' + err;
+            results.textContent = 'ERROR: Failed to initialize Edge Impulse model. ' + err;
             return;
         }
 
@@ -106,22 +108,23 @@
             }
 
             // 3. Pass the correctly formatted Float32Array to the initialized handle
-            const res = ei_handle.classify(rawFloatData);
-
-            // 4. Handle results synchronously (no promise needed for this API)
-            if (res.error) {
-                results.textContent = 'FATAL ERROR inside WASM: ' + res.error;
-                clearInterval(inferenceInterval);
-            } else {
-                 const output = {
-                    success: true,
-                    classification: res.results.map(r => ({
-                        label: r.label,
-                        score: r.value.toFixed(4)
-                    }))
-                };
-                results.textContent = JSON.stringify(output, null, 2);
-            }
+            // This requires the asynchronous .then/.catch structure
+            ei_classifier.classify(rawFloatData)
+                .then(res => {
+                    const output = {
+                        success: res.success,
+                        classification: res.results.map(r => ({
+                            label: r.label,
+                            score: r.value.toFixed(4)
+                        }))
+                    };
+                    results.textContent = JSON.stringify(output, null, 2);
+                })
+                .catch(err => {
+                    // Stop the loop if a fatal error occurs inside the model
+                    results.textContent = 'FATAL ERROR inside WASM: ' + err;
+                    clearInterval(inferenceInterval); 
+                });
 
         }, INFERENCE_INTERVAL_MS);
     });
