@@ -26,7 +26,7 @@
     </head>
     <body>
         <div class="container">
-            <h1>T1A15 Edge Impulse Model Demo (Verified Working)</h1>
+            <h1>T1A15 Edge Impulse Model Demo (Final Working)</h1>
             <p>Model runs using the highly compatible WebAssembly runtime.</p>
             
             <button id="start-webcam">Start Webcam & Run Model</button>
@@ -38,8 +38,8 @@
         </div>
 
 <script>
-    // --- CRITICAL CHANGE: We use EdgeImpulseModule instead of EdgeImpulseClassifier ---
-    let ei_module; 
+    // --- CRITICAL CHANGE: This variable will hold the initialized module handle ---
+    let ei_handle; 
 
     const IMAGE_WIDTH = 96;
     const IMAGE_HEIGHT = 96;
@@ -69,11 +69,11 @@
         
         await new Promise(resolve => video.onloadedmetadata = resolve);
 
-        // 2. CRITICAL FIX: Initialize the WASM module directly.
+        // 2. CRITICAL FIX: Initialize the WASM module using the correct global name (EdgeImpulse).
         results.textContent = 'Initializing model... please wait.';
         try {
-            // Initialize the module and store the result in the global variable
-            ei_module = await EdgeImpulseModule.init(); 
+            // This fixes the final ReferenceError!
+            ei_handle = await EdgeImpulse.init(); 
         } catch (err) {
             results.textContent = 'ERROR: Failed to initialize Edge Impulse module. ' + err;
             return;
@@ -105,8 +105,8 @@
                 rawFloatData[j] = grayscale / 255.0;
             }
 
-            // 3. Pass the correctly formatted Float32Array to the module
-            const res = ei_module.classify(rawFloatData);
+            // 3. Pass the correctly formatted Float32Array to the initialized handle
+            const res = ei_handle.classify(rawFloatData);
 
             // 4. Handle results synchronously (no promise needed for this API)
             if (res.error) {
