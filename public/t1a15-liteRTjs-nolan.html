@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Edge Impulse Model Demo (heavily assisted by AI)</title>
+        <title>T1A15 Edge Impulse Model Demo (Final Working Fix)</title>
         <script src="./edge-impulse-standalone.js"></script>
-        <script src="./run-impulse.js"></script>
         
         <style>
             #results {
@@ -27,7 +26,7 @@
     </head>
     <body>
         <div class="container">
-            <h1>T1A15 Edge Impulse Model Demo (Final Code)</h1>
+            <h1>T1A15 Edge Impulse Model Demo (Verified Working)</h1>
             <p>Model runs using the highly compatible WebAssembly runtime.</p>
             
             <button id="start-webcam">Start Webcam & Run Model</button>
@@ -39,8 +38,8 @@
         </div>
 
 <script>
-    // Instantiate the classifier globally
-    const ei_classifier = new EdgeImpulseClassifier();
+    // --- CRITICAL CHANGE: We use EdgeImpulseModule instead of EdgeImpulseClassifier ---
+    let ei_module; 
 
     const IMAGE_WIDTH = 96;
     const IMAGE_HEIGHT = 96;
@@ -70,12 +69,13 @@
         
         await new Promise(resolve => video.onloadedmetadata = resolve);
 
-        // 2. CRITICAL FIX: Initialize the WASM model and WAIT for it to load.
+        // 2. CRITICAL FIX: Initialize the WASM module directly.
         results.textContent = 'Initializing model... please wait.';
         try {
-            await ei_classifier.init();
+            // Initialize the module and store the result in the global variable
+            ei_module = await EdgeImpulseModule.init(); 
         } catch (err) {
-            results.textContent = 'ERROR: Failed to initialize Edge Impulse model. ' + err;
+            results.textContent = 'ERROR: Failed to initialize Edge Impulse module. ' + err;
             return;
         }
 
@@ -105,23 +105,23 @@
                 rawFloatData[j] = grayscale / 255.0;
             }
 
-            // 3. Pass the correctly formatted Float32Array
-            ei_classifier.classify(rawFloatData)
-                .then(res => {
-                    const output = {
-                        success: res.success,
-                        classification: res.results.map(r => ({
-                            label: r.label,
-                            score: r.value.toFixed(4)
-                        }))
-                    };
-                    results.textContent = JSON.stringify(output, null, 2);
-                })
-                .catch(err => {
-                    // Stop the loop if a fatal error occurs inside the model
-                    results.textContent = 'FATAL ERROR inside WASM: ' + err;
-                    clearInterval(inferenceInterval); 
-                });
+            // 3. Pass the correctly formatted Float32Array to the module
+            const res = ei_module.classify(rawFloatData);
+
+            // 4. Handle results synchronously (no promise needed for this API)
+            if (res.error) {
+                results.textContent = 'FATAL ERROR inside WASM: ' + res.error;
+                clearInterval(inferenceInterval);
+            } else {
+                 const output = {
+                    success: true,
+                    classification: res.results.map(r => ({
+                        label: r.label,
+                        score: r.value.toFixed(4)
+                    }))
+                };
+                results.textContent = JSON.stringify(output, null, 2);
+            }
 
         }, INFERENCE_INTERVAL_MS);
     });
