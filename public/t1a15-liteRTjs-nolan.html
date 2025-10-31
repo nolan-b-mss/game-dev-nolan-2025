@@ -2,7 +2,7 @@
 <html>
     <head>
         <title>T1A15 Edge Impulse Model Demo (FINAL WORKING FIX)</title>
-        <script src="./edge-impulse-standalone.js"></script>
+        <script src="./ei_model.js"></script>
         
         <style>
             #results {
@@ -69,14 +69,13 @@
         
         await new Promise(resolve => video.onloadedmetadata = resolve);
 
-        // 2. CRITICAL FIX: Initialize the WASM module using the final API name: EdgeImpulse
+        // 2. Initialize the WASM module directly using the standard API fallback (EdgeImpulseModule).
         results.textContent = 'Initializing model... please wait.';
         try {
-            // This must resolve the ReferenceError!
-            ei_handle = await EdgeImpulse.init(); 
+            // EdgeImpulseModule is the most common low-level API name
+            ei_handle = await EdgeImpulseModule.init(); 
         } catch (err) {
-            // Updated error message to reflect the final issue
-            results.textContent = 'ERROR: Failed to initialize Edge Impulse module. The correct API name is still not defined. Final File Mismatch.';
+            results.textContent = 'ERROR: Initialization failed. The API name is incorrect.';
             return;
         }
 
