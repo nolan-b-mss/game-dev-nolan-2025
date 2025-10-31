@@ -39,13 +39,50 @@
         </div>
 
 <script>
-    // --- CRITICAL CHANGE: Using the original, intended asynchronous API ---
-    // This requires both JS files to load correctly.
+    // Instantiate the classifier globally
     const ei_classifier = new EdgeImpulseClassifier();
 
     const IMAGE_WIDTH = 96;
     const IMAGE_HEIGHT = 96;
     const INFERENCE_INTERVAL_MS = 1000;  
+    let inferenceInterval; // Define the interval variable outside the function
+
+    // Function to run the classification loop (called ONLY after initialization)
+    function startInferenceLoop(video, ctx, results) {
+        results.textContent = 'Webcam started. Model running...';
+
+        inferenceInterval = setInterval(() => {
+            ctx.drawImage(video, 0, 0, IMAGE_WIDTH, IMAGE_HEIGHT);
+            const imageData = ctx.getImageData(0, 0, IMAGE_WIDTH, IMAGE_HEIGHT);
+
+            // Convert, Normalize, and create Float32Array (1-channel, 0-1)
+            const rawFloatData = new Float32Array(IMAGE_WIDTH * IMAGE_HEIGHT);
+            for (let i = 0, j = 0; i < imageData.data.length; i += 4, j++) {
+                const r = imageData.data[i];
+                const g = imageData.data[i + 1];
+                const b = imageData.data[i + 2];
+                const grayscale = (r * 0.299) + (g * 0.587) + (b * 0.114);
+                rawFloatData[j] = grayscale / 255.0;
+            }
+
+            ei_classifier.classify(rawFloatData)
+                .then(res => {
+                    const output = {
+                        success: res.success,
+                        classification: res.results.map(r => ({
+                            label: r.label,
+                            score: r.value.toFixed(4)
+                        }))
+                    };
+                    results.textContent = JSON.stringify(output, null, 2);
+                })
+                .catch(err => {
+                    results.textContent = 'FATAL ERROR inside WASM: ' + err;
+                    clearInterval(inferenceInterval); 
+                });
+
+        }, INFERENCE_INTERVAL_MS);
+    }
 
     document.getElementById('start-webcam').addEventListener('click', async () => {
         const video = document.getElementById('video');
@@ -71,62 +108,18 @@
         
         await new Promise(resolve => video.onloadedmetadata = resolve);
 
-        // 2. Initialize the WASM module asynchronously.
+        // 2. CRITICAL FIX: Initialize the WASM module using the PROMISE structure
         results.textContent = 'Initializing model... please wait.';
-        try {
-            // This is the correct asynchronous call for the EdgeImpulseClassifier API
-            await ei_classifier.init(); 
-        } catch (err) {
-            results.textContent = 'ERROR: Failed to initialize Edge Impulse model. ' + err;
-            return;
-        }
-
-        // 3. Start Classification Loop
-        results.textContent = 'Webcam started. Model running...';
-
-        const inferenceInterval = setInterval(() => {
-            // Draw current video frame
-            ctx.drawImage(video, 0, 0, IMAGE_WIDTH, IMAGE_HEIGHT);
-            
-            // 1. Get the raw RGBA image data (4 channels, 0-255)
-            const imageData = ctx.getImageData(0, 0, IMAGE_WIDTH, IMAGE_HEIGHT);
-
-            // 2. Convert, Normalize, and create Float32Array (1-channel, 0-1)
-            const rawFloatData = new Float32Array(IMAGE_WIDTH * IMAGE_HEIGHT);
-            
-            // i iterates through RGBA data (steps of 4), j iterates through Grayscale data (steps of 1)
-            for (let i = 0, j = 0; i < imageData.data.length; i += 4, j++) {
-                const r = imageData.data[i];
-                const g = imageData.data[i + 1];
-                const b = imageData.data[i + 2];
-                
-                // Calculate weighted Grayscale value (0-255)
-                const grayscale = (r * 0.299) + (g * 0.587) + (b * 0.114);
-                
-                // Normalize (0-255 -> 0-1) and store in the final Float32Array
-                rawFloatData[j] = grayscale / 255.0;
-            }
-
-            // 3. Pass the correctly formatted Float32Array to the initialized handle
-            // This requires the asynchronous .then/.catch structure
-            ei_classifier.classify(rawFloatData)
-                .then(res => {
-                    const output = {
-                        success: res.success,
-                        classification: res.results.map(r => ({
-                            label: r.label,
-                            score: r.value.toFixed(4)
-                        }))
-                    };
-                    results.textContent = JSON.stringify(output, null, 2);
-                })
-                .catch(err => {
-                    // Stop the loop if a fatal error occurs inside the model
-                    results.textContent = 'FATAL ERROR inside WASM: ' + err;
-                    clearInterval(inferenceInterval); 
-                });
-
-        }, INFERENCE_INTERVAL_MS);
+        
+        // This structure eliminates the race condition and hang caused by async/await
+        ei_classifier.init()
+            .then(() => {
+                // Only start the loop once initialization is guaranteed successful
+                startInferenceLoop(video, ctx, results); 
+            })
+            .catch(err => {
+                results.textContent = 'ERROR: Failed to initialize Edge Impulse module: ' + err.message + '. Please ensure your WASM files are correct.';
+            });
     });
 </script>
     </body>
