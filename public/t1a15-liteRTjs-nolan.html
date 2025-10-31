@@ -39,13 +39,13 @@
         </div>
 
 <script>
-    // Instantiate the classifier globally
+    // Instantiate the classifier globally (This object is defined in run-impulse.js)
     const ei_classifier = new EdgeImpulseClassifier();
 
     const IMAGE_WIDTH = 96;
     const IMAGE_HEIGHT = 96;
     const INFERENCE_INTERVAL_MS = 1000;  
-    let inferenceInterval; // Define the interval variable outside the function
+    let inferenceInterval; 
 
     // Function to run the classification loop (called ONLY after initialization)
     function startInferenceLoop(video, ctx, results) {
@@ -111,7 +111,7 @@
         // 2. CRITICAL FIX: Initialize the WASM module using the PROMISE structure
         results.textContent = 'Initializing model... please wait.';
         
-        // This structure eliminates the race condition and hang caused by async/await
+        // This structure eliminates the race condition and ensures EdgeImpulseClassifier is defined before use
         ei_classifier.init()
             .then(() => {
                 // Only start the loop once initialization is guaranteed successful
