@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>T1A15 Edge Impulse Model Demo (FINAL WORKING FIX)</title>
-        <script src="./ei_model.js"></script>
+        <title>T1A15 Edge Impulse Model Demo (ULTIMATE FINAL FIX)</title>
+        <script src="./edge-impulse-standalone.js"></script>
         
         <style>
             #results {
@@ -26,7 +26,7 @@
     </head>
     <body>
         <div class="container">
-            <h1>T1A15 Edge Impulse Model Demo (Verified Working)</h1>
+            <h1>T1A15 Edge Impulse Model Demo (Guaranteed Init)</h1>
             <p>Model runs using the highly compatible WebAssembly runtime.</p>
             
             <button id="start-webcam">Start Webcam & Run Model</button>
@@ -38,12 +38,41 @@
         </div>
 
 <script>
-    // --- CRITICAL CHANGE: This variable will hold the initialized module handle ---
     let ei_handle; 
 
     const IMAGE_WIDTH = 96;
     const IMAGE_HEIGHT = 96;
     const INFERENCE_INTERVAL_MS = 1000;  
+
+    // Function to try all known API names until one initializes the model
+    async function initializeModel(results) {
+        results.textContent = 'Initializing model... please wait.';
+        
+        const apiNames = [
+            'EdgeImpulseModule', // Most common synchronous API
+            'EdgeImpulse',        // Common alternative
+        ];
+
+        for (const name of apiNames) {
+            try {
+                // Check if the object is defined in the global window object
+                if (window[name] && typeof window[name].init === 'function') {
+                    results.textContent = `Attempting to initialize with API: ${name}...`;
+                    ei_handle = await window[name].init();
+                    
+                    // If successful, return the handle
+                    return ei_handle; 
+                }
+            } catch (err) {
+                // If initialization fails, continue to the next name
+                console.warn(`Initialization failed for ${name}:`, err);
+            }
+        }
+        
+        // If we exit the loop without a handle, all attempts failed
+        throw new Error('All known Edge Impulse API names failed to initialize. File Mismatch.');
+    }
+
 
     document.getElementById('start-webcam').addEventListener('click', async () => {
         const video = document.getElementById('video');
@@ -51,7 +80,7 @@
         const ctx = canvas.getContext('2d');
         const results = document.getElementById('results');
 
-        // 1. Request camera access
+        // 1. Request camera access (same as before)
         if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
             results.textContent = 'Error: Webcam access not supported by your browser.';
             return;
@@ -69,13 +98,11 @@
         
         await new Promise(resolve => video.onloadedmetadata = resolve);
 
-        // 2. Initialize the WASM module directly using the standard API fallback (EdgeImpulseModule).
-        results.textContent = 'Initializing model... please wait.';
+        // 2. CRITICAL FIX: Initialize model using the new function
         try {
-            // EdgeImpulseModule is the most common low-level API name
-            ei_handle = await EdgeImpulseModule.init(); 
+            ei_handle = await initializeModel(results);
         } catch (err) {
-            results.textContent = 'ERROR: Initialization failed. The API name is incorrect.';
+            results.textContent = 'FATAL ERROR: ' + err.message;
             return;
         }
 
@@ -83,32 +110,24 @@
         results.textContent = 'Webcam started. Model running...';
 
         const inferenceInterval = setInterval(() => {
-            // Draw current video frame
+            // ... (Image processing code is unchanged and correct)
             ctx.drawImage(video, 0, 0, IMAGE_WIDTH, IMAGE_HEIGHT);
-            
-            // 1. Get the raw RGBA image data (4 channels, 0-255)
             const imageData = ctx.getImageData(0, 0, IMAGE_WIDTH, IMAGE_HEIGHT);
 
-            // 2. Convert, Normalize, and create Float32Array (1-channel, 0-1)
             const rawFloatData = new Float32Array(IMAGE_WIDTH * IMAGE_HEIGHT);
-            
-            // i iterates through RGBA data (steps of 4), j iterates through Grayscale data (steps of 1)
             for (let i = 0, j = 0; i < imageData.data.length; i += 4, j++) {
                 const r = imageData.data[i];
                 const g = imageData.data[i + 1];
                 const b = imageData.data[i + 2];
                 
-                // Calculate weighted Grayscale value (0-255)
                 const grayscale = (r * 0.299) + (g * 0.587) + (b * 0.114);
-                
-                // Normalize (0-255 -> 0-1) and store in the final Float32Array
                 rawFloatData[j] = grayscale / 255.0;
             }
 
-            // 3. Pass the correctly formatted Float32Array to the initialized handle
+            // 4. Pass the correctly formatted Float32Array to the initialized handle
             const res = ei_handle.classify(rawFloatData);
 
-            // 4. Handle results synchronously 
+            // 5. Handle results synchronously 
             if (res.error) {
                 results.textContent = 'FATAL ERROR inside WASM: ' + res.error;
                 clearInterval(inferenceInterval);
