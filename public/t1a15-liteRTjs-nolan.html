@@ -69,12 +69,14 @@
         
         await new Promise(resolve => video.onloadedmetadata = resolve);
 
-        // 2. CRITICAL FIX: Initialize the WASM module directly using EdgeImpulseModule
+        // 2. CRITICAL FIX: Initialize the WASM module using the final API name: EdgeImpulse
         results.textContent = 'Initializing model... please wait.';
         try {
-            ei_handle = await EdgeImpulseModule.init(); 
+            // This must resolve the ReferenceError!
+            ei_handle = await EdgeImpulse.init(); 
         } catch (err) {
-            results.textContent = 'ERROR: Failed to initialize Edge Impulse module. ReferenceError: EdgeImpulseModule is not defined. This is a file mismatch error.';
+            // Updated error message to reflect the final issue
+            results.textContent = 'ERROR: Failed to initialize Edge Impulse module. The correct API name is still not defined. Final File Mismatch.';
             return;
         }
 
