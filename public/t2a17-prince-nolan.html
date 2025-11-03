@@ -1,0 +1,73 @@
+<h1 align=center> t2a17-prince-nolan.html </h1>
+<body>
+    <canvas id="myCrownCanvasID" width="300" height="200"></canvas>
+    
+    <script>
+        // --- Custom Variable Setup ---
+        const myCanvasID = 'myCrownCanvasID';
+        
+        // Use custom descriptive names for elements and contexts
+        const myCanvasElement = document.getElementById(myCanvasID);
+        // Reduced abbreviation for the drawing context
+        const myDrawingContext = myCanvasElement.getContext('2d'); 
+
+        // Define the entire path as a clear list of points (objects with x, y)
+        const myPathPoints = [
+            { x: 50, y: 150 },   // 0: Start Point (Bottom-Left)
+            { x: 250, y: 150 },  // 1: Base End (Bottom-Right)
+            { x: 250, y: 80 },   // 2: Right Side Top
+            { x: 210, y: 60 },   // 3: Peak 1
+            { x: 170, y: 80 },   // 4: Valley 1
+            { x: 130, y: 60 },   // 5: Peak 2
+            { x: 90, y: 80 },    // 6: Valley 2
+            { x: 50, y: 80 },    // 7: Top Left
+            { x: 50, y: 150 }    // 8: Final Close (Back to start)
+        ];
+
+        // Track the current drawing progress
+        let myStepIndex = 1; 
+        const myTotalSteps = myPathPoints.length - 1; // There are 8 points, so 7 line segments
+
+        // Set the final drawing styles
+        myDrawingContext.strokeStyle = 'gold'; 
+        myDrawingContext.lineWidth = 4;
+        myDrawingContext.lineJoin = 'round'; // Makes the corners look nicer
+
+        // --- Animation Function ---
+
+        function myDrawCrownSegment() {
+            // Stop the animation when all segments are drawn
+            if (myStepIndex > myTotalSteps) {
+                return;
+            }
+
+            // Get the previous point and the current target point
+            const myPreviousPoint = myPathPoints[myStepIndex - 1];
+            const myCurrentTarget = myPathPoints[myStepIndex];
+
+            if (myStepIndex === 1) {
+                // For the very first step, start the path and move to the starting point
+                myDrawingContext.beginPath();
+                myDrawingContext.moveTo(myPreviousPoint.x, myPreviousPoint.y);
+            }
+            
+            // Draw a line from the last point to the new target point
+            myDrawingContext.lineTo(myCurrentTarget.x, myCurrentTarget.y);
+            
+            // Render the path drawn so far
+            myDrawingContext.stroke(); 
+
+            // Advance the counter for the next segment
+            myStepIndex++;
+            
+            // Use setTimeout to create a pause (300ms) between drawing each segment.
+            // requestAnimationFrame ensures the drawing happens smoothly on the browser's next redraw cycle.
+            setTimeout(() => {
+                requestAnimationFrame(myDrawCrownSegment);
+            }, 300); 
+        }
+
+        // Start the process
+        myDrawCrownSegment();
+    </script>
+</body>
