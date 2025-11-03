@@ -1,42 +1,35 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>My Animated Crown</title>
-</head>
+<h1 align=center>t2a17-prince-nolan.html</h1>
 <body>
-    <canvas id="myCrownCanvasID" width="300" height="200" style="border: 1px solid gold;"></canvas>
+    <canvas id="myCrownCanvasID" width="300" height="200"></canvas>
     
     <script>
-        // --- Setup & Path ---
         const myCanvasID = 'myCrownCanvasID';
         const myCanvasElement = document.getElementById(myCanvasID);
         const myDrawingContext = myCanvasElement.getContext('2d'); 
 
         const myPathPoints = [
-            { x: 50, y: 150 },   // 0: Start Point (Bottom-Left)
-            { x: 50, y: 80 },    // 1: Left Side Top
-            { x: 70, y: 60 },    // 2: Peak 1
-            { x: 110, y: 80 },   // 3: Valley 1
-            { x: 150, y: 60 },   // 4: Peak 2
-            { x: 190, y: 80 },   // 5: Valley 2
-            { x: 230, y: 60 },   // 6: Peak 3
-            { x: 250, y: 80 },   // 7: Right Side Top
-            { x: 250, y: 150 },  // 8: Right Side Bottom
-            { x: 50, y: 150 }    // 9: Final Close (Base line)
+            { x: 50, y: 150 },   // 0
+            { x: 50, y: 80 },    // 1
+            { x: 70, y: 60 },    // 2
+            { x: 110, y: 80 },   // 3
+            { x: 150, y: 60 },   // 4
+            { x: 190, y: 80 },   // 5
+            { x: 230, y: 60 },   // 6
+            { x: 250, y: 80 },   // 7
+            { x: 250, y: 150 },  // 8
+            { x: 50, y: 150 }    // 9
         ];
 
-        // --- Animation Tracking Variables ---
         let mySegmentIndex = 0;       
         let mySegmentProgress = 0.0;  
-        const myAnimationSpeed = 0.02; // Speed (0.02 means 2% of the segment per frame)
-        let myIsCrownDrawn = false;   // <-- NEW FLAG for mode switching
+        const myAnimationSpeed = 0.02;
+        let myIsCrownDrawn = false;
 
-        // --- Drawing Styles ---
+
         myDrawingContext.strokeStyle = 'gold'; 
         myDrawingContext.lineWidth = 4;
         myDrawingContext.lineJoin = 'round'; 
 
-        // --- Helper Function: Draws the complete crown outline permanently ---
         function myDrawFullCrownLine() {
             myDrawingContext.beginPath();
             myDrawingContext.moveTo(myPathPoints[0].x, myPathPoints[0].y);
@@ -46,17 +39,17 @@
             myDrawingContext.stroke();
         }
 
-        // --- Main Unified Animation Function ---
+
         function myAnimateDrawing() {
-            // 1. Clear the canvas
+
             myDrawingContext.clearRect(0, 0, myCanvasElement.width, myCanvasElement.height);
 
-            // 2. Line Drawing Phase: Decide whether to draw the full line or the growing line
+
             if (myIsCrownDrawn) {
-                // Once the crown is finished, always draw the full line first
+
                 myDrawFullCrownLine();
             } else {
-                // If not finished, draw the line segment-by-segment (initial mode)
+
                 myDrawingContext.beginPath();
                 myDrawingContext.moveTo(myPathPoints[0].x, myPathPoints[0].y);
                 for (let i = 1; i <= mySegmentIndex + 1 && i < myPathPoints.length; i++) {
@@ -65,44 +58,34 @@
                 myDrawingContext.stroke();
             }
 
-            // --- Marker Logic (Handles both Initial Draw and Loop) ---
             
-            // The segment array goes up to index 8. Target the next point (index + 1)
             const myStartPoint = myPathPoints[mySegmentIndex];
             
-            // Use the modulus operator (%) to wrap the target point index around (9 % 9 = 0)
             const myTargetIndex = (mySegmentIndex + 1) % myPathPoints.length;
             const myEndPoint = myPathPoints[myTargetIndex];
 
-            // Calculate Marker Position (Interpolation)
             const myCurrentX = myStartPoint.x + (myEndPoint.x - myStartPoint.x) * mySegmentProgress;
             const myCurrentY = myStartPoint.y + (myEndPoint.y - myStartPoint.y) * mySegmentProgress;
 
-            // 3. Draw the Marker
             myDrawingContext.beginPath();
             myDrawingContext.arc(myCurrentX, myCurrentY, 5, 0, Math.PI * 2); 
             myDrawingContext.fillStyle = 'red'; 
             myDrawingContext.fill();
 
-            // 4. Update Progress and Check for Loop/Reset
             mySegmentProgress += myAnimationSpeed;
 
             if (mySegmentProgress >= 1.0) {
-                mySegmentIndex++;       // Move to the next segment
-                mySegmentProgress = 0;  // Reset progress
+                mySegmentIndex++;
+                mySegmentProgress = 0;
 
-                // Check for the very end of the line (The last segment is index 8)
                 if (mySegmentIndex >= myPathPoints.length - 1) { 
-                    myIsCrownDrawn = true; // Ensure the line stays permanent
-                    mySegmentIndex = 0;    // <--- THIS CREATES THE CONTINUOUS LOOP
+                    myIsCrownDrawn = true;
+                    mySegmentIndex = 0;
                 }
             }
 
             requestAnimationFrame(myAnimateDrawing);
         }
-
-        // Start the initial drawing
         myAnimateDrawing();
     </script>
 </body>
-</html>
