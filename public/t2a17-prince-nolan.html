@@ -7,12 +7,11 @@
     <canvas id="myCrownCanvasID" width="300" height="200" style="border: 1px solid gold;"></canvas>
     
     <script>
-        // --- Setup ---
+        // --- Setup & Path ---
         const myCanvasID = 'myCrownCanvasID';
         const myCanvasElement = document.getElementById(myCanvasID);
         const myDrawingContext = myCanvasElement.getContext('2d'); 
 
-        // Corrected path for three symmetrical peaks (10 points, 9 segments)
         const myPathPoints = [
             { x: 50, y: 150 },   // 0: Start Point (Bottom-Left)
             { x: 50, y: 80 },    // 1: Left Side Top
@@ -29,14 +28,15 @@
         // --- Animation Tracking Variables ---
         let mySegmentIndex = 0;       
         let mySegmentProgress = 0.0;  
-        const myAnimationSpeed = 0.02; // Marker speed
+        const myAnimationSpeed = 0.02; // Speed (0.02 means 2% of the segment per frame)
+        let myIsCrownDrawn = false;   // <-- NEW FLAG for mode switching
 
         // --- Drawing Styles ---
         myDrawingContext.strokeStyle = 'gold'; 
         myDrawingContext.lineWidth = 4;
         myDrawingContext.lineJoin = 'round'; 
 
-        // --- HELPER FUNCTION: Draws the complete crown outline once ---
+        // --- Helper Function: Draws the complete crown outline permanently ---
         function myDrawFullCrownLine() {
             myDrawingContext.beginPath();
             myDrawingContext.moveTo(myPathPoints[0].x, myPathPoints[0].y);
@@ -46,93 +46,63 @@
             myDrawingContext.stroke();
         }
 
-        // --- NEW FUNCTION: The marker loop that runs after the crown is fully drawn ---
-        function myLoopMarker() {
-            // 1. Clear only the area around the previous marker position (for simplicity, we'll clear the whole canvas and redraw the crown)
+        // --- Main Unified Animation Function ---
+        function myAnimateDrawing() {
+            // 1. Clear the canvas
             myDrawingContext.clearRect(0, 0, myCanvasElement.width, myCanvasElement.height);
 
-            // 2. Redraw the full crown line every frame
-            myDrawFullCrownLine(); 
-
-            // Check if we reached the end of the entire path
-            if (mySegmentIndex >= myPathPoints.length - 1) {
-                mySegmentIndex = 0;      // <--- THE LOOP: Reset to the first segment (0)
-                mySegmentProgress = 0;
+            // 2. Line Drawing Phase: Decide whether to draw the full line or the growing line
+            if (myIsCrownDrawn) {
+                // Once the crown is finished, always draw the full line first
+                myDrawFullCrownLine();
+            } else {
+                // If not finished, draw the line segment-by-segment (initial mode)
+                myDrawingContext.beginPath();
+                myDrawingContext.moveTo(myPathPoints[0].x, myPathPoints[0].y);
+                for (let i = 1; i <= mySegmentIndex + 1 && i < myPathPoints.length; i++) {
+                    myDrawingContext.lineTo(myPathPoints[i].x, myPathPoints[i].y);
+                }
+                myDrawingContext.stroke();
             }
 
-            // Get the start and end points of the current segment
+            // --- Marker Logic (Handles both Initial Draw and Loop) ---
+            
+            // The segment array goes up to index 8. Target the next point (index + 1)
             const myStartPoint = myPathPoints[mySegmentIndex];
-            const myEndPoint = myPathPoints[mySegmentIndex + 1];
+            
+            // Use the modulus operator (%) to wrap the target point index around (9 % 9 = 0)
+            const myTargetIndex = (mySegmentIndex + 1) % myPathPoints.length;
+            const myEndPoint = myPathPoints[myTargetIndex];
 
-            // 3. Calculate the Marker Position (Interpolation)
+            // Calculate Marker Position (Interpolation)
             const myCurrentX = myStartPoint.x + (myEndPoint.x - myStartPoint.x) * mySegmentProgress;
             const myCurrentY = myStartPoint.y + (myEndPoint.y - myStartPoint.y) * mySegmentProgress;
 
-            // 4. Draw the Marker (a small red circle)
+            // 3. Draw the Marker
             myDrawingContext.beginPath();
             myDrawingContext.arc(myCurrentX, myCurrentY, 5, 0, Math.PI * 2); 
             myDrawingContext.fillStyle = 'red'; 
             myDrawingContext.fill();
 
-            // 5. Update Progress
+            // 4. Update Progress and Check for Loop/Reset
             mySegmentProgress += myAnimationSpeed;
 
-            // If we reached the end of the current segment (Progress > 1.0)
             if (mySegmentProgress >= 1.0) {
                 mySegmentIndex++;       // Move to the next segment
                 mySegmentProgress = 0;  // Reset progress
+
+                // Check for the very end of the line (The last segment is index 8)
+                if (mySegmentIndex >= myPathPoints.length - 1) { 
+                    myIsCrownDrawn = true; // Ensure the line stays permanent
+                    mySegmentIndex = 0;    // <--- THIS CREATES THE CONTINUOUS LOOP
+                }
             }
 
-            requestAnimationFrame(myLoopMarker);
-        }
-
-        // --- Main Animation Function (Only runs once to draw the line initially) ---
-        function myAnimateCrown() {
-            // This function is still needed to draw the line during the first pass
-            myDrawingContext.clearRect(0, 0, myCanvasElement.width, myCanvasElement.height);
-
-            // Draw the completed line segments and the current segment (like before)
-            myDrawingContext.beginPath();
-            myDrawingContext.moveTo(myPathPoints[0].x, myPathPoints[0].y);
-            for (let i = 1; i <= mySegmentIndex + 1 && i < myPathPoints.length; i++) {
-                myDrawingContext.lineTo(myPathPoints[i].x, myPathPoints[i].y);
-            }
-            myDrawingContext.stroke();
-            
-            // Draw the Marker (as before)
-            const myStartPoint = myPathPoints[mySegmentIndex];
-            const myEndPoint = myPathPoints[mySegmentIndex + 1];
-            const myCurrentX = myStartPoint.x + (myEndPoint.x - myStartPoint.x) * mySegmentProgress;
-            const myCurrentY = myStartPoint.y + (myEndPoint.y - myStartPoint.y) * mySegmentProgress;
-            myDrawingContext.beginPath();
-            myDrawingContext.arc(myCurrentX, myCurrentY, 5, 0, Math.PI * 2); 
-            myDrawingContext.fillStyle = 'red'; 
-            myDrawingContext.fill();
-
-            // ----------------------------------------------------
-            // Check for completion of the initial drawing phase
-            // ----------------------------------------------------
-            if (mySegmentIndex >= myPathPoints.length - 1) {
-                // Initial drawing is complete!
-                myDrawFullCrownLine(); // Ensure the final line is solid
-                mySegmentIndex = 0;    // Reset for the loop
-                mySegmentProgress = 0;
-                myLoopMarker();        // Start the continuous loop
-                return;                // Stop the initial animation
-            }
-            
-            // Update Progress (only for initial phase)
-            mySegmentProgress += myAnimationSpeed;
-            if (mySegmentProgress >= 1.0) {
-                mySegmentIndex++;
-                mySegmentProgress = 0;
-            }
-
-            requestAnimationFrame(myAnimateCrown);
+            requestAnimationFrame(myAnimateDrawing);
         }
 
         // Start the initial drawing
-        myAnimateCrown();
+        myAnimateDrawing();
     </script>
 </body>
 </html>
