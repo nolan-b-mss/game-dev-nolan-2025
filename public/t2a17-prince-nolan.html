@@ -5,61 +5,52 @@
     <script>
         // --- Custom Variable Setup ---
         const myCanvasID = 'myCrownCanvasID';
-        
-        // Use custom descriptive names for elements and contexts
         const myCanvasElement = document.getElementById(myCanvasID);
         const myDrawingContext = myCanvasElement.getContext('2d'); 
 
-        // The corrected path with three full peaks (9 segments)
+        // The corrected path for three symmetrical peaks
         const myPathPoints = [
             { x: 50, y: 150 },   // 0: Start Point (Bottom-Left)
-            { x: 250, y: 150 },  // 1: Base End (Bottom-Right)
-            { x: 250, y: 80 },   // 2: Right Side Top
-            { x: 210, y: 60 },   // 3: Peak 1
-            { x: 170, y: 80 },   // 4: Valley 1
-            { x: 130, y: 60 },   // 5: Peak 2
-            { x: 90, y: 80 },    // 6: Valley 2
-            { x: 50, y: 60 },    // 7: Peak 3 (The new point!)
-            { x: 50, y: 80 },    // 8: Top Left Corner (The new level point!)
-            { x: 50, y: 150 }    // 9: Final Close (Back to start)
+            { x: 50, y: 80 },    // 1: Left Side Top
+            { x: 70, y: 60 },    // 2: Peak 1 (Starts the 3 peaks)
+            { x: 110, y: 80 },   // 3: Valley 1
+            { x: 150, y: 60 },   // 4: Peak 2
+            { x: 190, y: 80 },   // 5: Valley 2
+            { x: 230, y: 60 },   // 6: Peak 3
+            { x: 250, y: 80 },   // 7: Right Side Top
+            { x: 250, y: 150 },  // 8: Right Side Bottom
+            { x: 50, y: 150 }    // 9: Final Close (Base line)
         ];
 
         // Track the current drawing progress
         let myStepIndex = 1; 
-        const myTotalSteps = myPathPoints.length - 1; // Correctly 9 segments now
+        const myTotalSteps = myPathPoints.length - 1; 
 
         // Set the final drawing styles
         myDrawingContext.strokeStyle = 'gold'; 
         myDrawingContext.lineWidth = 4;
-        myDrawingContext.lineJoin = 'round';
+        myDrawingContext.lineJoin = 'round'; // Makes sharp corners look better
 
         // --- Animation Function ---
         function myDrawCrownSegment() {
-            // Stop the animation when all segments are drawn
             if (myStepIndex > myTotalSteps) {
                 return;
             }
 
-            // Get the previous point and the current target point
             const myPreviousPoint = myPathPoints[myStepIndex - 1];
             const myCurrentTarget = myPathPoints[myStepIndex];
 
             if (myStepIndex === 1) {
-                // For the very first step, start the path and move to the starting point
                 myDrawingContext.beginPath();
                 myDrawingContext.moveTo(myPreviousPoint.x, myPreviousPoint.y);
             }
             
-            // Draw a line from the last point to the new target point
             myDrawingContext.lineTo(myCurrentTarget.x, myCurrentTarget.y);
-            
-            // Render the path drawn so far
             myDrawingContext.stroke(); 
 
-            // Advance the counter for the next segment
             myStepIndex++;
             
-            // The 300ms (milliseconds) delay determines the speed of the "movement"
+            // 300ms delay for movement speed
             setTimeout(() => {
                 requestAnimationFrame(myDrawCrownSegment);
             }, 300); 
