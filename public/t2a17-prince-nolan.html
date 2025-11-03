@@ -1,5 +1,22 @@
 <h1 align=center>t2a17-prince-nolan.html</h1>
 <body>
+    
+    <div>
+        <label for="mySpeedInput">Animation Speed:</label>
+        <input 
+            type="range" 
+            id="mySpeedInput" 
+            min="0.005" 
+            max="0.1" 
+            step="0.005" 
+            value="0.02"
+            oninput="myUpdateSpeedAndDisplay(this.value)"
+        >
+        <span id="mySpeedDisplay">0.02</span>
+        <p>Default speed is 0.02</p>
+    </div>
+    <br>
+    
     <canvas id="myCrownCanvasID" width="300" height="200"></canvas>
     
     <script>
@@ -8,27 +25,34 @@
         const myDrawingContext = myCanvasElement.getContext('2d'); 
 
         const myPathPoints = [
-            { x: 50, y: 150 },   // 0
-            { x: 50, y: 80 },    // 1
-            { x: 70, y: 60 },    // 2
-            { x: 110, y: 80 },   // 3
-            { x: 150, y: 60 },   // 4
-            { x: 190, y: 80 },   // 5
-            { x: 230, y: 60 },   // 6
-            { x: 250, y: 80 },   // 7
-            { x: 250, y: 150 },  // 8
-            { x: 50, y: 150 }    // 9
+            { x: 50, y: 150 },
+            { x: 50, y: 80 },    
+            { x: 70, y: 60 },    
+            { x: 110, y: 80 },   
+            { x: 150, y: 60 },   
+            { x: 190, y: 80 },   
+            { x: 230, y: 60 },   
+            { x: 250, y: 80 },   
+            { x: 250, y: 150 },  
+            { x: 50, y: 150 }    
         ];
 
         let mySegmentIndex = 0;       
         let mySegmentProgress = 0.0;  
-        const myAnimationSpeed = 0.02;
-        let myIsCrownDrawn = false;
+        let myIsCrownDrawn = false;   
+        let myAnimationSpeed = 0.02;
 
 
         myDrawingContext.strokeStyle = 'gold'; 
         myDrawingContext.lineWidth = 4;
         myDrawingContext.lineJoin = 'round'; 
+
+        function myUpdateSpeedAndDisplay(newSpeedValue) {
+
+            myAnimationSpeed = parseFloat(newSpeedValue);
+            
+            document.getElementById('mySpeedDisplay').textContent = newSpeedValue;
+        }
 
         function myDrawFullCrownLine() {
             myDrawingContext.beginPath();
@@ -39,17 +63,12 @@
             myDrawingContext.stroke();
         }
 
-
         function myAnimateDrawing() {
-
             myDrawingContext.clearRect(0, 0, myCanvasElement.width, myCanvasElement.height);
 
-
             if (myIsCrownDrawn) {
-
                 myDrawFullCrownLine();
             } else {
-
                 myDrawingContext.beginPath();
                 myDrawingContext.moveTo(myPathPoints[0].x, myPathPoints[0].y);
                 for (let i = 1; i <= mySegmentIndex + 1 && i < myPathPoints.length; i++) {
@@ -58,9 +77,7 @@
                 myDrawingContext.stroke();
             }
 
-            
             const myStartPoint = myPathPoints[mySegmentIndex];
-            
             const myTargetIndex = (mySegmentIndex + 1) % myPathPoints.length;
             const myEndPoint = myPathPoints[myTargetIndex];
 
@@ -72,20 +89,22 @@
             myDrawingContext.fillStyle = 'red'; 
             myDrawingContext.fill();
 
-            mySegmentProgress += myAnimationSpeed;
+            mySegmentProgress += myAnimationSpeed; 
 
             if (mySegmentProgress >= 1.0) {
-                mySegmentIndex++;
-                mySegmentProgress = 0;
+                mySegmentIndex++;       
+                mySegmentProgress = 0;  
 
                 if (mySegmentIndex >= myPathPoints.length - 1) { 
                     myIsCrownDrawn = true;
-                    mySegmentIndex = 0;
+                    mySegmentIndex = 0;    
                 }
             }
 
             requestAnimationFrame(myAnimateDrawing);
         }
+
         myAnimateDrawing();
     </script>
 </body>
+</html>
