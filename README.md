@@ -391,8 +391,8 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 
 <details open><summary>Monday Nov 3rd, 2025</summary>
 
-### Title
-1.
+### Term 2
+1. We did assignment 17, which cannot be explained in words.
 1.
 1.
 
