@@ -8,10 +8,9 @@
         
         // Use custom descriptive names for elements and contexts
         const myCanvasElement = document.getElementById(myCanvasID);
-        // Reduced abbreviation for the drawing context
         const myDrawingContext = myCanvasElement.getContext('2d'); 
 
-        // Define the entire path as a clear list of points (objects with x, y)
+        // The corrected path with three full peaks (9 segments)
         const myPathPoints = [
             { x: 50, y: 150 },   // 0: Start Point (Bottom-Left)
             { x: 250, y: 150 },  // 1: Base End (Bottom-Right)
@@ -20,21 +19,21 @@
             { x: 170, y: 80 },   // 4: Valley 1
             { x: 130, y: 60 },   // 5: Peak 2
             { x: 90, y: 80 },    // 6: Valley 2
-            { x: 50, y: 80 },    // 7: Top Left
-            { x: 50, y: 150 }    // 8: Final Close (Back to start)
+            { x: 50, y: 60 },    // 7: Peak 3 (The new point!)
+            { x: 50, y: 80 },    // 8: Top Left Corner (The new level point!)
+            { x: 50, y: 150 }    // 9: Final Close (Back to start)
         ];
 
         // Track the current drawing progress
         let myStepIndex = 1; 
-        const myTotalSteps = myPathPoints.length - 1; // There are 8 points, so 7 line segments
+        const myTotalSteps = myPathPoints.length - 1; // Correctly 9 segments now
 
         // Set the final drawing styles
         myDrawingContext.strokeStyle = 'gold'; 
         myDrawingContext.lineWidth = 4;
-        myDrawingContext.lineJoin = 'round'; // Makes the corners look nicer
+        myDrawingContext.lineJoin = 'round';
 
         // --- Animation Function ---
-
         function myDrawCrownSegment() {
             // Stop the animation when all segments are drawn
             if (myStepIndex > myTotalSteps) {
@@ -60,8 +59,7 @@
             // Advance the counter for the next segment
             myStepIndex++;
             
-            // Use setTimeout to create a pause (300ms) between drawing each segment.
-            // requestAnimationFrame ensures the drawing happens smoothly on the browser's next redraw cycle.
+            // The 300ms (milliseconds) delay determines the speed of the "movement"
             setTimeout(() => {
                 requestAnimationFrame(myDrawCrownSegment);
             }, 300); 
