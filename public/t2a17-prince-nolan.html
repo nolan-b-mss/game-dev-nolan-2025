@@ -1,18 +1,22 @@
-<h1 align=center> t2a17-prince-nolan.html </h1>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Animated Crown</title>
+</head>
 <body>
-    <canvas id="myCrownCanvasID" width="300" height="200"></canvas>
+    <canvas id="myCrownCanvasID" width="300" height="200" style="border: 1px solid gold;"></canvas>
     
     <script>
-        // --- Custom Variable Setup ---
+        // --- Setup ---
         const myCanvasID = 'myCrownCanvasID';
         const myCanvasElement = document.getElementById(myCanvasID);
         const myDrawingContext = myCanvasElement.getContext('2d'); 
 
-        // The corrected path for three symmetrical peaks
+        // Corrected path for three symmetrical peaks (10 points, 9 segments)
         const myPathPoints = [
             { x: 50, y: 150 },   // 0: Start Point (Bottom-Left)
             { x: 50, y: 80 },    // 1: Left Side Top
-            { x: 70, y: 60 },    // 2: Peak 1 (Starts the 3 peaks)
+            { x: 70, y: 60 },    // 2: Peak 1
             { x: 110, y: 80 },   // 3: Valley 1
             { x: 150, y: 60 },   // 4: Peak 2
             { x: 190, y: 80 },   // 5: Valley 2
@@ -22,41 +26,67 @@
             { x: 50, y: 150 }    // 9: Final Close (Base line)
         ];
 
-        // Track the current drawing progress
-        let myStepIndex = 1; 
-        const myTotalSteps = myPathPoints.length - 1; 
+        // --- Animation Tracking Variables ---
+        let mySegmentIndex = 0;       // Which segment of the path we are drawing (0 to 8)
+        let mySegmentProgress = 0.0;  // How far along the current segment (0.0 to 1.0)
+        const myAnimationSpeed = 0.02; // How fast the marker moves (0.02 means 2% of segment length per frame)
 
-        // Set the final drawing styles
+        // --- Drawing Styles ---
         myDrawingContext.strokeStyle = 'gold'; 
         myDrawingContext.lineWidth = 4;
-        myDrawingContext.lineJoin = 'round'; // Makes sharp corners look better
+        myDrawingContext.lineJoin = 'round'; 
 
-        // --- Animation Function ---
-        function myDrawCrownSegment() {
-            if (myStepIndex > myTotalSteps) {
-                return;
+        // --- Main Animation Function ---
+
+        function myAnimateCrown() {
+            // 1. Clear the entire canvas on every frame (to erase the old marker position)
+            myDrawingContext.clearRect(0, 0, myCanvasElement.width, myCanvasElement.height);
+
+            // Redraw the path segments *already completed*
+            myDrawingContext.beginPath();
+            myDrawingContext.moveTo(myPathPoints[0].x, myPathPoints[0].y);
+            
+            // Loop through all completed segments and the current segment
+            for (let i = 1; i <= mySegmentIndex + 1 && i < myPathPoints.length; i++) {
+                myDrawingContext.lineTo(myPathPoints[i].x, myPathPoints[i].y);
+            }
+            myDrawingContext.stroke();
+
+            // Check if we are done with all segments
+            if (mySegmentIndex >= myPathPoints.length - 1) {
+                // Drawing is complete, stop the animation
+                return; 
             }
 
-            const myPreviousPoint = myPathPoints[myStepIndex - 1];
-            const myCurrentTarget = myPathPoints[myStepIndex];
+            // Get the start and end points of the current segment
+            const myStartPoint = myPathPoints[mySegmentIndex];
+            const myEndPoint = myPathPoints[mySegmentIndex + 1];
 
-            if (myStepIndex === 1) {
-                myDrawingContext.beginPath();
-                myDrawingContext.moveTo(myPreviousPoint.x, myPreviousPoint.y);
+            // 2. Calculate the Marker Position (Interpolation)
+            const myCurrentX = myStartPoint.x + (myEndPoint.x - myStartPoint.x) * mySegmentProgress;
+            const myCurrentY = myStartPoint.y + (myEndPoint.y - myStartPoint.y) * mySegmentProgress;
+
+            // 3. Draw the Marker (a small red circle)
+            myDrawingContext.beginPath();
+            myDrawingContext.arc(myCurrentX, myCurrentY, 5, 0, Math.PI * 2); // Radius 5
+            myDrawingContext.fillStyle = 'red'; 
+            myDrawingContext.fill();
+
+            // 4. Update Progress
+            mySegmentProgress += myAnimationSpeed;
+
+            // If we reached the end of the current segment (Progress > 1.0)
+            if (mySegmentProgress >= 1.0) {
+                mySegmentIndex++;       // Move to the next segment
+                mySegmentProgress = 0;  // Reset progress
             }
-            
-            myDrawingContext.lineTo(myCurrentTarget.x, myCurrentTarget.y);
-            myDrawingContext.stroke(); 
 
-            myStepIndex++;
-            
-            // 300ms delay for movement speed
-            setTimeout(() => {
-                requestAnimationFrame(myDrawCrownSegment);
-            }, 300); 
+            // Ask the browser to call this function again for the next frame
+            requestAnimationFrame(myAnimateCrown);
         }
 
         // Start the process
-        myDrawCrownSegment();
+        myAnimateCrown();
     </script>
 </body>
+</html>
