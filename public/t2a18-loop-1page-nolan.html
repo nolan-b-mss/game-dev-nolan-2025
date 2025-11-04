@@ -1,1 +1,18 @@
 <h1 align=center>t2a18-loop-1page-nolan.html</h1>
+<p><b>JavaScript Loops: Code Only</b></p>
+<p><b>1. `for` Loop</b></p>
+<pre>for(let i=0;i&lt;3;i++) o1+=`Count: ${i}\n`;</pre>Output:<div id="for-output"></div>
+<p><b>2. `while` Loop</b></p>
+<pre>let j=0;while(j&lt;3){o2+=`Count: ${j}\n`;j++;}</pre>Output:<div id="while-output"></div>
+<p><b>3. `do...while` Loop</b></p>
+<pre>let k=0;do{o3+=`Count: ${k}\n`;k++;}while(k&lt;3);</pre>Output:<div id="do-while-output"></div>
+<p><b>4. `for...in` Loop</b></p>
+<pre>const o={a:10,b:20};for(const k in o) o4+=`${k}:${o[k]}\n`;</pre>Output:<div id="for-in-output"></div>
+<p><b>5. `for...of` Loop</b></p>
+<pre>const a=["X","Y","Z"];for(const v of a) o5+=`Value: ${v}\n`;</pre>Output:<div id="for-of-output"></div>
+<p><b>6. `Array.forEach()`</b></p>
+<pre>[10,20,30].forEach((n,i)=>o6+=`Idx ${i}: ${n}\n`);</pre>Output:<div id="for-each-output"></div>
+<script>
+    function r(){const l=(i,c)=>document.getElementById(i).textContent=c.trim();let o1 = ""; for (let i = 0; i < 3; i++) o1 += `Count: ${i}\n`; l('for-output', o1);let o2 = "", j = 0; while (j < 3) { o2 += `Count: ${j}\n`; j++; } l('while-output', o2);let o3 = "", k = 0; do { o3 += `Count: ${k}\n`; k++; } while (k < 3); l('do-while-output', o3);let o4 = ""; const o = {n: "G", v: 2.5}; for (const key in o) o4 += `${key}:${o[key]}\n`; l('for-in-output', o4);let o5 = ""; const a = ["A", "B", "C"]; for (const v of a) o5 += `Value: ${v}\n`; l('for-of-output', o5);let o6 = ""; [10, 20, 30].forEach((n, i) => o6 += `Idx ${i}: ${n}\n`); l('for-each-output', o6);}
+    document.addEventListener('DOMContentLoaded', r);
+</script>
