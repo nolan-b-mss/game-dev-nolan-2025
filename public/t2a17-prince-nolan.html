@@ -20,9 +20,9 @@
     <canvas id="myCrownCanvasID" width="300" height="200"></canvas>
     
     <script>
-        const myCanvasID = 'myCrownCanvasID';
-        const myCanvasElement = document.getElementById(myCanvasID);
-        const myDrawingContext = myCanvasElement.getContext('2d'); 
+        const myCanvasID = 'myCrownCanvasID'
+        const myCanvasElement = document.getElementById(myCanvasID)
+        const myDrawingContext = myCanvasElement.getContext('2d')
 
         const myPathPoints = [
             { x: 50, y: 150 },
@@ -37,37 +37,37 @@
             { x: 50, y: 150 }    
         ];
 
-        let mySegmentIndex = 0;       
-        let mySegmentProgress = 0.0;  
-        let myIsCrownDrawn = false;   
-        let myAnimationSpeed = 0.02;
+        let mySegmentIndex = 0      
+        let mySegmentProgress = 0.0
+        let myIsCrownDrawn = false
+        let myAnimationSpeed = 0.02
 
 
-        myDrawingContext.strokeStyle = 'gold'; 
-        myDrawingContext.lineWidth = 4;
-        myDrawingContext.lineJoin = 'round'; 
+        myDrawingContext.strokeStyle = 'gold'
+        myDrawingContext.lineWidth = 4
+        myDrawingContext.lineJoin = 'round'
 
         function myUpdateSpeedAndDisplay(newSpeedValue) {
 
-            myAnimationSpeed = parseFloat(newSpeedValue);
+            myAnimationSpeed = parseFloat(newSpeedValue)
             
-            document.getElementById('mySpeedDisplay').textContent = newSpeedValue;
+            document.getElementById('mySpeedDisplay').textContent = newSpeedValue
         }
 
         function myDrawFullCrownLine() {
-            myDrawingContext.beginPath();
-            myDrawingContext.moveTo(myPathPoints[0].x, myPathPoints[0].y);
+            myDrawingContext.beginPath()
+            myDrawingContext.moveTo(myPathPoints[0].x, myPathPoints[0].y)
             for (let i = 1; i < myPathPoints.length; i++) {
-                myDrawingContext.lineTo(myPathPoints[i].x, myPathPoints[i].y);
+                myDrawingContext.lineTo(myPathPoints[i].x, myPathPoints[i].y)
             }
-            myDrawingContext.stroke();
+            myDrawingContext.stroke()
         }
 
         function myAnimateDrawing() {
             myDrawingContext.clearRect(0, 0, myCanvasElement.width, myCanvasElement.height);
 
             if (myIsCrownDrawn) {
-                myDrawFullCrownLine();
+                myDrawFullCrownLine()
             } else {
                 myDrawingContext.beginPath();
                 myDrawingContext.moveTo(myPathPoints[0].x, myPathPoints[0].y);
@@ -77,27 +77,27 @@
                 myDrawingContext.stroke();
             }
 
-            const myStartPoint = myPathPoints[mySegmentIndex];
-            const myTargetIndex = (mySegmentIndex + 1) % myPathPoints.length;
-            const myEndPoint = myPathPoints[myTargetIndex];
+            const myStartPoint = myPathPoints[mySegmentIndex]
+            const myTargetIndex = (mySegmentIndex + 1) % myPathPoints.length
+            const myEndPoint = myPathPoints[myTargetIndex]
 
-            const myCurrentX = myStartPoint.x + (myEndPoint.x - myStartPoint.x) * mySegmentProgress;
-            const myCurrentY = myStartPoint.y + (myEndPoint.y - myStartPoint.y) * mySegmentProgress;
+            const myCurrentX = myStartPoint.x + (myEndPoint.x - myStartPoint.x) * mySegmentProgress
+            const myCurrentY = myStartPoint.y + (myEndPoint.y - myStartPoint.y) * mySegmentProgress
 
-            myDrawingContext.beginPath();
-            myDrawingContext.arc(myCurrentX, myCurrentY, 5, 0, Math.PI * 2); 
-            myDrawingContext.fillStyle = 'red'; 
-            myDrawingContext.fill();
+            myDrawingContext.beginPath()
+            myDrawingContext.arc(myCurrentX, myCurrentY, 5, 0, Math.PI * 2)
+            myDrawingContext.fillStyle = 'red'
+            myDrawingContext.fill()
 
-            mySegmentProgress += myAnimationSpeed; 
+            mySegmentProgress += myAnimationSpeed
 
             if (mySegmentProgress >= 1.0) {
-                mySegmentIndex++;       
-                mySegmentProgress = 0;  
+                mySegmentIndex++    
+                mySegmentProgress = 0
 
                 if (mySegmentIndex >= myPathPoints.length - 1) { 
-                    myIsCrownDrawn = true;
-                    mySegmentIndex = 0;    
+                    myIsCrownDrawn = true
+                    mySegmentIndex = 0  
                 }
             }
 
