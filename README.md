@@ -400,8 +400,8 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 
 <details  open><summary>Tuesday Nov 4th, 2025</summary>
 
-### Title
-1.
+### Assignment 18
+1. We did assignment 18 on all loops on one page.
 1.
 1.
 
