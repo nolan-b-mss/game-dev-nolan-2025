@@ -438,9 +438,9 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 
 <details open><summary>Monday Nov 10th, 2025</summary>
 
-### Title
-1.
-1.
+### Leet
+1. We started assignment 19 on Leet coding.
+1. I don't understand.
 1.
 
 </details>
