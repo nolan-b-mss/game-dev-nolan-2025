@@ -389,7 +389,7 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 
 ---    
 
-<details open><summary>Monday Nov 3rd, 2025</summary>
+<details ><summary>Monday Nov 3rd, 2025</summary>
 
 ### Term 2
 1. We did assignment 17, which cannot be explained in words.
@@ -398,7 +398,7 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 
 </details>
 
-<details  open><summary>Tuesday Nov 4th, 2025</summary>
+<details ><summary>Tuesday Nov 4th, 2025</summary>
 
 ### Assignment 18
 1. We did assignment 18 on all loops on one page.
@@ -407,7 +407,7 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 
 </details>
 
-<details  open><summary>Wednesday Nov 5th, 2025</summary>
+<details  ><summary>Wednesday Nov 5th, 2025</summary>
 
 ### Absent
 1.
@@ -416,7 +416,7 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 
 </details>
 
-<details  open><summary>Thursday Nov 6th, 2025</summary>
+<details  ><summary>Thursday Nov 6th, 2025</summary>
 
 ### Work day
 1. We got to work on our assignments.
@@ -425,9 +425,9 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 
 </details>
 
-<details  open><summary>Friday Nov 7th, 2025 half day </summary>
+<details  ><summary>Friday Nov 7th, 2025 half day </summary>
 
-### Title
+### Absent
 1.
 1.
 1.
@@ -436,7 +436,7 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 
 ---    
 
-<details ><summary>Monday Nov 10th, 2025</summary>
+<details open><summary>Monday Nov 10th, 2025</summary>
 
 ### Title
 1.
@@ -445,7 +445,7 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 
 </details>
 
-<details><summary>Tuesday Nov 11th, 2025 No Classes</summary>
+<details  ><summary>Tuesday Nov 11th, 2025 No Classes</summary>
 
 ### Title
 1.
@@ -454,7 +454,7 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 
 </details>
 
-<details><summary>Wednesday Nov 12th, 2025</summary>
+<details  open><summary>Wednesday Nov 12th, 2025</summary>
 
 ### Title
 1.
@@ -463,7 +463,7 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 
 </details>
 
-<details><summary>Thursday Nov 13th, 2025</summary>
+<details open><summary>Thursday Nov 13th, 2025</summary>
 
 ### Title
 1.
@@ -472,7 +472,7 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 
 </details>
 
-<details><summary>Friday Nov 14th, 2025</summary>
+<details open><summary>Friday Nov 14th, 2025</summary>
 
 ### Title
 1.
