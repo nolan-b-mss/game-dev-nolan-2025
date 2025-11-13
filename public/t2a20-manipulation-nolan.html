@@ -72,3 +72,9 @@ String, Array, Object manipulation methods<br>
   let myIn = document.getElementById('myNum01').value
   document.getElementById('mySpan01').innerHTML = '[' + myIn.trim() + ']'
 }"><br>
+<input id="myJSONString" type=text value='{"name":"Jerry","age":10}'><br>
+<input type=button value="JSON.parse() returns object" onclick="{
+  let myJSON = document.getElementById('myJSONString').value
+  let myObject = JSON.parse(myJSON)
+  document.getElementById('mySpan01').innerHTML = 'Name:' + myObject.name + ' Age:' + myObject.age
+}"><br>
