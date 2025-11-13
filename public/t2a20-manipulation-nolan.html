@@ -43,3 +43,10 @@ String, Array, Object manipulation methods<br>
   myArray.push(newItem)
   document.getElementById('mySpan01').innerHTML = myArray
 }"><br>
+<input id="myJoinSeparator" type=text value=" * "><br>
+<input type=button value="Array .join() returns string" onclick="{
+  let myIn = document.getElementById('myNum01').value
+  let myArray = myIn.split(' ')
+  let separator = document.getElementById('myJoinSeparator').value
+  document.getElementById('mySpan01').innerHTML = myArray.join(separator)
+}"><br>
