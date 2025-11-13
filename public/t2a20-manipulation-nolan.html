@@ -23,10 +23,22 @@ String, Array, Object manipulation methods<br>
   document.getElementById('mySpan01').innerHTML = keyArray
 }"><br>
 <hr>
-<span id="mySpan02">...</span>
+<span id="mySpan02">...</span> <br>
 <input id="mySearchTerm" type=text value="string"><br>
 <input type=button value=".includes() returns boolean" onclick="{
   let myIn = document.getElementById('myNum01').value
   let searchTerm = document.getElementById('mySearchTerm').value
   document.getElementById('mySpan02').innerHTML = myIn.includes(searchTerm)
+}"><br>
+<input type=button value=".toLowerCase()" onclick="{
+  let myIn = document.getElementById('myNum01').value
+  document.getElementById('mySpan02').innerHTML = myIn.toLowerCase()
+}"><br>
+<input id="myPushItem" type=text value="added word"><br>
+<input type=button value="Array .push() adds element" onclick="{
+  let myIn = document.getElementById('myNum01').value
+  let myArray = myIn.split(' ')
+  let newItem = document.getElementById('myPushItem').value
+  myArray.push(newItem)
+  document.getElementById('mySpan01').innerHTML = myArray
 }"><br>
