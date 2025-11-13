@@ -68,3 +68,7 @@ String, Array, Object manipulation methods<br>
   let entryArray = Object.entries(myObject)
   document.getElementById('mySpan01').innerHTML = entryArray
 }"><br>
+<input type=button value=".trim() removes whitespace" onclick="{
+  let myIn = document.getElementById('myNum01').value
+  document.getElementById('mySpan01').innerHTML = '[' + myIn.trim() + ']'
+}"><br>
