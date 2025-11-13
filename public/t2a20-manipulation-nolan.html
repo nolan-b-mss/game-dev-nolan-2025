@@ -23,3 +23,10 @@ String, Array, Object manipulation methods<br>
   document.getElementById('mySpan01').innerHTML = keyArray
 }"><br>
 <hr>
+<span id="mySpan02">...</span>
+<input id="mySearchTerm" type=text value="string"><br>
+<input type=button value=".includes() returns boolean" onclick="{
+  let myIn = document.getElementById('myNum01').value
+  let searchTerm = document.getElementById('mySearchTerm').value
+  document.getElementById('mySpan02').innerHTML = myIn.includes(searchTerm)
+}"><br>
