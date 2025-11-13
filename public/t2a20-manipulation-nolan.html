@@ -59,3 +59,12 @@ String, Array, Object manipulation methods<br>
   let valueArray = Object.values(myObject)
   document.getElementById('mySpan01').innerHTML = valueArray
 }"><br>
+<input type=button value="Object.entries() returns array of arrays" onclick="{
+  let myObject= {
+    first: 10,
+    second: 'Hello',
+    third: true
+  }
+  let entryArray = Object.entries(myObject)
+  document.getElementById('mySpan01').innerHTML = entryArray
+}"><br>
