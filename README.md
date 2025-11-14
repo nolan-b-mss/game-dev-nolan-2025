@@ -456,8 +456,8 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 
 <details  open><summary>Wednesday Nov 12th, 2025</summary>
 
-### Title
-1.
+### Work day
+1. We kept working on leet.
 1.
 1.
 
@@ -465,8 +465,8 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 
 <details open><summary>Thursday Nov 13th, 2025</summary>
 
-### Title
-1.
+### Manipulation
+1. We did assignment 20 on object, string, and array manipulation.
 1.
 1.
 
