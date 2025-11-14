@@ -474,8 +474,8 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 
 <details open><summary>Friday Nov 14th, 2025</summary>
 
-### Title
-1.
+### Collisions
+1. We started assignment 20 on collisions.
 1.
 1.
 
