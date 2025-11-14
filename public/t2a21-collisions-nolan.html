@@ -1,17 +1,17 @@
 <script>
-  // global variables here
-
   function myHitOther(my1, my2) {
+    const element1 = document.getElementById(my1);
+    const element2 = document.getElementById(my2);
 
-    let left1  = parseInt(document.getElementById(my1).style.left);
-    let right1  = left1 + parseInt(document.getElementById(my1).style.width);
-    let top1  = parseInt(document.getElementById(my1).style.top);
-    let bottom1 = top1 + parseInt(document.geElementById(my1).style.height);
+    let left1 = parseInt(element1.style.left);
+    let right1 = left1 + parseInt(element1.style.width);
+    let top1 = parseInt(element1.style.top);
+    let bottom1 = top1 + parseInt(element1.style.height);
 
-    let left2 = parseInt(document.getElementById(my2).style.left);
-    let right2 = left2 + parseInt(document.getElementById(my2).style.width);
-    let top2 = parseInt(document.getElementById(my2).style.top);
-    let bottom2 = top2 + parseInt(document.getElementById(my2).style.height);
+    let left2 = parseInt(element2.style.left);
+    let right2 = left2 + parseInt(element2.style.width);
+    let top2 = parseInt(element2.style.top);
+    let bottom2 = top2 + parseInt(element2.style.height);
 
     if ((right1 >= left2) &&
         (bottom1 >= top2) &&
@@ -19,14 +19,14 @@
         (top1 <= bottom2)) {
       return true;
     }
-    return false; // Explicitly return false if no hit
+    return false;
   }
 
   function myCheckHit() {
-    if (myHitOther('myImg01',' myImg02')) {
+    if (myHitOther('myImg01', 'myImg02')) {
       alert('you lose');
       document.getElementById('myImg01').style.left = '20px';
-      location = 'index.html'; // go to your next level
+      location = 'index.html';
     }
   }
 </script>
@@ -37,8 +37,7 @@
 <img id="myImg02" src="myImage02.png" style="position:absolute; left:100px; top:0px; width:50px; height:30px;">
 
 <input type=button value="Move" onclick="{
-  document.getElementById('myImg01'.style.left =
-  parseInt(document.getElementById('myImg01').style.left) + 10 + 'px';
-    myCheckHit();
-  }"><br>
-)
+  let img = document.getElementById('myImg01');
+  img.style.left = (parseInt(img.style.left) + 10) + 'px';
+  myCheckHit();
+}"><br>
