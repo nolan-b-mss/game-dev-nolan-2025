@@ -485,8 +485,8 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 
 <details open><summary>Monday Nov 17th, 2025</summary>
 
-### Title
-1.
+### Work day
+1. We had our first sub today.
 1.
 1.
 
