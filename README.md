@@ -494,9 +494,9 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 
 <details open><summary>Tuesday Nov 18th, 2025</summary>
 
-### Title
-1.
-1.
+### ???
+1. We didn't really do anything today.
+1. It was kinda weird.
 1.
 
 </details>
