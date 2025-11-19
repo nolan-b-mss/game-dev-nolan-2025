@@ -8,12 +8,14 @@
     const myData = await myResponse.json();
     
     console.log(myData);
+    
+    let imageUrl = myData.image || myData.message
 
     const myJson = JSON.stringify(myData, null, 2);
     
     document.getElementById('myDiv1').innerHTML = `<pre>${myJson}</pre>`;
 
-    document.getElementById('myDiv1').innerHTML += `<img src="${myData.image}" alt="Random Image" style="max-width: 100%; height: auto;">`;
+    document.getElementById('myDiv1').innerHTML += `<img src="${imageUrl}" alt="Random Image" style="max-width: 100%; height: auto;">`;
 
   }
   
@@ -22,6 +24,7 @@
 <select id="mySelect" size="1" onchange="fetchData(this.value)">
   <option value=""></option>
   <option value ="https://randomfox.ca/floof/">randomfox</option>
+  <option value ="https://dog.ceo/api/breeds/image/random">randomdog</option>
 </select><br><br>
 
 <div id="myDiv1">...</div>
