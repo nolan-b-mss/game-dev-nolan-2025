@@ -497,14 +497,14 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 ### ???
 1. We didn't really do anything today.
 1. It was kinda weird.
-1.
+1. At the end of class we started assignment 22 on JSON.
 
 </details>
 
 <details open><summary>Wednesday Nov 19th, 2025</summary>
 
-### Title
-1.
+### Work day
+1. We kept working on assignment 22.
 1.
 1.
 
