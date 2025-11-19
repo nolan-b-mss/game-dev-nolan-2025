@@ -1,4 +1,5 @@
 <h1 align=center>t2a22-json-nolan.html</h1>
+
 <script>
   async function fetchData(url){
     const myResponse = await fetch(url);
@@ -6,23 +7,20 @@
     
     console.log(myData);
 
-    // This single line handles all four different response structures
     let imageUrl = myData.image || myData.message || myData.file || myData[0]; 
     
     const myJson = JSON.stringify(myData, null, 2);
     
-    // Display the raw JSON
     document.getElementById('myDiv1').innerHTML = `<pre>${myJson}</pre>`;
 
-    // Display the image using the flexible imageUrl variable
-    // We add a check to make sure imageUrl actually has a value before trying to display an image tag
     if (imageUrl) {
       document.getElementById('myDiv1').innerHTML += `<img src="${imageUrl}" alt="Random Image" style="max-width: 100%; height: auto;">`;
     }
-    if (url.includes("dog.ceo"))  {
-      let breedName = imageUrl.split('/')[4];
+
+    if (url.includes("dog.ceo")) {
+        let breedName = imageUrl.split('/')[4]; 
+        document.getElementById('myDiv1').innerHTML += '<p>Breed: <strong>' + breedName + '</strong></p>';
     }
-  document.getElementById('myDiv1').innerHTML += '<p>Breed: <strong>' + breedName + '</strong></p>';
   }
 </script>
 
