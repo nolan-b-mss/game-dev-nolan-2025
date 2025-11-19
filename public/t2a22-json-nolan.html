@@ -1,31 +1,32 @@
 <h1 align=center>t2a22-json-nolan.html</h1>
-
 <script>
   async function fetchData(url){
-    
     const myResponse = await fetch(url);
-    
     const myData = await myResponse.json();
     
     console.log(myData);
-    
-    let imageUrl = myData.image || myData.message || myData.file;
 
+    // This single line handles all four different response structures
+    let imageUrl = myData.image || myData.message || myData.file || myData[0]; 
+    
     const myJson = JSON.stringify(myData, null, 2);
     
+    // Display the raw JSON
     document.getElementById('myDiv1').innerHTML = `<pre>${myJson}</pre>`;
 
-    document.getElementById('myDiv1').innerHTML += `<img src="${imageUrl}" alt="Random Image" style="max-width: 100%; height: auto;">`;
-
+    // Display the image using the flexible imageUrl variable
+    // We add a check to make sure imageUrl actually has a value before trying to display an image tag
+    if (imageUrl) {
+      document.getElementById('myDiv1').innerHTML += `<img src="${imageUrl}" alt="Random Image" style="max-width: 100%; height: auto;">`;
+    }
   }
-  
 </script>
 
 <select id="mySelect" size="1" onchange="fetchData(this.value)">
   <option value=""></option>
   <option value ="https://randomfox.ca/floof/">randomfox</option>
   <option value ="https://dog.ceo/api/breeds/image/random">randomdog</option>
-  <option value ="https://aws.random.cat/meow">randomcat</option>
+  <option value ="https://shibe.online/api/shibes?count=1&urls=true&httpsUrls=true">randomshibe</option>
 </select><br><br>
 
 <div id="myDiv1">...</div>
