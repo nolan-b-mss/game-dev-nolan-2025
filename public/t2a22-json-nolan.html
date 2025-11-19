@@ -9,7 +9,7 @@
     
     console.log(myData);
     
-    let imageUrl = myData.image || myData.message
+    let imageUrl = myData.image || myData.message || myData.file;
 
     const myJson = JSON.stringify(myData, null, 2);
     
@@ -25,6 +25,7 @@
   <option value=""></option>
   <option value ="https://randomfox.ca/floof/">randomfox</option>
   <option value ="https://dog.ceo/api/breeds/image/random">randomdog</option>
+  <option value ="https://aws.random.cat/meow">randomcat</option>
 </select><br><br>
 
 <div id="myDiv1">...</div>
