@@ -7,7 +7,7 @@
     
     console.log(myData);
 
-    let imageUrl = myData.image || myData.message || myData.file || myData[0] || myData.url;
+    let imageUrl = myData.image || myData.message || myData.file || myData[0];
     
     const myJson = JSON.stringify(myData, null, 2);
     
@@ -25,11 +25,10 @@
     if (url.includes("randomfox.ca")) { 
         document.getElementById('myDiv1').innerHTML += '<p>Fox Link: <strong>' + myData.link + '</strong></p>';
     }
-  
-    if (url.includes("random-d.uk")) { 
-        document.getElementById('myDiv1').innerHTML += '<p>Duck Status: <strong>' + myData.message + '</strong></p>';
-    }
-    
+
+    if (url.includes("loremflickr.com")) { 
+        document.getElementById('myDiv1').innerHTML += '<p>Image Owner: <strong>' + myData.owner + '</strong></p>';
+    }
   }
 </script>
 
@@ -37,7 +36,7 @@
   <option value=""></option>
   <option value ="https://randomfox.ca/floof/">randomfox</option>
   <option value ="https://dog.ceo/api/breeds/image/random">randomdog</option>
-  <option value ="https://random-d.uk/api/random">randomduck</option>
+  <option value="https://loremflickr.com/json/800/600/all">loremflicker</option>
 </select><br><br>
 
 <div id="myDiv1">...</div>
