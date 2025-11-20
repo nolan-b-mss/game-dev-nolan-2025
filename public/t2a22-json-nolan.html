@@ -19,16 +19,14 @@
 
     if (url.includes("dog.ceo")) {
         let breedName = imageUrl.split('/')[4]; 
-        document.getElementById('myDiv1').innerHTML += '<p>Breed: <strong>' + breedName + '</strong></p>';
+        document.getElementById('myDiv1').innerHTML += '<p>Breed: <strong>' + breedName + '</strong></p><br>';
+        document.getElementById('myDiv1').innerHTML += '<p>API Status: <strong>' + myData.status + '</strong></p>';
     }
 
     if (url.includes("randomfox.ca")) { 
         document.getElementById('myDiv1').innerHTML += '<p>Fox Link: <strong>' + myData.link + '</strong></p>';
     }
 
-    if (url.includes("loremflickr.com")) { 
-        document.getElementById('myDiv1').innerHTML += '<p>Image Owner: <strong>' + myData.owner + '</strong></p>';
-    }
   }
 </script>
 
@@ -36,7 +34,6 @@
   <option value=""></option>
   <option value ="https://randomfox.ca/floof/">randomfox</option>
   <option value ="https://dog.ceo/api/breeds/image/random">randomdog</option>
-  <option value="https://loremflickr.com/json/800/600/all">loremflicker</option>
 </select><br><br>
 
 <div id="myDiv1">...</div>
