@@ -7,7 +7,7 @@
     
     console.log(myData);
 
-    let imageUrl = myData.image || myData.message || myData.file || myData[0]; 
+    let imageUrl = myData.image || myData.message || myData.file || myData[0] || myData.url;
     
     const myJson = JSON.stringify(myData, null, 2);
     
@@ -25,14 +25,19 @@
     if (url.includes("randomfox.ca")) { 
         document.getElementById('myDiv1').innerHTML += '<p>Fox Link: <strong>' + myData.link + '</strong></p>';
     }
-  }
+  
+    if (url.includes("random-d.uk")) { 
+        document.getElementById('myDiv1').innerHTML += '<p>Duck Status: <strong>' + myData.message + '</strong></p>';
+    }
+    
+  }
 </script>
 
 <select id="mySelect" size="1" onchange="fetchData(this.value)">
   <option value=""></option>
   <option value ="https://randomfox.ca/floof/">randomfox</option>
   <option value ="https://dog.ceo/api/breeds/image/random">randomdog</option>
-  <option value ="https://shibe.online/api/shibes?count=1&urls=true&httpsUrls=true">randomshibe</option>
+  <option value ="https://random-d.uk/api/random">randomduck</option>
 </select><br><br>
 
 <div id="myDiv1">...</div>
