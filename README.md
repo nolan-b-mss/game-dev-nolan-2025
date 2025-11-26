@@ -541,9 +541,9 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 
 <details open><summary>Tuesday Nov 25th, 2025</summary>
 
-### Title
-1.
-1.
+### Assignment 26 (?)
+1. We started assignment 26 on backend research.
+1. I'm not sure what happened to assignments 23, 24, and 25 but I think Mr. Ellis said that we would look at those later.
 1.
 
 </details>
