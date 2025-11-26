@@ -550,10 +550,10 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 
 <details open><summary>Wednesday Nov 26th, 2025</summary>
 
-### Title
-1.
-1.
-1.
+### Work day
+1. I finished assignment 26.
+1. I worked on a passion project
+1. We had a sub today.
 
 </details>
 
