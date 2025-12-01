@@ -596,8 +596,8 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 
 <details open><summary>Monday Dec 1st, 2025</summary>
 
-### Title
-1.
+### Render
+1. We started assignment 27 on Render.
 1.
 1.
 
