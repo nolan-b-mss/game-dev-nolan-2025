@@ -383,7 +383,7 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 
 
 
-<details open ><summary>November 2025 Journal Entries</summary>
+<details ><summary>November 2025 Journal Entries</summary>
 
 ---
 
@@ -530,7 +530,7 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 
 ---    
 
-<details open><summary>Monday Nov 24th, 2025</summary>
+<details ><summary>Monday Nov 24th, 2025</summary>
 
 ### Work day
 1. I worked on a passion project
@@ -539,7 +539,7 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 
 </details>
 
-<details open><summary>Tuesday Nov 25th, 2025</summary>
+<details ><summary>Tuesday Nov 25th, 2025</summary>
 
 ### Assignment 26 (?)
 1. We started assignment 26 on backend research.
@@ -548,7 +548,7 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 
 </details>
 
-<details open><summary>Wednesday Nov 26th, 2025</summary>
+<details ><summary>Wednesday Nov 26th, 2025</summary>
 
 ### Work day
 1. I finished assignment 26.
@@ -557,10 +557,10 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 
 </details>
 
-<details open><summary>Thursday Nov 27th, 2025</summary>
+<details ><summary>Thursday Nov 27th, 2025</summary>
 
-### Title
-1.
+### ???
+1. I cannot remember this day.
 1.
 1.
 
@@ -588,13 +588,13 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 
 
 
-<details ><summary>December 2025 Journal Entries</summary>
+<details open><summary>December 2025 Journal Entries</summary>
 
 ---
 
 ---    
 
-<details ><summary>Monday Dec 1st, 2025</summary>
+<details open><summary>Monday Dec 1st, 2025</summary>
 
 ### Title
 1.
@@ -603,7 +603,7 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 
 </details>
 
-<details><summary>Tuesday Dec 2nd, 2025</summary>
+<details open><summary>Tuesday Dec 2nd, 2025</summary>
 
 ### Title
 1.
@@ -612,7 +612,7 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 
 </details>
 
-<details><summary>Wednesday Dec 3rd, 2025</summary>
+<details open><summary>Wednesday Dec 3rd, 2025</summary>
 
 ### Title
 1.
@@ -621,7 +621,7 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 
 </details>
 
-<details><summary>Thursday Dec 4th, 2025</summary>
+<details open><summary>Thursday Dec 4th, 2025</summary>
 
 ### Title
 1.
@@ -630,7 +630,7 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 
 </details>
 
-<details><summary>Friday Dec 5th, 2025</summary>
+<details open><summary>Friday Dec 5th, 2025</summary>
 
 ### Title
 1.
