@@ -605,9 +605,9 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 
 <details open><summary>Tuesday Dec 2nd, 2025</summary>
 
-### Title
-1.
-1.
+### Work day
+1. We kept working on assignment 27.
+1. We had a sub today.
 1.
 
 </details>
