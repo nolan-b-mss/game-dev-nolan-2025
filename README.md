@@ -614,8 +614,8 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 
 <details open><summary>Wednesday Dec 3rd, 2025</summary>
 
-### Title
-1.
+### wip
+1. We had a sub today.
 1.
 1.
 
@@ -632,8 +632,8 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 
 <details open><summary>Friday Dec 5th, 2025</summary>
 
-### Title
-1.
+### Absent
+1. I was absent this day.
 1.
 1.
 
