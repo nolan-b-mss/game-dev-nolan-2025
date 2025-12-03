@@ -614,9 +614,9 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 
 <details open><summary>Wednesday Dec 3rd, 2025</summary>
 
-### wip
+### Work day
 1. We had a sub today.
-1.
+1. I worked on a passion project.
 1.
 
 </details>
