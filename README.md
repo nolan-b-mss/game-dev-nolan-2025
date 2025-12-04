@@ -623,9 +623,9 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 
 <details open><summary>Thursday Dec 4th, 2025</summary>
 
-### Title
-1.
-1.
+### Work day
+1. I worked on a passion project.
+1. We made some art on piskelapp.com
 1.
 
 </details>
