@@ -632,10 +632,10 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 
 <details open><summary>Friday Dec 5th, 2025</summary>
 
-### Absent
-1. I was absent this day.
-1.
-1.
+### Work day + test
+1. We had a test where we have to explain chunks of code in the game template.
+1. After we finished the test, we had more time to work.
+1. I worked on a passion project.
 
 </details>
 
