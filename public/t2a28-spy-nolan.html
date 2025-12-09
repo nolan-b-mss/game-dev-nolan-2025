@@ -44,7 +44,39 @@
 <textarea id="myArea02" rows=4 cols=70></textarea><br> 
 
 <input type=button value="decrypt" onclick="{
-   alert('Sorry, you have to do this!')
+   let myTemp2 = ''
+   myString2 = document.getElementById('myArea02').value.toLowerCase().split('')
+   for (let myLoop2=0;   myLoop2 < myString2.length; myLoop2++){
+      myTemp2 = myString2[myLoop2]
+if (myString2[myLoop2] == 'b') {myTemp2  = 'a'}
+if (myString2[myLoop2] == 'c') {myTemp2  = 'b'}
+if (myString2[myLoop2] == 'd') {myTemp2  = 'c'}
+if (myString2[myLoop2] == 'e') {myTemp2  = 'd'}
+if (myString2[myLoop2] == 'f') {myTemp2  = 'e'}
+if (myString2[myLoop2] == 'g') {myTemp2  = 'f'}
+if (myString2[myLoop2] == 'h') {myTemp2  = 'g'}
+if (myString2[myLoop2] == 'i') {myTemp2  = 'h'}
+if (myString2[myLoop2] == 'j') {myTemp2  = 'i'}
+if (myString2[myLoop2] == 'k') {myTemp2  = 'j'}
+if (myString2[myLoop2] == 'l') {myTemp2  = 'k'}
+if (myString2[myLoop2] == 'm') {myTemp2  = 'l'}
+if (myString2[myLoop2] == 'n') {myTemp2  = 'm'}
+if (myString2[myLoop2] == 'o') {myTemp2  = 'n'}
+if (myString2[myLoop2] == 'p') {myTemp2  = 'o'}
+if (myString2[myLoop2] == 'q') {myTemp2  = 'p'}
+if (myString2[myLoop2] == 'r') {myTemp2  = 'q'}
+if (myString2[myLoop2] == 's') {myTemp2  = 'r'}
+if (myString2[myLoop2] == 't') {myTemp2  = 's'}
+if (myString2[myLoop2] == 'u') {myTemp2  = 't'}
+if (myString2[myLoop2] == 'v') {myTemp2  = 'u'}
+if (myString2[myLoop2] == 'w') {myTemp2  = 'v'}
+if (myString2[myLoop2] == 'x') {myTemp2  = 'w'}
+if (myString2[myLoop2] == 'y') {myTemp2  = 'x'}
+if (myString2[myLoop2] == 'z') {myTemp2  = 'y'}
+if (myString2[myLoop2] == 'a') {myTemp2  = 'z'}
+      myString2[myLoop2] = myTemp2
+   }
+   document.getElementById('myArea02').value = myString2.join('')
 }"><br><br>
 
 
