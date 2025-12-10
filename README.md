@@ -652,8 +652,8 @@ Note: If you have a link to an assignment that has not been marked, put "open" a
 
 <details open><summary>Tuesday Dec 9th, 2025</summary>
 
-### Title
-1.
+### Encryption
+1. We did assignment 28 on encryption and decryption of data.
 1.
 1.
 
