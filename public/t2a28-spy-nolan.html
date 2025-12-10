@@ -79,5 +79,80 @@ if (myString2[myLoop2] == 'a') {myTemp2  = 'z'}
    document.getElementById('myArea03').value = myString2.join('')
 }"><br><br>
 
-
 <textarea id="myArea03" rows=4 cols=70></textarea><br> 
+<hr>
+<h2 align=left> (Custom) Keyboard Cipher </h2>
+<textarea id="myArea04" rows =4 cols =70></textarea><br>
+<input type=button value="encrypt" onclick="{
+   let myTemp3 = ''
+   myString3 = document3.getElementById('myArea04').value.toLowerCase().split('')
+   for (let myLoop3=0;   myLoop3 < myString3.length; myLoop3++){
+      myTemp4 = myString3[myLoop3]
+      if (myString3[myLoop3] == 'a') {myTemp4  = 'q'}
+      if (myString3[myLoop3] == 'b') {myTemp4  = 'w'}
+      if (myString3[myLoop3] == 'c') {myTemp4  = 'e'}
+      if (myString3[myLoop3] == 'd') {myTemp4  = 'r'}
+      if (myString3[myLoop3] == 'e') {myTemp4  = 't'}
+      if (myString3[myLoop3] == 'f') {myTemp4  = 'y'}
+      if (myString3[myLoop3] == 'g') {myTemp4  = 'u'}
+      if (myString3[myLoop3] == 'h') {myTemp4  = 'i'} 
+      if (myString3[myLoop3] == 'i') {myTemp4  = 'o'}
+      if (myString3[myLoop3] == 'j') {myTemp4  = 'p'}
+      if (myString3[myLoop3] == 'k') {myTemp4  = 'a'}
+      if (myString3[myLoop3] == 'l') {myTemp4  = 's'}
+      if (myString3[myLoop3] == 'm') {myTemp4  = 'd'}
+      if (myString3[myLoop3] == 'n') {myTemp4  = 'f'}
+      if (myString3[myLoop3] == 'o') {myTemp4  = 'g'}
+      if (myString3[myLoop3] == 'p') {myTemp4  = 'h'}
+      if (myString3[myLoop3] == 'q') {myTemp4  = 'j'}
+      if (myString3[myLoop3] == 'r') {myTemp4  = 'k'}
+      if (myString3[myLoop3] == 's') {myTemp4  = 'l'}
+      if (myString3[myLoop3] == 't') {myTemp4  = 'z'}
+      if (myString3[myLoop3] == 'u') {myTemp4  = 'x'}
+      if (myString3[myLoop3] == 'v') {myTemp4  = 'c'}
+      if (myString3[myLoop3] == 'w') {myTemp4  = 'v'}
+      if (myString3[myLoop3] == 'x') {myTemp4  = 'b'}
+      if (myString3[myLoop3] == 'y') {myTemp4  = 'n'}
+      if (myString3[myLoop3] == 'z') {myTemp4  = 'm'}
+      myString3[myLoop3] = myTemp4
+   }
+   document.getElementById('myArea05').value = myString.join('')
+}"><br><br>
+
+<textarea id="myArea05" rows=4 cols=70></textarea><br>
+<input type=button value="decrypt" onclick="{
+   let myTemp4 = ''
+   myString4 = document.getElementById('myArea04').value.toLowerCase().split('')
+   for (let myLoop4=0;   myLoop4 < myString4.length; myLoop4++){
+      myTemp4 = myString4[myLoop4]
+      if (myString4[myLoop4] == 'q') {myTemp4  = 'a'}
+      if (myString4[myLoop4] == 'w') {myTemp4  = 'b'}
+      if (myString4[myLoop4] == 'e') {myTemp4  = 'c'}
+      if (myString4[myLoop4] == 'r') {myTemp4  = 'd'}
+      if (myString4[myLoop4] == 't') {myTemp4  = 'e'}
+      if (myString4[myLoop4] == 'y') {myTemp4  = 'f'}
+      if (myString4[myLoop4] == 'u') {myTemp4  = 'g'}
+      if (myString4[myLoop4] == 'i') {myTemp4  = 'h'} 
+      if (myString4[myLoop4] == 'o') {myTemp4  = 'i'}
+      if (myString4[myLoop4] == 'p') {myTemp4  = 'j'}
+      if (myString4[myLoop4] == 'a') {myTemp4  = 'k'}
+      if (myString4[myLoop4] == 's') {myTemp4  = 'l'}
+      if (myString4[myLoop4] == 'd') {myTemp4  = 'm'}
+      if (myString4[myLoop4] == 'f') {myTemp4  = 'n'}
+      if (myString4[myLoop4] == 'g') {myTemp4  = 'o'}
+      if (myString4[myLoop4] == 'h') {myTemp4  = 'p'}
+      if (myString4[myLoop4] == 'j') {myTemp4  = 'q'}
+      if (myString4[myLoop4] == 'k') {myTemp4  = 'r'}
+      if (myString4[myLoop4] == 'l') {myTemp4  = 's'}
+      if (myString4[myLoop4] == 'z') {myTemp4  = 't'}
+      if (myString4[myLoop4] == 'x') {myTemp4  = 'u'}
+      if (myString4[myLoop4] == 'c') {myTemp4  = 'v'}
+      if (myString4[myLoop4] == 'v') {myTemp4  = 'w'}
+      if (myString4[myLoop4] == 'b') {myTemp4  = 'x'}
+      if (myString4[myLoop4] == 'n') {myTemp4  = 'y'}
+      if (myString4[myLoop4] == 'm') {myTemp4  = 'z'}
+      myString4[myLoop4] = myTemp4
+   }
+   document.getElementById('myArea06').value = myString4.join('')
+}"><br><br>
+<textarea id="myArea06" rows=4 cols=70></textarea><br> 
