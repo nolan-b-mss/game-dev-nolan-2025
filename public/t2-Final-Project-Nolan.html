@@ -22,19 +22,9 @@
 <img id="myImg03" src="blockImage.png" class="game-object" style="width:200px; height:10px; left:500px; top:400px;">
 <img id="myWinArea" src="myWinArea.gif" class="game-object" style="width:100px; height:80px; left:800px; top:400px;">
 
-
-<input type=button value="Right" onTouchStart="event.preventDefault(); this.click();" onclick="{
-  document.getElementById('myPlayer').style.left = parseInt(document.getElementById('myPlayer').style.left) + 10 + 'px';
-  myCheckHit();
-}">
-
-<input type=button value="Down" onTouchStart="event.preventDefault(); this.click();" onclick="{
-  document.getElementById('myPlayer').style.top = parseInt(document.getElementById('myPlayer').style.top) + 10 + 'px';
-  myCheckHit();
-}"><br><br>
-
-
 <script>
+window.addEventListener('resize', updateBoundaries);
+    
    const myPlayer = document.getElementById("myPlayer");
    const playerWidth = 32;
    const playerHeight = 32;
@@ -47,7 +37,9 @@
    let down = false;
    let right = false;
 
-
+function updateBoundaries(){
+    maxPlayerX = window.innerWidth - 32;
+    maxPlayerY = window.innerHeight;
    function myHitOther(my1, my2){
       const element1 = document.getElementById(my1);
       const element2 = document.getElementById(my2);
@@ -127,3 +119,4 @@
 
 </body>
 </html>
+
