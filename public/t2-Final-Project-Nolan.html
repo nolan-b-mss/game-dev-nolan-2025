@@ -23,100 +23,112 @@
 <img id="myWinArea" src="myWinArea.gif" class="game-object" style="width:100px; height:80px; left:800px; top:400px;">
 
 <script>
-window.addEventListener('resize', updateBoundaries);
-    
-   const myPlayer = document.getElementById("myPlayer");
-   const playerWidth = 32;
-   const playerHeight = 32;
-   let playerX = parseInt(myPlayer.style.left);
-   let playerY = parseInt(myPlayer.style.top); 
-   let maxPlayerX = window.innerWidth;
-   let maxPlayerY = window.innerHeight;
-   let up = false;
-   let left = false;
-   let down = false;
-   let right = false;
+// --- 1. Variable Initialization ---
+const myPlayer = document.getElementById("myPlayer");
+const playerWidth = 32;
+const playerHeight = 32;
+let playerX = parseInt(myPlayer.style.left) || 0;
+let playerY = parseInt(myPlayer.style.top) || 0;
+let maxPlayerX = 0;
+let maxPlayerY = 0;
+let up = false;
+let left = false;
+let down = false;
+let right = false;
 
+// --- 2. Boundary Management ---
 function updateBoundaries(){
-    maxPlayerX = window.innerWidth - 32;
-    maxPlayerY = window.innerHeight;
-   function myHitOther(my1, my2){
-      const element1 = document.getElementById(my1);
-      const element2 = document.getElementById(my2);
+    // Correctly calculates boundaries based on window size minus player dimensions
+    maxPlayerX = window.innerWidth - playerWidth;
+    maxPlayerY = window.innerHeight - playerHeight;
+}
 
-      if (!element1 || !element2) {
-         return false;
-      }
-      
-      let left1   = parseInt(element1.style.left);
-      let right1  = left1 + parseInt(element1.style.width);
-      let top1    = parseInt(element1.style.top);   
-      let bottom1 = top1   + parseInt(element1.style.height);
-      
-      let left2   = parseInt(element2.style.left);
-      let right2  = left2 + parseInt(element2.style.width);
-      let top2    = parseInt(element2.style.top);   
-      let bottom2 = top2   + parseInt(element2.style.height);
-      
-      if ((right1  >=  left2  ) &&      	   
-          (bottom1 >=  top2   ) &&
-          (left1   <=  right2 ) &&
-          (top1    <=  bottom2) ){
-          return true;
-      }
-      return false;
-   }
-   
-   document.onkeydown = function(event){
-     if (event.key === "w"){up = true;}
-     if (event.key === "s"){down = true;}
-     if (event.key === "a"){left = true;}
-     if (event.key === "d"){right = true;}
-   }
-   
-   document.onkeyup = function(event){
-     if (event.key === "w"){up = false;}
-     if (event.key === "s"){down = false;}
-     if (event.key === "a"){left = false;}
-     if (event.key === "d"){right = false;}
-   }
-   
-   setInterval(movement, 10);
-   
-   function movement(){
-     if (up) { playerY -= 3}
-     if (down) { playerY += 3}
-     if (left) { playerX -= 3}
-     if (right) { playerX += 3}
-     
-     if (playerX < 0){playerX = 0}
-     if (playerY < 0){playerY = 0}
-     
-     if (playerX > maxPlayerX - playerWidth){playerX = maxPlayerX - playerWidth} 
-     if (playerY > maxPlayerY - playerHeight){playerY = maxPlayerY - playerHeight}
+// Call once to initialize boundaries on load
+updateBoundaries(); 
+window.addEventListener('resize', updateBoundaries);
 
-     myPlayer.style.top = playerY + 'px';
-     myPlayer.style.left = playerX + 'px';
-     myCheckHit();
-   }
+// --- 3. Collision Function ---
+function myHitOther(my1, my2){
+    const element1 = document.getElementById(my1);
+    const element2 = document.getElementById(my2);
 
-   function myCheckHit(){
+    if (!element1 || !element2) {
+        return false;
+    }
+    
+    let left1   = parseInt(element1.style.left);
+    let right1  = left1 + parseInt(element1.style.width);
+    let top1    = parseInt(element1.style.top);    
+    let bottom1 = top1    + parseInt(element1.style.height);
+    
+    let left2   = parseInt(element2.style.left);
+    let right2  = left2 + parseInt(element2.style.width);
+    let top2    = parseInt(element2.style.top);    
+    let bottom2 = top2    + parseInt(element2.style.height);
+    
+    if ((right1  >=  left2  ) &&           
+        (bottom1 >=  top2   ) &&
+        (left1   <=  right2 ) &&
+        (top1    <=  bottom2) ){
+        return true;
+    }
+    return false;
+}
 
-      if ( myHitOther('myPlayer','myImg02') ){
-         myPlayer.style.left = '20px';
-      }   
-      
-      if ( myHitOther('myPlayer','myImg03') ){
-         myPlayer.style.left = '20px';
-      }   
-      
-      if ( myHitOther('myPlayer','myWinArea') ){
-         myPlayer.style.left = '20px';
-         location = 'https://nolan-b-mss.github.io/personal-use-nolan/public/undertale-test-05.html';
-      }
-   }
+// --- 4. Input Handlers ---
+document.onkeydown = function(event){
+   if (event.key === "w"){up = true;}
+   if (event.key === "s"){down = true;}
+   if (event.key === "a"){left = true;}
+   if (event.key === "d"){right = true;}
+}
+
+document.onkeyup = function(event){
+   if (event.key === "w"){up = false;}
+   if (event.key === "s"){down = false;}
+   if (event.key === "a"){left = false;}
+   if (event.key === "d"){right = false;}
+}
+
+// --- 5. Game Loop and Movement ---
+function movement(){
+    if (up) { playerY -= 3}
+    if (down) { playerY += 3}
+    if (left) { playerX -= 3}
+    if (right) { playerX += 3}
+    
+    // Boundary Checks (using correct maxPlayerX/Y)
+    if (playerX < 0){playerX = 0}
+    if (playerY < 0){playerY = 0}
+    
+    if (playerX > maxPlayerX){playerX = maxPlayerX}
+    if (playerY > maxPlayerY){playerY = maxPlayerY}
+
+    myPlayer.style.top = playerY + 'px';
+    myPlayer.style.left = playerX + 'px';
+    myCheckHit();
+}
+
+// Start the game loop
+setInterval(movement, 10);
+
+// --- 6. Collision Response ---
+function myCheckHit(){
+
+    if ( myHitOther('myPlayer','myImg02') || myHitOther('myPlayer','myImg03') ){
+        // Block collision: Reset X/Y variables and style to the start position (50, 190)
+        playerX = 50; 
+        playerY = 190;
+        myPlayer.style.left = playerX + 'px';
+        myPlayer.style.top = playerY + 'px';
+    }   
+    
+    if ( myHitOther('myPlayer','myWinArea') ){
+        // Win condition: Redirect without unnecessary style change
+        location.href = 'https://nolan-b-mss.github.io/personal-use-nolan/public/undertale-test-05.html';
+    }
+}
 </script>
 
 </body>
 </html>
-
