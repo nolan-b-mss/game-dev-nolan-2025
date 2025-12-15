@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Dynamic Maze Final Challenge</title>
+    <title>Dynamic Maze Final Challenge - FIXED PUNISHMENT</title>
     <style>
         body {
             background-color: black;
@@ -11,18 +11,17 @@
         .game-object {
             position: absolute;
         }
-        /* Obstacle styles: full height of the maze walls */
         .blue-obstacle {
             background-color: blue;
             width: 30px; 
-            height: 500px; /* Spans full height (550 - 50 = 500) */
+            height: 500px; 
             position: absolute;
             top: 50px; 
         }
         .orange-obstacle {
             background-color: orange;
             width: 30px;
-            height: 500px; /* Spans full height */
+            height: 500px; 
             position: absolute;
             top: 50px; 
         }
@@ -42,17 +41,16 @@
 <img id="wall-bottom" src="blockImage.png" class="game-object" style="width:1000px; height:10px; left: 0px; top: 550px;">
 <img id="wall-left" src="blockImage.png" class="game-object" style="width:10px; height:500px; left: 0px; top: 50px;">
 <img id="wall-right" src="blockImage.png" class="game-object" style="width:10px; height:500px; left: 990px; top: 50px;">
-
 <img id="wall-v1" src="blockImage.png" class="game-object" style="width:10px; height:300px; left: 200px; top: 50px;">
 <img id="wall-v2" src="blockImage.png" class="game-object" style="width:10px; height:200px; left: 450px; top: 350px;">
 <img id="wall-v3" src="blockImage.png" class="game-object" style="width:10px; height:200px; left: 800px; top: 350px;">
 <img id="wall-v4" src="blockImage.png" class="game-object" style="width:10px; height:100px; left: 550px; top: 50px;">
-
 <img id="wall-h1" src="blockImage.png" class="game-object" style="width:200px; height:10px; left: 200px; top: 350px;">
 <img id="wall-h2" src="blockImage.png" class="game-object" style="width:100px; height:10px; left: 550px; top: 150px;">
 <img id="wall-h3" src="blockImage.png" class="game-object" style="width:100px; height:10px; left: 800px; top: 350px;">
 <img id="wall-h4" src="blockImage.png" class="game-object" style="width:150px; height:10px; left: 450px; top: 450px;">
 <img id="wall-h5" src="blockImage.png" class="game-object" style="width:150px; height:10px; left: 700px; top: 250px;">
+
 <script>
 // --- 1. Variable Initialization ---
 const myPlayer = document.getElementById("myPlayer");
@@ -76,8 +74,7 @@ let left = false;
 let down = false;
 let right = false;
 
-// Obstacle movement state
-let blueDirection = 1; // 1 for right, -1 for left
+let blueDirection = 1; 
 
 const mazeWalls = [
     'wall-top', 'wall-bottom', 'wall-left', 'wall-right',
@@ -85,25 +82,21 @@ const mazeWalls = [
     'wall-h1', 'wall-h2', 'wall-h3', 'wall-h4', 'wall-h5'
 ];
 
-// --- 2. Boundary Management ---
+// --- 2. Boundary Management & Collision Function (Unchanged) ---
 function updateBoundaries(){
     maxPlayerX = window.innerWidth - playerWidth;
     maxPlayerY = window.innerHeight - playerHeight;
 }
-
 updateBoundaries(); 
 window.addEventListener('resize', updateBoundaries);
 
-// --- 3. Collision Function (AABB) ---
 function myHitOther(my1, my2){
     const element1 = document.getElementById(my1);
     const element2 = document.getElementById(my2);
-
     if (!element1 || !element2) {
         return false;
     }
     
-    // Get numeric coordinates (parsing inline style for simplicity)
     let left1   = parseInt(element1.style.left);
     let right1  = left1 + parseInt(element1.style.width);
     let top1    = parseInt(element1.style.top);    
@@ -114,56 +107,48 @@ function myHitOther(my1, my2){
     let top2    = parseInt(element2.style.top);    
     let bottom2 = top2    + parseInt(element2.style.height);
     
-    // Standard AABB collision check
-    if ((right1  >=  left2  ) &&           
-        (bottom1 >=  top2   ) &&
-        (left1   <=  right2 ) &&
-        (top1    <=  bottom2) ){
+    if ((right1  >=  left2  ) && (bottom1 >=  top2   ) &&
+        (left1   <=  right2 ) && (top1    <=  bottom2) ){
         return true;
     }
     return false;
 }
 
-// --- 4. Input Handlers ---
-document.onkeydown = function(event){
-   if (event.key === "w"){up = true;}
-   if (event.key === "s"){down = true;}
-   if (event.key === "a"){left = true;}
-   if (event.key === "d"){right = true;}
+// --- NEW HELPER FUNCTION: Teleport Player to Start ---
+function resetPlayer() {
+    // Reset internal variables
+    playerX = START_X; 
+    playerY = START_Y;
+    prevPlayerX = START_X; 
+    prevPlayerY = START_Y; 
+    
+    // Update style immediately
+    myPlayer.style.left = playerX + 'px';
+    myPlayer.style.top = playerY + 'px';
+
+    // Optional: brief visual flash for confirmation
+    myPlayer.style.opacity = 0.5;
+    setTimeout(() => {
+        myPlayer.style.opacity = 1;
+    }, 100);
 }
 
-document.onkeyup = function(event){
-   if (event.key === "w"){up = false;}
-   if (event.key === "s"){down = false;}
-   if (event.key === "a"){left = false;}
-   if (event.key === "d"){right = false;}
-}
 
-// --- Obstacle Movement Logic ---
+// --- Obstacle Movement Logic (Unchanged) ---
 function obstacleMovement() {
-    // Blue Obstacle (Horizontal, moves between X=250 and X=500)
     let blueX = parseInt(blueObstacle.style.left);
     blueX += 2 * blueDirection;
-    
     if (blueX > 500) { blueDirection = -1; }
     if (blueX < 250) { blueDirection = 1; }
-    
     blueObstacle.style.left = blueX + 'px';
-
-    // Orange Obstacle is static.
 }
 
-// --- Obstacle Collision Checks (Punishment: Teleport to Start) ---
+// --- Obstacle Collision Checks (Now uses resetPlayer helper) ---
 
 function checkHitBlue(){
-    // BLUE: Must stay still! Resets if player is moving during collision.
     if (myHitOther('myPlayer', 'blueObstacle')) {
         if (up || down || left || right) {
-            // Teleport to start
-            playerX = START_X; 
-            playerY = START_Y;
-            myPlayer.style.left = playerX + 'px';
-            myPlayer.style.top = playerY + 'px';
+            resetPlayer(); // Teleport
             return true;
         }
     }
@@ -171,14 +156,9 @@ function checkHitBlue(){
 }
 
 function checkHitOrange(){
-    // ORANGE: Must keep moving! Resets if player is stationary during collision.
     if (myHitOther('myPlayer', 'orangeObstacle')) {
         if (!up && !down && !left && !right) {
-            // Teleport to start
-            playerX = START_X; 
-            playerY = START_Y;
-            myPlayer.style.left = playerX + 'px';
-            myPlayer.style.top = playerY + 'px';
+            resetPlayer(); // Teleport
             return true;
         }
     }
@@ -186,7 +166,7 @@ function checkHitOrange(){
 }
 
 
-// --- Collision Checks for Sliding (Wall Collision) ---
+// --- Wall Collision Checks (Unchanged) ---
 function checkHitWallX(){
     for (const wallId of mazeWalls) {
         if (myHitOther('myPlayer', wallId)) {
@@ -209,7 +189,7 @@ function checkHitWallY(){
 
 // --- 5. Game Loop and Movement ---
 function movement(){
-    // 1. Check Obstacles FIRST (If rule is broken, teleport occurs and we exit the loop)
+    // 1. CRITICAL: Check Obstacles FIRST. If a reset occurs, RETURN immediately.
     if (checkHitBlue() || checkHitOrange()) {
         return; 
     }
