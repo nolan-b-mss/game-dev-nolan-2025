@@ -1,15 +1,18 @@
 
 
-<body id="myBody" style="background-repeat:repeat; background-size: 80%" background="myBackground01.jpg">
+<body id="myBody" style="color:black;overflow:hidden;">
 
-<h1 align=center><font color=red>Final Project Template Level 1</font></h1>
+<h1 align=center><font color=red>Tutorial for Nolan's Final Project</font></h1>
 
 
 <script>
-
    // global variables here
-   let myGlobalX = 0
-   let myClock
+let playerX = parseInt(document.getElementById("myPlayer").style.left
+let playerY = parseInt(document.getElementById("myPlayer").style.top
+let up = false;
+let left = false;
+let down = false;
+let right = false;
 
 
    // global functions here
@@ -29,25 +32,46 @@ function myHitOther(my1,my2){
        return true
    }
 }
-
-
+    document.onkeydown = function(event){
+      if (event.key === "w"){up = true;}
+      if (event.key === "s"){down = true;}
+      if (event.key === "a"){left = true;}
+      if (event.key === "d"){right = true;}
+    }
+    document.onkeyup = function(event){
+      if (event.key === "w"){up = false;}
+      if (event.key === "s"){down = false;}
+      if (event.key === "a"){left = false;}
+      if (event.key === "d"){right = false;}
+    }
+   setInterval(movement, 10)
+    function movement(){
+     if (up) { playerY -= 3}
+     if (down) { playerY += 3}
+     if (left) { playerX -= 3}
+     if (right) { playerX += 3}
+     if (playerX < 0){playerX = 0}
+     if (playerY < 0){playerY = 0}
+     myPlayer.style.top = playerY + 'px'
+     myPlayer.style.left = playerX + 'px'
+     myCheckHit()
+    }
 function myCheckHit(){
 
-   if ( myHitOther('myPlayer01','myImg02') ){
-      document.getElementById('myPlayer01').style.left = '20px'
+   if ( myHitOther('myPlayer','myImg02') ){
+      document.getElementById('myPlayer').style.left = '20px'
    }   
    
-   if ( myHitOther('myPlayer01','myImg03') ){
-      document.getElementById('myPlayer01').style.left = '20px'
+   if ( myHitOther('myPlayer','myImg03') ){
+      document.getElementById('myPlayer').style.left = '20px'
    }   
    
 
 
    // YOU WIN and go to next level!
 
-   if ( myHitOther('myPlayer01','myWinArea') ){
-       alert('You Win, now go to the next level')
-      document.getElementById('myPlayer01').style.left = '20px'
+   if ( myHitOther('myPlayer','myWinArea') ){
+      document.getElementById('myPlayer').style.left = '20px'
       location = 'https://nolan-b-mss.github.io/personal-use-nolan/public/undertale-test-05.html'
    }
 
@@ -61,37 +85,23 @@ function myCheckHit(){
 
 
 
-<input type=button value="Auto Background Left" onclick="{
-  clearInterval(myClock)
-  let myTemp = '100px 0px'
-  myClock = setInterval(function(){
-      myGlobalX -= 5
-      myTemp =  myGlobalX + 'px 0px'
-      document.getElementById('myBody').style.backgroundPosition = myTemp
-  }, 100)
-    
-}">
+
 
 
 <input type=button value="Right" onTouchStart="{this.click(); event.preventDefault();}" onclick="{
-  document.getElementById('myPlayer01').style.left = parseInt(document.getElementById('myPlayer01').style.left) + 10 + 'px'
+  document.getElementById('myPlayer').style.left = parseInt(document.getElementById('myPlayer').style.left) + 10 + 'px'
   myCheckHit()     // checks for all collisions
 }">
 
 <input type=button value="Down" onTouchStart="{this.click(); event.preventDefault();}" onclick="{
-  document.getElementById('myPlayer01').style.top = parseInt(document.getElementById('myPlayer01').style.top) + 10 + 'px'
+  document.getElementById('myPlayer').style.top = parseInt(document.getElementById('myPlayer').style.top) + 10 + 'px'
   myCheckHit()     // checks for all collisions
 }"><br><br>
 
 
 
 
-<img id="myPlayer01" src="myPlayer.png"  style="position:absolute; width:32px; height:32px; left: 50px; top:190px;">
+<img id="myPlayer" src="myPlayer.png"  style="position:absolute; width:32px; height:32px; left: 50px; top:190px;">
 <img id="myImg02" src="blockImage.png"  style="position:absolute; width:10px; height:200px; left:350px; top:90px;">
 <img id="myImg03" src="blockImage.png"  style="position:absolute; width:200px; height:10px; left:500px; top:400px;">
 <img id="myWinArea" src="myWinArea.gif"  style="position:absolute; width:100px; height:80px; left:800px; top:400px;">
-
-
-
-
-
