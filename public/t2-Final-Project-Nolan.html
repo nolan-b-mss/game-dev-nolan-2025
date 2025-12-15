@@ -33,24 +33,22 @@ function myHitOther(my1,my2){
 
 function myCheckHit(){
 
-   if ( myHitOther('myImg01','myImg02') ){
-       //alert('you lose')
-      document.getElementById('myImg01').style.left = '20px'
+   if ( myHitOther('myPlayer01','myImg02') ){
+      document.getElementById('myPlayer01').style.left = '20px'
    }   
    
-   if ( myHitOther('myImg01','myImg03') ){
-       //alert('you lose')
-      document.getElementById('myImg01').style.left = '20px'
+   if ( myHitOther('myPlayer01','myImg03') ){
+      document.getElementById('myPlayer01').style.left = '20px'
    }   
    
 
 
    // YOU WIN and go to next level!
 
-   if ( myHitOther('myImg01','myImg04') ){
+   if ( myHitOther('myPlayer01','myWinArea') ){
        alert('You Win, now go to the next level')
-      document.getElementById('myImg01').style.left = '20px'
-      location = 'https://www.google.ca'
+      document.getElementById('myPlayer01').style.left = '20px'
+      location = 'https://nolan-b-mss.github.io/personal-use-nolan/public/undertale-test-05.html'
    }
 
    // more if statements here
@@ -76,22 +74,23 @@ function myCheckHit(){
 
 
 <input type=button value="Right" onTouchStart="{this.click(); event.preventDefault();}" onclick="{
-  document.getElementById('myImg01').style.left = parseInt(document.getElementById('myImg01').style.left) + 10 + 'px'
+  document.getElementById('myPlayer01').style.left = parseInt(document.getElementById('myPlayer01').style.left) + 10 + 'px'
   myCheckHit()     // checks for all collisions
 }">
 
 <input type=button value="Down" onTouchStart="{this.click(); event.preventDefault();}" onclick="{
-  document.getElementById('myImg01').style.top = parseInt(document.getElementById('myImg01').style.top) + 10 + 'px'
+  document.getElementById('myPlayer01').style.top = parseInt(document.getElementById('myPlayer01').style.top) + 10 + 'px'
   myCheckHit()     // checks for all collisions
 }"><br><br>
 
 
 
 
-<img id="myImg01" src="myImgNew.jpg"  style="position:absolute; width:100px; height:80px; left: 50px; top:190px;">
-<img id="myImg02" src="myImgNew.jpg"  style="position:absolute; width:10px; height:200px; left:350px; top:90px;">
-<img id="myImg03" src="myImgNew.jpg"  style="position:absolute; width:200px; height:10px; left:500px; top:400px;">
-<img id="myImg04" src="myImgNew.jpg"  style="position:absolute; width:100px; height:80px; left:800px; top:400px;">
+<img id="myPlayer01" src="myPlayer.png"  style="position:absolute; width:32px; height:32px; left: 50px; top:190px;">
+<img id="myImg02" src="blockImage.png"  style="position:absolute; width:10px; height:200px; left:350px; top:90px;">
+<img id="myImg03" src="blockImage.png"  style="position:absolute; width:200px; height:10px; left:500px; top:400px;">
+<img id="myWinArea" src="myWinArea.png"  style="position:absolute; width:100px; height:80px; left:800px; top:400px;">
+
 
 
 
