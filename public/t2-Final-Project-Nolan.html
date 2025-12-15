@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Maze Tutorial for Nolan's Final Project</title>
+    <title>Fixed Maze Tutorial for Nolan's Final Project</title>
     <style>
         body {
             background-color: black;
@@ -15,7 +15,7 @@
 </head>
 <body id="myBody">
 
-<h1 style="text-align: center; color: red;">Maze Tutorial for Nolan's Final Project</h1>
+<h1 style="text-align: center; color: red;">Fixed Maze Tutorial for Nolan's Final Project</h1>
 
 <img id="myPlayer" src="myPlayer.png" class="game-object" style="width:32px; height:32px; left: 50px; top:190px;">
 <img id="myWinArea" src="myWinArea.gif" class="game-object" style="width:100px; height:80px; left: 880px; top: 100px;">
@@ -24,7 +24,10 @@
 <img id="wall-bottom" src="blockImage.png" class="game-object" style="width:1000px; height:10px; left: 0px; top: 550px;">
 <img id="wall-left" src="blockImage.png" class="game-object" style="width:10px; height:500px; left: 0px; top: 50px;">
 <img id="wall-right" src="blockImage.png" class="game-object" style="width:10px; height:500px; left: 990px; top: 50px;">
-<img id="wall-v01" src="blockImage.png" class="game-object" style="width:10px; height:200px; left: 200px; top: 50px;">
+
+<img id="wall-v01a" src="blockImage.png" class="game-object" style="width:10px; height:100px; left: 200px; top: 50px;">
+<img id="wall-v01b" src="blockImage.png" class="game-object" style="width:10px; height:100px; left: 200px; top: 250px;">
+
 <img id="wall-v02" src="blockImage.png" class="game-object" style="width:10px; height:300px; left: 400px; top: 250px;">
 <img id="wall-v03" src="blockImage.png" class="game-object" style="width:10px; height:150px; left: 600px; top: 50px;">
 <img id="wall-v04" src="blockImage.png" class="game-object" style="width:10px; height:150px; left: 800px; top: 300px;">
@@ -38,8 +41,8 @@ const playerWidth = 32;
 const playerHeight = 32;
 let playerX = parseInt(myPlayer.style.left) || 0;
 let playerY = parseInt(myPlayer.style.top) || 0;
-let prevPlayerX = playerX; // NEW: Store last safe X
-let prevPlayerY = playerY; // NEW: Store last safe Y
+let prevPlayerX = playerX; 
+let prevPlayerY = playerY; 
 let maxPlayerX = 0;
 let maxPlayerY = 0;
 let up = false;
@@ -47,9 +50,10 @@ let left = false;
 let down = false;
 let right = false;
 
+// Updated wall list to include the new split walls
 const mazeWalls = [
     'wall-top', 'wall-bottom', 'wall-left', 'wall-right',
-    'wall-v01', 'wall-v02', 'wall-v03', 'wall-v04',
+    'wall-v01a', 'wall-v01b', 'wall-v02', 'wall-v03', 'wall-v04',
     'wall-h01', 'wall-h02', 'wall-h03'
 ];
 
@@ -105,50 +109,63 @@ document.onkeyup = function(event){
    if (event.key === "d"){right = false;}
 }
 
+// --- NEW: Separate Collision Checks for Sliding ---
+function checkHitX(){
+    for (const wallId of mazeWalls) {
+        if (myHitOther('myPlayer', wallId)) {
+            playerX = prevPlayerX; // ONLY revert X position
+            myPlayer.style.left = playerX + 'px';
+            return; 
+        }
+    }
+}
+
+function checkHitY(){
+    for (const wallId of mazeWalls) {
+        if (myHitOther('myPlayer', wallId)) {
+            playerY = prevPlayerY; // ONLY revert Y position
+            myPlayer.style.top = playerY + 'px';
+            return; 
+        }
+    }
+}
+
 // --- 5. Game Loop and Movement ---
 function movement(){
-    // FIX: Store the current (safe) position before attempting a move
     prevPlayerX = playerX;
     prevPlayerY = playerY;
-    
-    if (up) { playerY -= 3}
-    if (down) { playerY += 3}
+
+    // 1. Apply X Movement
     if (left) { playerX -= 3}
     if (right) { playerX += 3}
     
+    // X Boundary Check and Style Update
     if (playerX < 0){playerX = 0}
-    if (playerY < 0){playerY = 0}
-    
     if (playerX > maxPlayerX){playerX = maxPlayerX}
-    if (playerY > maxPlayerY){playerY = maxPlayerY}
-
-    myPlayer.style.top = playerY + 'px';
     myPlayer.style.left = playerX + 'px';
-    myCheckHit();
-}
-
-setInterval(movement, 10);
-
-// --- 6. Collision Response ---
-function myCheckHit(){
-
-    // Check collision with any wall
-    for (const wallId of mazeWalls) {
-        if (myHitOther('myPlayer', wallId)) {
-            // FIX: Revert player to the last safe position (prevents sticky wall effect)
-            playerX = prevPlayerX; 
-            playerY = prevPlayerY;
-            myPlayer.style.left = playerX + 'px';
-            myPlayer.style.top = playerY + 'px';
-            return; // Stop checking after the first hit
-        }
-    }
     
-    // Check win condition
+    // X Collision Check (only reverts X if hit)
+    checkHitX();
+
+    // 2. Apply Y Movement
+    if (up) { playerY -= 3}
+    if (down) { playerY += 3}
+
+    // Y Boundary Check and Style Update
+    if (playerY < 0){playerY = 0}
+    if (playerY > maxPlayerY){playerY = maxPlayerY}
+    myPlayer.style.top = playerY + 'px';
+
+    // Y Collision Check (only reverts Y if hit)
+    checkHitY();
+    
+    // 3. Check Win Condition
     if ( myHitOther('myPlayer','myWinArea') ){
         location.href = 'https://nolan-b-mss.github.io/personal-use-nolan/public/undertale-test-05.html';
     }
 }
+
+setInterval(movement, 10);
 </script>
 
 </body>
