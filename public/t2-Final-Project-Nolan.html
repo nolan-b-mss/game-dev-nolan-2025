@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Fixed Maze Tutorial for Nolan's Final Project</title>
+    <title>Dynamic Maze for Nolan's Final Project</title>
     <style>
         body {
             background-color: black;
@@ -11,50 +11,84 @@
         .game-object {
             position: absolute;
         }
+        /* New obstacle styles for clear distinction */
+        .blue-obstacle {
+            background-color: blue;
+            width: 32px; /* Same size as player for easy collision */
+            height: 32px;
+            position: absolute;
+        }
+        .orange-obstacle {
+            background-color: orange;
+            width: 32px;
+            height: 32px;
+            position: absolute;
+        }
     </style>
 </head>
 <body id="myBody">
 
-<h1 style="text-align: center; color: red;">Fixed Maze Tutorial for Nolan's Final Project</h1>
+<h1 style="text-align: center; color: red;">Dynamic Maze Challenge</h1>
 
 <img id="myPlayer" src="myPlayer.png" class="game-object" style="width:32px; height:32px; left: 50px; top:190px;">
 <img id="myWinArea" src="myWinArea.gif" class="game-object" style="width:100px; height:80px; left: 880px; top: 100px;">
+
+<div id="blueObstacle" class="blue-obstacle game-object" style="left: 300px; top: 120px;"></div>
+<div id="orangeObstacle" class="orange-obstacle game-object" style="left: 600px; top: 400px;"></div>
 
 <img id="wall-top" src="blockImage.png" class="game-object" style="width:1000px; height:10px; left: 0px; top: 50px;">
 <img id="wall-bottom" src="blockImage.png" class="game-object" style="width:1000px; height:10px; left: 0px; top: 550px;">
 <img id="wall-left" src="blockImage.png" class="game-object" style="width:10px; height:500px; left: 0px; top: 50px;">
 <img id="wall-right" src="blockImage.png" class="game-object" style="width:10px; height:500px; left: 990px; top: 50px;">
 
-<img id="wall-v01a" src="blockImage.png" class="game-object" style="width:10px; height:100px; left: 200px; top: 50px;">
-<img id="wall-v01b" src="blockImage.png" class="game-object" style="width:10px; height:100px; left: 200px; top: 250px;">
+<img id="wall-a1" src="blockImage.png" class="game-object" style="width:10px; height:100px; left: 150px; top: 50px;">
+<img id="wall-a2" src="blockImage.png" class="game-object" style="width:10px; height:200px; left: 150px; top: 350px;">
+<img id="wall-a3" src="blockImage.png" class="game-object" style="width:150px; height:10px; left: 150px; top: 350px;">
 
-<img id="wall-v02" src="blockImage.png" class="game-object" style="width:10px; height:300px; left: 400px; top: 250px;">
-<img id="wall-v03" src="blockImage.png" class="game-object" style="width:10px; height:150px; left: 600px; top: 50px;">
-<img id="wall-v04" src="blockImage.png" class="game-object" style="width:10px; height:150px; left: 800px; top: 300px;">
-<img id="wall-h01" src="blockImage.png" class="game-object" style="width:300px; height:10px; left: 100px; top: 350px;">
-<img id="wall-h02" src="blockImage.png" class="game-object" style="width:400px; height:10px; left: 600px; top: 200px;">
-<img id="wall-h03" src="blockImage.png" class="game-object" style="width:200px; height:10px; left: 400px; top: 450px;">
+<img id="wall-b1" src="blockImage.png" class="game-object" style="width:300px; height:10px; left: 160px; top: 250px;">
+<img id="wall-b2" src="blockImage.png" class="game-object" style="width:10px; height:100px; left: 450px; top: 50px;">
+
+<img id="wall-c1" src="blockImage.png" class="game-object" style="width:10px; height:200px; left: 550px; top: 250px;">
+<img id="wall-c2" src="blockImage.png" class="game-object" style="width:150px; height:10px; left: 450px; top: 400px;">
+
+<img id="wall-d1" src="blockImage.png" class="game-object" style="width:10px; height:100px; left: 700px; top: 50px;">
+<img id="wall-d2" src="blockImage.png" class="game-object" style="width:300px; height:10px; left: 550px; top: 500px;">
+<img id="wall-d3" src="blockImage.png" class="game-object" style="width:10px; height:150px; left: 700px; top: 350px;">
+
+<img id="wall-e1" src="blockImage.png" class="game-object" style="width:100px; height:10px; left: 790px; top: 150px;">
+
+
 <script>
 // --- 1. Variable Initialization ---
 const myPlayer = document.getElementById("myPlayer");
+const blueObstacle = document.getElementById("blueObstacle");
+const orangeObstacle = document.getElementById("orangeObstacle");
 const playerWidth = 32;
 const playerHeight = 32;
+
 let playerX = parseInt(myPlayer.style.left) || 0;
 let playerY = parseInt(myPlayer.style.top) || 0;
 let prevPlayerX = playerX; 
 let prevPlayerY = playerY; 
 let maxPlayerX = 0;
 let maxPlayerY = 0;
+
 let up = false;
 let left = false;
 let down = false;
 let right = false;
 
-// Updated wall list to include the new split walls
+// Obstacle movement state
+let blueDirection = 1; // 1 for right, -1 for left
+let orangeDirection = 1; // 1 for down, -1 for up
+
 const mazeWalls = [
     'wall-top', 'wall-bottom', 'wall-left', 'wall-right',
-    'wall-v01a', 'wall-v01b', 'wall-v02', 'wall-v03', 'wall-v04',
-    'wall-h01', 'wall-h02', 'wall-h03'
+    'wall-a1', 'wall-a2', 'wall-a3',
+    'wall-b1', 'wall-b2',
+    'wall-c1', 'wall-c2',
+    'wall-d1', 'wall-d2', 'wall-d3',
+    'wall-e1'
 ];
 
 // --- 2. Boundary Management ---
@@ -75,6 +109,7 @@ function myHitOther(my1, my2){
         return false;
     }
     
+    // Get numeric coordinates
     let left1   = parseInt(element1.style.left);
     let right1  = left1 + parseInt(element1.style.width);
     let top1    = parseInt(element1.style.top);    
@@ -85,6 +120,7 @@ function myHitOther(my1, my2){
     let top2    = parseInt(element2.style.top);    
     let bottom2 = top2    + parseInt(element2.style.height);
     
+    // Standard AABB collision check
     if ((right1  >=  left2  ) &&           
         (bottom1 >=  top2   ) &&
         (left1   <=  right2 ) &&
@@ -94,7 +130,7 @@ function myHitOther(my1, my2){
     return false;
 }
 
-// --- 4. Input Handlers ---
+// --- 4. Input Handlers (Unchanged) ---
 document.onkeydown = function(event){
    if (event.key === "w"){up = true;}
    if (event.key === "s"){down = true;}
@@ -109,21 +145,77 @@ document.onkeyup = function(event){
    if (event.key === "d"){right = false;}
 }
 
-// --- NEW: Separate Collision Checks for Sliding ---
-function checkHitX(){
+// --- NEW: Obstacle Movement Logic ---
+
+function obstacleMovement() {
+    // 1. Blue Obstacle (Horizontal, between X=250 and X=500)
+    let blueX = parseInt(blueObstacle.style.left);
+    blueX += 2 * blueDirection;
+    
+    if (blueX > 500) { blueDirection = -1; }
+    if (blueX < 250) { blueDirection = 1; }
+    
+    blueObstacle.style.left = blueX + 'px';
+
+    // 2. Orange Obstacle (Vertical, between Y=100 and Y=450)
+    let orangeY = parseInt(orangeObstacle.style.top);
+    orangeY += 2 * orangeDirection;
+
+    if (orangeY > 450) { orangeDirection = -1; }
+    if (orangeY < 100) { orangeDirection = 1; }
+    
+    orangeObstacle.style.top = orangeY + 'px';
+}
+
+
+// --- NEW: Obstacle Collision Checks ---
+
+function checkHitBlue(){
+    // BLUE: Must stop moving! Check if player is attempting to move (any key pressed)
+    if (myHitOther('myPlayer', 'blueObstacle')) {
+        if (up || down || left || right) {
+            // Player is hit AND is moving -> Game Over (teleport to start)
+            playerX = 50; 
+            playerY = 190;
+            myPlayer.style.left = playerX + 'px';
+            myPlayer.style.top = playerY + 'px';
+            return true;
+        }
+    }
+    return false;
+}
+
+function checkHitOrange(){
+    // ORANGE: Must keep moving! Check if player is NOT attempting to move
+    if (myHitOther('myPlayer', 'orangeObstacle')) {
+        if (!up && !down && !left && !right) {
+            // Player is hit AND is stationary -> Game Over (teleport to start)
+            playerX = 50; 
+            playerY = 190;
+            myPlayer.style.left = playerX + 'px';
+            myPlayer.style.top = playerY + 'px';
+            return true;
+        }
+    }
+    return false;
+}
+
+
+// --- Collision Checks for Sliding (Unchanged from last fix) ---
+function checkHitWallX(){
     for (const wallId of mazeWalls) {
         if (myHitOther('myPlayer', wallId)) {
-            playerX = prevPlayerX; // ONLY revert X position
+            playerX = prevPlayerX; 
             myPlayer.style.left = playerX + 'px';
             return; 
         }
     }
 }
 
-function checkHitY(){
+function checkHitWallY(){
     for (const wallId of mazeWalls) {
         if (myHitOther('myPlayer', wallId)) {
-            playerY = prevPlayerY; // ONLY revert Y position
+            playerY = prevPlayerY; 
             myPlayer.style.top = playerY + 'px';
             return; 
         }
@@ -132,40 +224,43 @@ function checkHitY(){
 
 // --- 5. Game Loop and Movement ---
 function movement(){
+    // 1. Check Obstacles FIRST (They will teleport the player if the rule is broken)
+    if (checkHitBlue() || checkHitOrange()) {
+        // If an obstacle hit caused a teleport, stop the rest of the movement frame
+        return; 
+    }
+    
+    // Store safe position before attempting move
     prevPlayerX = playerX;
     prevPlayerY = playerY;
 
-    // 1. Apply X Movement
+    // 2. Player Movement and Wall Collision (X-axis)
     if (left) { playerX -= 3}
     if (right) { playerX += 3}
     
-    // X Boundary Check and Style Update
     if (playerX < 0){playerX = 0}
     if (playerX > maxPlayerX){playerX = maxPlayerX}
     myPlayer.style.left = playerX + 'px';
-    
-    // X Collision Check (only reverts X if hit)
-    checkHitX();
+    checkHitWallX();
 
-    // 2. Apply Y Movement
+    // 3. Player Movement and Wall Collision (Y-axis)
     if (up) { playerY -= 3}
     if (down) { playerY += 3}
 
-    // Y Boundary Check and Style Update
     if (playerY < 0){playerY = 0}
     if (playerY > maxPlayerY){playerY = maxPlayerY}
     myPlayer.style.top = playerY + 'px';
-
-    // Y Collision Check (only reverts Y if hit)
-    checkHitY();
+    checkHitWallY();
     
-    // 3. Check Win Condition
+    // 4. Check Win Condition
     if ( myHitOther('myPlayer','myWinArea') ){
         location.href = 'https://nolan-b-mss.github.io/personal-use-nolan/public/undertale-test-05.html';
     }
 }
 
+// Start game and obstacle loops
 setInterval(movement, 10);
+setInterval(obstacleMovement, 10);
 </script>
 
 </body>
