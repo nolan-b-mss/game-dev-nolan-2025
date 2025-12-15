@@ -11,21 +11,20 @@
         .game-object {
             position: absolute;
         }
-        /* Maze boundaries are 1000px wide and 500px tall (from top: 50px to top: 550px) */
-        
+        /* Obstacle styles: full height of the maze walls */
         .blue-obstacle {
             background-color: blue;
-            width: 30px; /* Width for visibility */
-            height: 500px; /* Spans full height of the maze walls (550 - 50 = 500) */
+            width: 30px; 
+            height: 500px; /* Spans full height (550 - 50 = 500) */
             position: absolute;
-            top: 50px; /* Starts at the inner top boundary */
+            top: 50px; 
         }
         .orange-obstacle {
             background-color: orange;
             width: 30px;
-            height: 500px; /* Spans full height of the maze walls */
+            height: 500px; /* Spans full height */
             position: absolute;
-            top: 50px; /* Starts at the inner top boundary */
+            top: 50px; 
         }
     </style>
 </head>
@@ -62,9 +61,11 @@ const orangeObstacle = document.getElementById("orangeObstacle");
 const playerWidth = 32;
 const playerHeight = 32;
 
-// Initial position from HTML
-let playerX = parseInt(myPlayer.style.left) || 0;
-let playerY = parseInt(myPlayer.style.top) || 0;
+const START_X = 100;
+const START_Y = 450;
+
+let playerX = START_X;
+let playerY = START_Y;
 let prevPlayerX = playerX; 
 let prevPlayerY = playerY; 
 let maxPlayerX = 0;
@@ -93,7 +94,7 @@ function updateBoundaries(){
 updateBoundaries(); 
 window.addEventListener('resize', updateBoundaries);
 
-// --- 3. Collision Function ---
+// --- 3. Collision Function (AABB) ---
 function myHitOther(my1, my2){
     const element1 = document.getElementById(my1);
     const element2 = document.getElementById(my2);
@@ -102,7 +103,7 @@ function myHitOther(my1, my2){
         return false;
     }
     
-    // Get numeric coordinates
+    // Get numeric coordinates (parsing inline style for simplicity)
     let left1   = parseInt(element1.style.left);
     let right1  = left1 + parseInt(element1.style.width);
     let top1    = parseInt(element1.style.top);    
@@ -123,7 +124,7 @@ function myHitOther(my1, my2){
     return false;
 }
 
-// --- 4. Input Handlers (Unchanged) ---
+// --- 4. Input Handlers ---
 document.onkeydown = function(event){
    if (event.key === "w"){up = true;}
    if (event.key === "s"){down = true;}
@@ -138,30 +139,29 @@ document.onkeyup = function(event){
    if (event.key === "d"){right = false;}
 }
 
-// --- NEW: Obstacle Movement Logic ---
+// --- Obstacle Movement Logic ---
 function obstacleMovement() {
-    // 1. Blue Obstacle (Horizontal, moves between X=250 and X=500)
+    // Blue Obstacle (Horizontal, moves between X=250 and X=500)
     let blueX = parseInt(blueObstacle.style.left);
     blueX += 2 * blueDirection;
     
-    // Blue obstacle boundary check (within the area of the maze)
     if (blueX > 500) { blueDirection = -1; }
     if (blueX < 250) { blueDirection = 1; }
     
     blueObstacle.style.left = blueX + 'px';
 
-    // 2. Orange Obstacle (Static) - No movement needed here
+    // Orange Obstacle is static.
 }
 
-// --- NEW: Obstacle Collision Checks ---
+// --- Obstacle Collision Checks (Punishment: Teleport to Start) ---
 
 function checkHitBlue(){
-    // BLUE: Must stop moving! Check if player is attempting to move (any key pressed)
+    // BLUE: Must stay still! Resets if player is moving during collision.
     if (myHitOther('myPlayer', 'blueObstacle')) {
         if (up || down || left || right) {
-            // Player is hit AND is moving -> Game Over (teleport to start)
-            playerX = 100; 
-            playerY = 450;
+            // Teleport to start
+            playerX = START_X; 
+            playerY = START_Y;
             myPlayer.style.left = playerX + 'px';
             myPlayer.style.top = playerY + 'px';
             return true;
@@ -171,12 +171,12 @@ function checkHitBlue(){
 }
 
 function checkHitOrange(){
-    // ORANGE: Must keep moving! Check if player is NOT attempting to move
+    // ORANGE: Must keep moving! Resets if player is stationary during collision.
     if (myHitOther('myPlayer', 'orangeObstacle')) {
         if (!up && !down && !left && !right) {
-            // Player is hit AND is stationary -> Game Over (teleport to start)
-            playerX = 100; 
-            playerY = 450;
+            // Teleport to start
+            playerX = START_X; 
+            playerY = START_Y;
             myPlayer.style.left = playerX + 'px';
             myPlayer.style.top = playerY + 'px';
             return true;
@@ -209,7 +209,7 @@ function checkHitWallY(){
 
 // --- 5. Game Loop and Movement ---
 function movement(){
-    // 1. Check Obstacles FIRST (They will teleport the player if the rule is broken)
+    // 1. Check Obstacles FIRST (If rule is broken, teleport occurs and we exit the loop)
     if (checkHitBlue() || checkHitOrange()) {
         return; 
     }
