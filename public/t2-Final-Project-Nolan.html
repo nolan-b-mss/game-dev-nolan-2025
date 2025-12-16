@@ -1,37 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Dynamic Maze Final Challenge - FIXED PUNISHMENT</title>
+    <title>Fixed Movement - Dynamic Maze</title>
     <style>
-        body {
-            background-color: black;
-            overflow: hidden;
-            margin: 0;
-        }
-        .game-object {
-            position: absolute;
-        }
-        .blue-obstacle {
-            background-color: blue;
-            width: 30px; 
-            height: 500px; 
-            position: absolute;
-            top: 50px; 
-        }
-        .orange-obstacle {
-            background-color: orange;
-            width: 30px;
-            height: 500px; 
-            position: absolute;
-            top: 50px; 
-        }
+        body { background-color: black; overflow: hidden; margin: 0; }
+        .game-object { position: absolute; }
+        .blue-obstacle { background-color: blue; width: 30px; height: 500px; position: absolute; top: 50px; }
+        .orange-obstacle { background-color: orange; width: 30px; height: 500px; position: absolute; top: 50px; }
     </style>
 </head>
 <body id="myBody">
 
-<h1 style="text-align: center; color: red;">Dynamic Maze Final Challenge</h1>
+<h1 style="text-align: center; color: red;">Maze Final</h1>
 
-<img id="myPlayer" src="myPlayer.png" class="game-object" style="width:32px; height:32px; left: 100px; top:450px;">
+<img id="myPlayer" src="myPlayer.png" class="game-object" style="width:32px; height:32px; left: 60px; top:480px;">
 <img id="myWinArea" src="myWinArea.gif" class="game-object" style="width:100px; height:100px; left: 880px; top: 80px;">
 
 <div id="blueObstacle" class="blue-obstacle game-object" style="left: 300px;"></div>
@@ -52,180 +34,83 @@
 <img id="wall-h5" src="blockImage.png" class="game-object" style="width:150px; height:10px; left: 700px; top: 250px;">
 
 <script>
-// --- 1. Variable Initialization ---
 const myPlayer = document.getElementById("myPlayer");
 const blueObstacle = document.getElementById("blueObstacle");
 const orangeObstacle = document.getElementById("orangeObstacle");
-const playerWidth = 32;
-const playerHeight = 32;
 
-const START_X = 100;
-const START_Y = 450;
+const START_X = 60;
+const START_Y = 480;
 
 let playerX = START_X;
 let playerY = START_Y;
 let prevPlayerX = playerX; 
-let prevPlayerY = playerY; 
-let maxPlayerX = 0;
-let maxPlayerY = 0;
+let prevPlayerY = playerY;
+let maxPlayerX = window.innerWidth - 32;
+let maxPlayerY = window.innerHeight - 32;
 
-let up = false;
-let left = false;
-let down = false;
-let right = false;
-
+let up = false, down = false, left = false, right = false;
 let blueDirection = 1; 
 
-const mazeWalls = [
-    'wall-top', 'wall-bottom', 'wall-left', 'wall-right',
-    'wall-v1', 'wall-v2', 'wall-v3', 'wall-v4',
-    'wall-h1', 'wall-h2', 'wall-h3', 'wall-h4', 'wall-h5'
-];
-
-// --- 2. Boundary Management & Collision Function (Unchanged) ---
-function updateBoundaries(){
-    maxPlayerX = window.innerWidth - playerWidth;
-    maxPlayerY = window.innerHeight - playerHeight;
-}
-updateBoundaries(); 
-window.addEventListener('resize', updateBoundaries);
+const mazeWalls = ['wall-top', 'wall-bottom', 'wall-left', 'wall-right', 'wall-v1', 'wall-v2', 'wall-v3', 'wall-v4', 'wall-h1', 'wall-h2', 'wall-h3', 'wall-h4', 'wall-h5'];
 
 function myHitOther(my1, my2){
-    const element1 = document.getElementById(my1);
-    const element2 = document.getElementById(my2);
-    if (!element1 || !element2) {
-        return false;
-    }
-    
-    let left1   = parseInt(element1.style.left);
-    let right1  = left1 + parseInt(element1.style.width);
-    let top1    = parseInt(element1.style.top);    
-    let bottom1 = top1    + parseInt(element1.style.height);
-    
-    let left2   = parseInt(element2.style.left);
-    let right2  = left2 + parseInt(element2.style.width);
-    let top2    = parseInt(element2.style.top);    
-    let bottom2 = top2    + parseInt(element2.style.height);
-    
-    if ((right1  >=  left2  ) && (bottom1 >=  top2   ) &&
-        (left1   <=  right2 ) && (top1    <=  bottom2) ){
-        return true;
-    }
-    return false;
+    const e1 = document.getElementById(my1), e2 = document.getElementById(my2);
+    if(!e1 || !e2) return false;
+    let r1 = e1.getBoundingClientRect(), r2 = e2.getBoundingClientRect();
+    return !(r1.right < r2.left || r1.left > r2.right || r1.bottom < r2.top || r1.top > r2.bottom);
 }
 
-// --- NEW HELPER FUNCTION: Teleport Player to Start ---
 function resetPlayer() {
-    // Reset internal variables
-    playerX = START_X; 
-    playerY = START_Y;
-    prevPlayerX = START_X; 
-    prevPlayerY = START_Y; 
-    
-    // Update style immediately
+    playerX = START_X; playerY = START_Y;
     myPlayer.style.left = playerX + 'px';
     myPlayer.style.top = playerY + 'px';
-
-    // Optional: brief visual flash for confirmation
-    myPlayer.style.opacity = 0.5;
-    setTimeout(() => {
-        myPlayer.style.opacity = 1;
-    }, 100);
 }
 
+document.onkeydown = (e) => {
+    if (e.key === "w") up = true; if (e.key === "s") down = true;
+    if (e.key === "a") left = true; if (e.key === "d") right = true;
+};
+document.onkeyup = (e) => {
+    if (e.key === "w") up = false; if (e.key === "s") down = false;
+    if (e.key === "a") left = false; if (e.key === "d") right = false;
+};
 
-// --- Obstacle Movement Logic (Unchanged) ---
 function obstacleMovement() {
-    let blueX = parseInt(blueObstacle.style.left);
-    blueX += 2 * blueDirection;
-    if (blueX > 500) { blueDirection = -1; }
-    if (blueX < 250) { blueDirection = 1; }
-    blueObstacle.style.left = blueX + 'px';
+    let bX = parseInt(blueObstacle.style.left) || 300;
+    bX += 2 * blueDirection;
+    if (bX > 500 || bX < 210) blueDirection *= -1;
+    blueObstacle.style.left = bX + 'px';
 }
 
-// --- Obstacle Collision Checks (Now uses resetPlayer helper) ---
-
-function checkHitBlue(){
-    if (myHitOther('myPlayer', 'blueObstacle')) {
-        if (up || down || left || right) {
-            resetPlayer(); // Teleport
-            return true;
-        }
-    }
+function checkObstacles() {
+    let isMoving = (up || down || left || right);
+    if (myHitOther('myPlayer', 'blueObstacle') && isMoving) { resetPlayer(); return true; }
+    if (myHitOther('myPlayer', 'orangeObstacle') && !isMoving) { resetPlayer(); return true; }
     return false;
 }
 
-function checkHitOrange(){
-    if (myHitOther('myPlayer', 'orangeObstacle')) {
-        if (!up && !down && !left && !right) {
-            resetPlayer(); // Teleport
-            return true;
-        }
-    }
-    return false;
-}
+function move() {
+    if (checkObstacles()) return;
+    prevPlayerX = playerX; prevPlayerY = playerY;
 
-
-// --- Wall Collision Checks (Unchanged) ---
-function checkHitWallX(){
-    for (const wallId of mazeWalls) {
-        if (myHitOther('myPlayer', wallId)) {
-            playerX = prevPlayerX; 
-            myPlayer.style.left = playerX + 'px';
-            return; 
-        }
-    }
-}
-
-function checkHitWallY(){
-    for (const wallId of mazeWalls) {
-        if (myHitOther('myPlayer', wallId)) {
-            playerY = prevPlayerY; 
-            myPlayer.style.top = playerY + 'px';
-            return; 
-        }
-    }
-}
-
-// --- 5. Game Loop and Movement ---
-function movement(){
-    // 1. CRITICAL: Check Obstacles FIRST. If a reset occurs, RETURN immediately.
-    if (checkHitBlue() || checkHitOrange()) {
-        return; 
-    }
-    
-    // Store safe position before attempting move
-    prevPlayerX = playerX;
-    prevPlayerY = playerY;
-
-    // 2. Player Movement and Wall Collision (X-axis)
-    if (left) { playerX -= 3}
-    if (right) { playerX += 3}
-    
-    if (playerX < 0){playerX = 0}
-    if (playerX > maxPlayerX){playerX = maxPlayerX}
+    if (left) playerX -= 3; if (right) playerX += 3;
+    playerX = Math.max(0, Math.min(playerX, maxPlayerX));
     myPlayer.style.left = playerX + 'px';
-    checkHitWallX();
+    for (let id of mazeWalls) if (myHitOther('myPlayer', id)) playerX = prevPlayerX;
+    myPlayer.style.left = playerX + 'px';
 
-    // 3. Player Movement and Wall Collision (Y-axis)
-    if (up) { playerY -= 3}
-    if (down) { playerY += 3}
-
-    if (playerY < 0){playerY = 0}
-    if (playerY > maxPlayerY){playerY = maxPlayerY}
+    if (up) playerY -= 3; if (down) playerY += 3;
+    playerY = Math.max(0, Math.min(playerY, maxPlayerY));
     myPlayer.style.top = playerY + 'px';
-    checkHitWallY();
-    
-    // 4. Check Win Condition
-    if ( myHitOther('myPlayer','myWinArea') ){
-        location.href = 'https://nolan-b-mss.github.io/personal-use-nolan/public/undertale-test-05.html';
-    }
+    for (let id of mazeWalls) if (myHitOther('myPlayer', id)) playerY = prevPlayerY;
+    myPlayer.style.top = playerY + 'px';
+
+    if (myHitOther('myPlayer','myWinArea')) location.href = 'https://nolan-b-mss.github.io/personal-use-nolan/public/undertale-test-05.html';
 }
 
-// Start game and obstacle loops
-setInterval(movement, 10);
+setInterval(move, 10);
 setInterval(obstacleMovement, 10);
+window.onresize = () => { maxPlayerX = window.innerWidth - 32; maxPlayerY = window.innerHeight - 32; };
 </script>
-
 </body>
 </html>
