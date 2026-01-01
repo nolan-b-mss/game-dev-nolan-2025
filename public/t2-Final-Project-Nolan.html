@@ -5,17 +5,12 @@
     <style>
         body { background-color: black; overflow: hidden; margin: 0; }
         .game-object { position: absolute; }
-        .blue-obstacle { background-color: skyblue; width: 30px; height: 500px; position: absolute; top: 50px; }
-        .orange-obstacle { background-color: orange; width: 30px; height: 500px; position: absolute; top: 50px; }
     </style>
 </head>
 <body id="myBody">
 
 <img id="myPlayer" src="myPlayer.png" class="game-object" style="width:32px; height:32px; left: 60px; top:480px;">
 <img id="myWinArea" src="myWinArea.gif" class="game-object" style="width:100px; height:100px; left: 880px; top: 80px;">
-
-<div id="blueObstacle" class="blue-obstacle game-object" style="left: 300px;"></div>
-<div id="orangeObstacle" class="orange-obstacle game-object" style="left: 650px;"></div>
 
 <img id="wall-top" src="blockImage.png" class="game-object" style="width:1000px; height:10px; left: 0px; top: 50px;">
 <img id="wall-bottom" src="blockImage.png" class="game-object" style="width:1000px; height:10px; left: 0px; top: 550px;">
@@ -33,8 +28,6 @@
 
 <script>
 const myPlayer = document.getElementById("myPlayer");
-const blueObstacle = document.getElementById("blueObstacle");
-const orangeObstacle = document.getElementById("orangeObstacle");
 
 const START_X = 60;
 const START_Y = 480;
@@ -46,8 +39,10 @@ let prevPlayerY = playerY;
 let maxPlayerX = window.innerWidth - 32;
 let maxPlayerY = window.innerHeight - 32;
 
-let up = false, down = false, left = false, right = false;
-let blueDirection = 1; 
+let up = false;
+let down = false;
+let left = false;
+let right = false;
 
 const mazeWalls = ['wall-top', 'wall-bottom', 'wall-left', 'wall-right', 'wall-v1', 'wall-v2', 'wall-v3', 'wall-v4', 'wall-h1', 'wall-h2', 'wall-h3', 'wall-h4', 'wall-h5'];
 
@@ -64,31 +59,20 @@ function resetPlayer() {
     myPlayer.style.top = playerY + 'px';
 }
 
-document.onkeydown = (e) => {
-    if (e.key === "w") up = true; if (e.key === "s") down = true;
-    if (e.key === "a") left = true; if (e.key === "d") right = true;
+document.onkeydown = (event) => {
+    if (event.key === "w") up = true; 
+    if (event.key === "s") down = true;
+    if (event.key === "a") left = true; 
+    if (event.key === "d") right = true;
 };
-document.onkeyup = (e) => {
-    if (e.key === "w") up = false; if (e.key === "s") down = false;
-    if (e.key === "a") left = false; if (e.key === "d") right = false;
+document.onkeyup = (event) => {
+    if (event.key === "w") up = false; 
+    if (event.key === "s") down = false;
+    if (event.key === "a") left = false; 
+    if (event.key === "d") right = false;
 };
-
-function obstacleMovement() {
-    let bX = parseInt(blueObstacle.style.left) || 300;
-    bX += 2 * blueDirection;
-    if (bX > 500 || bX < 210) blueDirection *= -1;
-    blueObstacle.style.left = bX + 'px';
-}
-
-function checkObstacles() {
-    let isMoving = (up || down || left || right);
-    if (myHitOther('myPlayer', 'blueObstacle') && isMoving) { resetPlayer(); return true; }
-    if (myHitOther('myPlayer', 'orangeObstacle') && !isMoving) { resetPlayer(); return true; }
-    return false;
-}
 
 function move() {
-    if (checkObstacles()) return;
     prevPlayerX = playerX; prevPlayerY = playerY;
 
     if (left) playerX -= 3; if (right) playerX += 3;
@@ -107,22 +91,12 @@ function move() {
 }
 
 setInterval(move, 10);
-setInterval(obstacleMovement, 10);
 window.onresize = () => { maxPlayerX = window.innerWidth - 32; maxPlayerY = window.innerHeight - 32; };
 </script>
+
+<br><br><br><br><br>
+<h1 style="text-align: center; color: white;">Level 1 for Nolan's Final Project</h1><br>
+<p style="text-align: center; color: white;">Navigate the maze to reach the goal!</p>
+<button style="display: block; margin: 0 auto;" onclick="{location.href ='https://nolan-b-mss.github.io/game-dev-nolan-2025/public/project-index.html'}">Shortcut Menu for Marking</button>
 </body>
 </html>
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-<h1 style="text-align: center; color: white;">(Tutorial level)Level 1 for Nolan's Final Project</h1><br>
-<p style="text-align: center; color: skyblue;">To get past BLUE obstacles, stay still!</p>
-<p style="text-align: center; color: orange;">To get past ORANGE obstacles, keep moving!</p>
-<p style="text-align: center; color: white;">Note: This uses the Maze Template, but I have made heavy changes to the template to produce this.</p>
-<button onclick="{location.href ='https://nolan-b-mss.github.io/game-dev-nolan-2025/public/project-index.html'}">Shortcut Menu for Marking</button>
-
-
-
-
-
-
-
-
