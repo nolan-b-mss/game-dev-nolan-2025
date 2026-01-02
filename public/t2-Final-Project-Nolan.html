@@ -87,7 +87,7 @@ function move() {
     for (let id of mazeWalls) if (myHitOther('myPlayer', id)) playerY = prevPlayerY;
     myPlayer.style.top = playerY + 'px';
 
-    if (myHitOther('myPlayer','myWinArea')) location.href = 'https://nolan-b-mss.github.io/personal-use-nolan/public/undertale-test-05.html';
+    if (myHitOther('myPlayer','myWinArea')) location.href = 'https://nolan-b-mss.github.io/personal-use-nolan/public/level2.html';
 }
 
 setInterval(move, 10);
@@ -100,4 +100,5 @@ window.onresize = () => { maxPlayerX = window.innerWidth - 32; maxPlayerY = wind
 <button style="display: block; margin: 0 auto;" onclick="{location.href ='https://nolan-b-mss.github.io/game-dev-nolan-2025/public/project-index.html'}">Shortcut Menu for Marking</button>
 </body>
 </html>
+
 
