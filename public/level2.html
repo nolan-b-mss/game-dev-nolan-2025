@@ -257,6 +257,15 @@ dMenuKeyDebounced = true;
 }
 if (event.key === "z" && !actionKeyDebounced || event.key === "Enter" && !actionKeyDebounced){actionKeyPressed = true; actionKeyDebounced = true;}
 if (event.key === "x" || event.key === "Shift" ){handleCancel();}
+if (event.ctrlKey && event.key === "q"){
+if (showDebug) {showDebug = false;}
+else if (!showDebug) {showDebug = true;}
+else {console.log ('ERROR: Failed to reveal debugMenu/debugElement;')}
+const debugElement = document.getElementById('debugMenu');
+if (showDebug) {
+debugElement.style.display = 'block';
+} else {debugElement.style.display = 'none';
+}
 }
 document.onkeyup = function(event){
 if (event.key === "w"){up = false; wMenuKeyDebounced = false;}
