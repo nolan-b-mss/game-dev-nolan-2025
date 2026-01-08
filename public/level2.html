@@ -270,6 +270,9 @@ debugElement.style.display = 'block';
 } else {debugElement.style.display = 'none';
 }
 }
+if (victory && event.key === "Enter") {
+location.href('level2.html'); 
+}
 }
 document.onkeyup = function(event){
 if (event.key === "w"){up = false; wMenuKeyDebounced = false;}
@@ -591,8 +594,11 @@ isActionActive = true;
 actionKeyPressed = false;
 if (currentMercyItem === 1){
 if (enemyMercy === 100) {
-writeText ("* You spared the enemy!<br>* You won!")
-setTimeout(() => {writeText ("* If/when there is a level 3, this is when you are sent to it.");}, 5000)
+writeText("* You spared the enemy!<br>* You won!");
+setTimeout(() => {
+isWinState = true;
+writeText("* You can press Enter to restart the battle :)");
+}, 5000); 
 }
 else {
 writeText ("* You spared the enemy!<br>* But it's name wasn't YELLOW...")
