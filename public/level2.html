@@ -278,7 +278,7 @@ if (event.key === "z" && actionKeyDebounced || event.key === "Enter" && actionKe
 function handleAction() {
 if (isActionActive) return;
 if (actionKeyPressed) {
-actionKeyPressed = false;
+actionKeyPressed = false; 
 if (isMenuPhase) {
 if (currentMenuItem === 1) {
 startAttackBar();
@@ -584,7 +584,7 @@ setTimeout(() => {writeText ("* If/when there is a level 3, this is when you are
 }
 else {
 writeText ("* You spared the enemy!<br>* But it's name wasn't YELLOW...")
-setTimeout(() => {nemyTurn();}, 7000)
+setTimeout(() => {startEnemyTurn();}, 7000)
 }
 }
 else if (currentMercyItem === 2){
