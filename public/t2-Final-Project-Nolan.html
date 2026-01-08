@@ -87,7 +87,7 @@ function move() {
     for (let id of mazeWalls) if (myHitOther('myPlayer', id)) playerY = prevPlayerY;
     myPlayer.style.top = playerY + 'px';
 
-    if (myHitOther('myPlayer','myWinArea')) location.href = 'https://nolan-b-mss.github.io/personal-use-nolan/public/level2.html';
+    if (myHitOther('myPlayer','myWinArea')) location.href = 'level2.html';
 }
 
 setInterval(move, 10);
@@ -98,10 +98,7 @@ window.onresize = () => { maxPlayerX = window.innerWidth - 32; maxPlayerY = wind
 <h1 style="text-align: center; color: white;">Level 1 for Nolan's Final Project</h1><br>
 <p style="text-align: center; color: white;">Navigate the maze using WASD to reach the goal!</p>
 <p style="text-align: center; color: white;">In level 2, you can use Z to interact and X to go back a step.</p>
-<button style="display: block; margin: 0 auto;" onclick="{location.href ='https://nolan-b-mss.github.io/game-dev-nolan-2025/public/project-index.html'}">Shortcut Menu for Marking</button>
+<p style="text-align: center; color: white;">This level uses your Maze template, I have just modified it heavily to suit my project.</p>
+<button style="display: block; margin: 0 auto;" onclick="{location.href ='project-index.html'}">Shortcut Menu for Marking</button>
 </body>
 </html>
-
-
-
-
