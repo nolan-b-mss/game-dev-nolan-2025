@@ -68,6 +68,7 @@ let isItemMenuPhase = false;
 let isActionActive = false;
 let isMercyChoice = false;
 let isEnemyTurn = false;
+let victory = false;
 let myHoriz;
 let myVerti;
 let up = false;
@@ -372,7 +373,6 @@ debugElement.innerHTML = `
 ---------------- <br>
 Menu Variables<br>
 IsTyping: ${isTyping}<br>
-EnemyDialogue: ${enemyDialogue}<br>
 ActionKeyPressed: ${actionKeyPressed}<br>
 MenuItem: ${currentMenuItem}<br>
 MenuPhase: ${isMenuPhase}<br>
@@ -386,13 +386,21 @@ MercyItem: ${currentMercyItem}<br>
 ActionActive: ${isActionActive}<br>
 EnemyTurn: ${isEnemyTurn}<br>
 ---------------- <br>
-Movement Variables<br>
+Player Variables<br>
 Up: ${up}<br>
 Left: ${left}<br>
 Down: ${down}<br>
 Right: ${right}<br>
 X: ${myHoriz}<br>
-Y: ${myVerti}
+Y: ${myVerti}<br>
+HP: ${playerHealth}<br>
+Maximum HP: ${maxHealth}<br>
+---------------- <br>
+Enemy Variables<br>
+Attack: ${enemyATK}<br>
+Defense: ${enemyDEF}<br>
+Mercy: ${enemyMercy}<br>
+EnemyDialogue: ${enemyDialogue}<br>
 `;
 }
 function updateUI() {
