@@ -29,7 +29,7 @@ body {height:100vh; margin: 0; background-color:black; position: relative; font-
 </div>
 <img src="sprites/soul-01.png" width="32" height="32" id="myPlayer01" style="position: absolute; left: 284px; top: 134px; opacity: 1.0; z-index: 100;">
 <div id="textBox">
-<img id="attackBar" src="sprites/attackbar.png" style="position: absolute; display: none; width: 14px; height: 200px; z-index: 10;">
+<img id="attackBar" src="sprites/attackbar.gif" style="position: absolute; display: none; width: 14px; height: 200px; z-index: 10;">
 <img id="attackZone" src= "sprites/attackzone.png" style="position: absolute; display: none; z-index: 5;">
 </div>
 <div id="hp-section">
@@ -565,7 +565,7 @@ enemyHealth -= damage;
 writeText(hitMessage);
 setTimeout(() => {
 if (enemyHealth <= 0) {victorySequence();}
-} else {
+else {
 startEnemyTurn();
 }
 }, 2000);
