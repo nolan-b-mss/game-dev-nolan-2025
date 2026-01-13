@@ -56,6 +56,7 @@ let menuBox = document.getElementById('menuBox');
 let playerElement = document.getElementById('myPlayer01');
 let enemy = document.getElementById('enemy');
 let attackBar = document.getElementById('attackBar');
+let attackZone = document.getElementById('attackZone');
 let maxHoriz = 568;
 let maxVerti = 268;
 let showDebug = false;
@@ -524,6 +525,7 @@ isAttacking = true;
 barPosition = 0;
 attackBar.style.left = '0px';
 attackBar.style.display = 'block';
+attazkZone.style.display = 'block';
 function moveBar() {
 if (!isAttacking){return;}
 barPosition += 5;
@@ -651,9 +653,12 @@ enemyDialogue = true;
 isActionActive = true;
 actionKeyPressed = false;
 if (currentMercyItem === 1){
-else {
-writeText ("* You spared the enemy!<br>* But it's name wasn't YELLOW...")
+if (enemyMercy < 100){
+writeText ("* You spared the enemy!<br>* But it's still willing to fight...")
 setTimeout(() => {startEnemyTurn();}, 7000)
+}
+else if (enemyMercy >= 100){
+victorySequence();
 }
 }
 else if (currentMercyItem === 2){
