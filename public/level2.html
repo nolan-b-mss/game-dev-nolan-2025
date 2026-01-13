@@ -29,6 +29,8 @@ body {height:100vh; margin: 0; background-color:black; position: relative; font-
 </div>
 <img src="sprites/soul-01.png" width="32" height="32" id="myPlayer01" style="position: absolute; left: 284px; top: 134px; opacity: 1.0; z-index: 100;">
 <div id="textBox">
+<img id="attackBar" src="sprites/attackbar.png" style="position: absolute; display: none; width: 14px; height: 200px; z-index: 10;">
+<img id="attackZone" src= "sprites/attackzone.png" style="position: absolute; display: none; z-index: 5;">
 </div>
 <div id="hp-section">
 <div id="lv-group">FRED   LV 1</div>  
@@ -53,6 +55,7 @@ let textBox = document.getElementById('textBox');
 let menuBox = document.getElementById('menuBox');
 let playerElement = document.getElementById('myPlayer01');
 let enemy = document.getElementById('enemy');
+let attackBar = document.getElementById('attackBar');
 let maxHoriz = 568;
 let maxVerti = 268;
 let showDebug = false;
@@ -63,6 +66,7 @@ let dMenuKeyDebounced = false;
 let actionKeyDebounced = false;
 let isTyping = false;
 let isMenuPhase = true;
+let isAttacking = false;
 let isActMenuPhase = false;
 let isTargettingAct = false;
 let isItemMenuPhase = false;
@@ -84,6 +88,7 @@ let actionKeyPressed = false;
 let maxHealth = 20;
 let playerHealth = 20;
 let inventory = ['Monster Candy','Monster Candy','Monster Candy','Monster Candy','Bandage']
+let enemyHealth = 20;
 let enemyATK = 10;
 let enemyDEF = 10;
 let enemyMercy = 0;
@@ -97,6 +102,7 @@ let bullets = [];
 let flySpawner;
 let boxLeft;
 let boxTop;
+let barPosition = 0;
 function writeText(dialogue, callback, index = 0) {
 if (index === 0) {
 if (isTyping) return;
@@ -512,7 +518,58 @@ writeText("* A Froggit appears!");
 }
 }
 }
-function startAttackBar() {}
+function startAttackBar() {
+const targetCenter = 184;
+isAttacking = true;
+barPosition = 0;
+attackBar.style.left = '0px';
+attackBar.style.display = 'block';
+function moveBar() {
+if (!isAttacking){return;}
+barPosition += 5;
+attackBar.style.left = barPosition + 'px';
+if (barPosition < 368) {
+requestAnimationFrame(moveBar);
+} else {
+handleHit(184);
+}
+}
+requestAnimationFrame(moveBar);
+}
+document.onkeydown = function(e) {
+if (e.key.toLowerCase() === 'z' && isAttacking) {
+isAttacking = false;
+let distance = Math.abs(barPosition - targetCenter);
+handleHit(distance);
+}
+};
+function handleHit(distance) {
+let damage = 0;
+let hitMessage = "";
+if (distance > 180) {
+hitMessage = "* Missed!";
+} else if (distance <= 5) {
+damage = 20;
+hitMessage = "* A PERFECT HIT! Dealt 20 damage!";
+} else if (distance <= 30) {
+damage = 10;
+hitMessage = "* A Great hit! Dealt 10 damage!";
+} else if (distance <= 80) {
+damage = 5;
+hitMessage = "* A Nice hit! Dealt 5 damage!";
+} else {
+damage = 2;
+hitMessage = "* A Poor hit! Dealt 2 damage!";
+}
+enemyHealth -= damage;
+writeText(hitMessage);
+setTimeout(() => {
+if (enemyHealth <= 0) {victorySequence();}
+} else {
+startEnemyTurn();
+}
+}, 2000);
+}
 function startActMenu() {
 updateActMenu();
 }
@@ -594,13 +651,6 @@ enemyDialogue = true;
 isActionActive = true;
 actionKeyPressed = false;
 if (currentMercyItem === 1){
-if (enemyMercy === 100) {
-writeText("* You spared the enemy!<br>* You won!");
-setTimeout(() => {
-victory = true;
-writeText("* You can press Enter to restart the battle :)");
-}, 5000); 
-}
 else {
 writeText ("* You spared the enemy!<br>* But it's name wasn't YELLOW...")
 setTimeout(() => {startEnemyTurn();}, 7000)
@@ -821,6 +871,24 @@ myHoriz = 190
 if (currentActItem === 4){
 myVerti = 763
 myHoriz = 667
+}
+}
+function victorySequence(){
+if (enemyMercy === 100) {
+enemy.style.opacity = 0.5;
+writeText("* You spared the enemy!<br>* You won!");
+setTimeout(() => {
+victory = true;
+writeText("* You can press Enter to restart the battle :)");
+}, 5000); 
+}
+else if (enemyHealth === 0) {
+enemy.style.opacity = 0;
+writeText("* You defeated the enemy!<br>* You won!");
+setTimeout(() => {
+victory = true;
+writeText("* You can press Enter to restart the battle :)");
+}, 5000); 
 }
 }
 updateMenu();
