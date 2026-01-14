@@ -29,9 +29,9 @@ body {height:100vh; margin: 0; background-color:black; position: relative; font-
 </div>
 <img src="sprites/soul-01.png" width="32" height="32" id="myPlayer01" style="position: absolute; left: 284px; top: 134px; opacity: 1.0; z-index: 100;">
 <div id="textBox">
+</div>
 <img id="attackBar" src="sprites/attackbar.gif" style="position: absolute; display: none; width: 14px; height: 200px; z-index: 10;">
 <img id="attackZone" src= "sprites/attackzone.png" style="position: absolute; display: none; z-index: 5;">
-</div>
 <div id="hp-section">
 <div id="lv-group">FRED  LV 1</div>  
 <div id="hp-display-group">
@@ -517,9 +517,12 @@ console.log('Attack Bar Started!')
 textBox.style.borderColor = "red";
 isAttacking = true;
 barPosition = 0;
-attackBar.style.left = '0px';
-attackBar.style.display = 'block';
 attackZone.style.display = 'block';
+attackZone.style.top = '635px';
+attackZone.style.left = '0px';     
+attackBar.style.display = 'block';
+attackBar.style.top = '635px';
+attackBar.style.left = '0px';
 function moveBar() {
 if (!isAttacking){return;}
 barPosition += 5;
