@@ -343,21 +343,25 @@ if (isMenuPhase || isActMenuPhase || isTargettingAct || isItemMenuPhase || isMer
 if (!isTyping) {
 handleAction();
 }
+// Logic: During menus, we simply apply the coordinates set by the menu functions
+playerElement.style.top = myVerti + 'px';
+playerElement.style.left = myHoriz + 'px';
 } 
 else if (isEnemyTurn) {
 if (up) { myVerti -= 3; }
 if (down) { myVerti += 3; }
 if (left) { myHoriz -= 3; }
 if (right) { myHoriz += 3; }
+
+// Keep player inside the small battle box
 if (myHoriz < 0) { myHoriz = 0; }
 if (myHoriz > maxHoriz) { myHoriz = maxHoriz; }
 if (myVerti < 0) { myVerti = 0; }
 if (myVerti > maxVerti) { myVerti = maxVerti; }
+
 moveBullets();
-playerElement.style.top = myVerti + 'px';
-playerElement.style.left = myHoriz + 'px';
-}
-if (!isEnemyTurn) {
+
+// Apply dodging movement
 playerElement.style.top = myVerti + 'px';
 playerElement.style.left = myHoriz + 'px';
 }
