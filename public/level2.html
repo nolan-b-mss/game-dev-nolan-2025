@@ -76,6 +76,7 @@ let isActionActive = false;
 let isMercyChoice = false;
 let isEnemyTurn = false;
 let victory = false;
+let hasAttacked = false;
 let myHoriz;
 let myVerti;
 let up = false;
@@ -105,6 +106,7 @@ let flySpawner;
 let boxLeft;
 let boxTop;
 let barPosition = 0;
+let moveBarID;
 let targetCenter = 480;
 function writeText(dialogue, callback, index = 0) {
 if (index === 0) {
@@ -531,7 +533,7 @@ if (!isAttacking){return;}
 barPosition += 10;
 attackBar.style.left = (45 + barPosition) + 'px';
 if (barPosition < 960) {
-requestAnimationFrame(moveBar);
+moveBarID = requestAnimationFrame(moveBar);
 } else {
 handleHit(480);
 }
@@ -539,8 +541,12 @@ handleHit(480);
 requestAnimationFrame(moveBar);
 }
 function handleHit(distance) {
+if (!hasAttacked) {
+hasAttacked = true;
 let damage = 0;
 let hitMessage = "";
+cancelAnimationFrame(moveBarID);
+setTimeOut(function(){
 attackBar.style.display = 'none';
 attackZone.style.display = 'none';
 if (distance >= 480) {
@@ -566,6 +572,8 @@ else {
 startEnemyTurn();
 }
 }, 2000);
+}, 1000);
+}
 }
 function startActMenu() {
 updateActMenu();
