@@ -390,7 +390,6 @@ Item: ${currentItem}<br>
 MercyChoice: ${isMercyChoice}<br>
 MercyItem: ${currentMercyItem}<br>
 ActionActive: ${isActionActive}<br>
-EnemyTurn: ${isEnemyTurn}<br>
 ---------------- <br>
 Player Variables<br>
 Up: ${up}<br>
@@ -399,14 +398,16 @@ Down: ${down}<br>
 Right: ${right}<br>
 X: ${myHoriz}<br>
 Y: ${myVerti}<br>
-HP: ${playerHealth}<br>
+Health: ${playerHealth}<br>
 Maximum HP: ${maxHealth}<br>
 ---------------- <br>
 Enemy Variables<br>
 Attack: ${enemyATK}<br>
 Defense: ${enemyDEF}<br>
 Mercy: ${enemyMercy}<br>
+Health: ${enemyHealth}<br>
 EnemyDialogue: ${enemyDialogue}<br>
+EnemyTurn: ${isEnemyTurn}<br>
 `;
 }
 function updateUI() {
