@@ -519,8 +519,8 @@ isAttacking = true;
 barPosition = 0;
 attackZone.style.display = 'block';
 attackZone.style.width = '960px';
-attackZone.style.height = '140px';
-attackZone.style.top = '630px'; 
+attackZone.style.height = '116px';
+attackZone.style.top = '642px'; 
 attackZone.style.left = '45px'; 
 attackBar.style.display = 'block';
 attackBar.style.height = '140px'; 
@@ -528,7 +528,7 @@ attackBar.style.top = '630px';
 attackBar.style.left = (45 + barPosition) + 'px';
 function moveBar() {
 if (!isAttacking){return;}
-barPosition += 15;
+barPosition += 10;
 attackBar.style.left = (45 + barPosition) + 'px';
 if (barPosition < 960) {
 requestAnimationFrame(moveBar);
@@ -543,20 +543,20 @@ let damage = 0;
 let hitMessage = "";
 attackBar.style.display = 'none';
 attackZone.style.display = 'none';
-if (distance > 480) {
+if (distance >= 480) {
 hitMessage = "* Missed!";
-} else if (distance <= 15) {
+} else if (distance <= 30) {
 damage = 20;
 hitMessage = "* A PERFECT HIT! Dealt 20 damage!";
-} else if (distance <= 30) {
+} else if (distance <= 60) {
 damage = 10;
 hitMessage = "* A Great hit! Dealt 10 damage!";
-} else if (distance <= 80) {
+} else if (distance <= 120) {
 damage = 5;
 hitMessage = "* A Nice hit! Dealt 5 damage!";
-} else {
+} else if (distance < 480) {
 damage = 2;
-hitMessage = "* A Poor hit! Dealt 2 damage!";
+hitMessage = "* A Poor hit... Dealt 2 damage.";
 }
 enemyHealth -= damage;
 writeText(hitMessage);
