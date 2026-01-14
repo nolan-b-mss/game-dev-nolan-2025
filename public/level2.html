@@ -131,10 +131,13 @@ writeText(dialogue, callback, index);
 }
 function startBattle() {
 writeText("* A Froggit appears!");
+if (!battleInitiated) {
 setInterval(movement, 10);
+battleInitiated = true;
+}
 myVerti = 925;
 myHoriz = 36;
-showDebug = false;
+updateMenu();
 }
 document.onkeydown = function(event){
 if (event.key === "w"){
