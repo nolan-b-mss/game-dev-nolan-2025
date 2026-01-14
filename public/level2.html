@@ -357,20 +357,7 @@ moveBullets();
 }
 playerElement.style.top = myVerti + 'px';
 playerElement.style.left = myHoriz + 'px';
-
-if (isEnemyTurn) {
-// Left wall
-if (myHoriz < 0) { myHoriz = 0; }
-// Right wall
-if (myHoriz > maxHoriz) { myHoriz = maxHoriz; }
-// Top wall
-if (myVerti < 0) { myVerti = 0; }
-// Bottom wall
-if (myVerti > maxVerti) { myVerti = maxVerti; }
 moveBullets(); 
-}
-playerElement.style.top = myVerti + 'px';
-playerElement.style.left = myHoriz + 'px';
 }
 function updateDebug() {
 const debugElement = document.getElementById('debugMenu');
