@@ -518,11 +518,14 @@ textBox.style.borderColor = "red";
 isAttacking = true;
 barPosition = 0;
 attackZone.style.display = 'block';
-attackZone.style.top = '635px';
-attackZone.style.left = '0px';     
+attackZone.style.width = '960px';
+attackZone.style.height = '140px';
+attackZone.style.top = '630px'; 
+attackZone.style.left = '45px'; 
 attackBar.style.display = 'block';
-attackBar.style.top = '635px';
-attackBar.style.left = '0px';
+attackBar.style.height = '140px'; 
+attackBar.style.top = '630px';
+attackBar.style.left = '45px';
 function moveBar() {
 if (!isAttacking){return;}
 barPosition += 5;
