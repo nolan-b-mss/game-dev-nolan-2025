@@ -546,7 +546,7 @@ hasAttacked = true;
 let damage = 0;
 let hitMessage = "";
 cancelAnimationFrame(moveBarID);
-setTimeOut(function(){
+setTimeout(function(){
 attackBar.style.display = 'none';
 attackZone.style.display = 'none';
 if (distance >= 480) {
@@ -746,6 +746,7 @@ clearInterval(flySpawner);
 enemyDialogue = false;
 isActionActive = true;
 isAttacking = false;
+hasAttacked = false;
 turnNum = 1;
 bullets = [];
 textBox.innerHTML = '';
