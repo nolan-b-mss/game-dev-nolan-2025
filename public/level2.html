@@ -141,7 +141,7 @@ myHoriz = 36;
 updateMenu();
 }
 document.onkeydown = function(event){
-if (event.key.toLowerCase() === 'z' && isAttacking) {
+if (event.key.toLowerCase() === 'z' && isAttacking || event.key === 'Enter' && isAttacking) {
 isAttacking = false;
 let distance = Math.abs(barPosition - targetCenter);
 handleHit(distance);
@@ -514,9 +514,8 @@ writeText("* A Froggit appears!");
 }
 function startAttackBar() {
 writeText('')
-console.log('Attack Bar Started!')
-textBox.style.borderColor = "red";
 isAttacking = true;
+isMenuPhase = false;
 barPosition = 0;
 attackZone.style.display = 'block';
 attackZone.style.width = '948px';
@@ -738,6 +737,7 @@ if (isEnemyTurn) return;
 clearInterval(flySpawner);
 enemyDialogue = false;
 isActionActive = true;
+isAttacking = false;
 turnNum = 1;
 bullets = [];
 textBox.innerHTML = '';
