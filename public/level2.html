@@ -105,7 +105,7 @@ let flySpawner;
 let boxLeft;
 let boxTop;
 let barPosition = 0;
-let targetCenter = 184;
+let targetCenter = 480;
 function writeText(dialogue, callback, index = 0) {
 if (index === 0) {
 if (isTyping) return;
@@ -525,15 +525,15 @@ attackZone.style.left = '45px';
 attackBar.style.display = 'block';
 attackBar.style.height = '140px'; 
 attackBar.style.top = '630px';
-attackBar.style.left = '45px';
+attackBar.style.left = (45 + barPosition) + 'px';
 function moveBar() {
 if (!isAttacking){return;}
-barPosition += 5;
-attackBar.style.left = barPosition + 'px';
-if (barPosition < 368) {
+barPosition += 15;
+attackBar.style.left = (45 + barPosition) + 'px';
+if (barPosition < 960) {
 requestAnimationFrame(moveBar);
 } else {
-handleHit(184);
+handleHit(480);
 }
 }
 requestAnimationFrame(moveBar);
@@ -543,9 +543,9 @@ let damage = 0;
 let hitMessage = "";
 attackBar.style.display = 'none';
 attackZone.style.display = 'none';
-if (distance > 180) {
+if (distance > 480) {
 hitMessage = "* Missed!";
-} else if (distance <= 5) {
+} else if (distance <= 15) {
 damage = 20;
 hitMessage = "* A PERFECT HIT! Dealt 20 damage!";
 } else if (distance <= 30) {
